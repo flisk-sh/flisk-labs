@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
+import fs, { readFile } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { readYaml, fail } from '../scripts/lib.mjs';
@@ -20,12 +20,16 @@ test('readYaml should parse a valid YAML file', (t) => {
 });
 
 // this test readYaml() throws when file does not exist
-test('readYaml should throw for a missing YAML file', () => {
-  const filePath = path.join(
-    os.tmpdir(),
-    'tdk-labs-nonexistent-file.yaml'
-  );
-  assert.throws(() => readYaml(filePath), {
+test('readYaml should throw for a missing YAML file', (t) => {
+  const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'tdk-labs-'));
+
+  t.after(() => {
+    fs.rmSync(tempDirectory, {recursive: true, force: true})
+  })
+
+  const fPath = path.join(tempDirectory, 'missing.yaml');
+
+  assert.throws(() => readYaml(fPath), {
     code: 'ENOENT'
   });
 });
