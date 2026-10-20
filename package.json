@@ -11,7 +11,8 @@
     "capture:write": "node scripts/capture-lab.mjs --write",
     "check:capture": "node scripts/check-captures.mjs",
     "check:links": "node scripts/validate-links.mjs",
-    "build": "bundle exec jekyll build"
+    "build": "bundle exec jekyll build",
+    "test": "node --test"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
