@@ -1186,7 +1186,7 @@
 - title: tdk-discovery
   section: Extensions and historical projects
   classification: Archived
-  url: https://github.com/flisk-sh/tdk-discovery
+  url: https://github.com/flisk-sh/flisk
   description: "**Archived.** Earlier standalone service-discovery repository;
     current development is in
     [flisk](https://github.com/flisk-sh/flisk)."
@@ -1194,7 +1194,7 @@
 - title: tdk-ext
   section: Extensions and historical projects
   classification: Archived
-  url: https://github.com/flisk-sh/tdk-ext
+  url: https://github.com/flisk-sh/flisk
   description: "**Archived.** Earlier extensions repository; use the current
     [tdk-cli-core extension
     documentation](https://github.com/flisk-sh/flisk/tree/main/ext)
