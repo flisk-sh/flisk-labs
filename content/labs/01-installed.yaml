@@ -49,7 +49,7 @@ steps:
     files: []
 runbook:
   needs: [Node.js 22.12 or newer, Docker for local stack commands, Tilt for `tdk up`]
-  install: npm install -g @tdk-landscape/tdk-cli-core
+  install: npm install -g @flisk-sh/flisk
   live: docker run --rm -it --entrypoint sh tdk-landscape/tdk-cli-releases:latest
 troubleshooting:
   title: Fix the doctor checks on your machine

@@ -46,7 +46,7 @@
 - title: npm package
   section: Core framework and releases
   classification: Official
-  url: https://www.npmjs.com/package/@tdk-landscape/tdk-cli-core
+  url: https://www.npmjs.com/package/@flisk-sh/flisk
   description: install the TDK CLI with npm or Bun. **Official**
   lab_ids:
     - 01-installed

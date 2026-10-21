@@ -122,7 +122,7 @@ steps:
       - services/pre-alpha/api/src/index.ts
 runbook:
   needs: [Docker, Tilt]
-  install: npm i -g @tdk-landscape/tdk-cli-core
+  install: npm i -g @flisk-sh/flisk
   live: docker run --rm -it --entrypoint sh tdk-landscape/tdk-cli-releases:latest
 ```
 
