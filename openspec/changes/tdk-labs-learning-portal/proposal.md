@@ -21,7 +21,7 @@ TDK has documentation, examples, and a sandbox tour, but learners lack an ordere
 
 ## Impact
 
-- New public `tdk/tdk-labs` repository and static website deployment path.
+- New public `flisk-sh/tdk-labs` repository and static website deployment path.
 - Reuse/extraction of the existing sandbox terminal component and CSS hooks from `website`.
 - Reads awesome-tdk-framework README data and official TDK documentation URLs.
 - Uses Docker for maintainer-side transcript capture; v1 hosts static replay only.
