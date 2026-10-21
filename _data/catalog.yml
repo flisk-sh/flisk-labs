@@ -1189,7 +1189,7 @@
   url: https://github.com/flisk-sh/tdk-discovery
   description: "**Archived.** Earlier standalone service-discovery repository;
     current development is in
-    [tdk-cli-core](https://github.com/flisk-sh/flisk)."
+    [flisk](https://github.com/flisk-sh/flisk)."
   lab_ids: []
 - title: tdk-ext
   section: Extensions and historical projects
