@@ -1,6 +1,6 @@
 title: TDK Labs
 description: Step through TDK commands, inspect what they change, and run them on your machine.
-url: https://tdk-landscape.github.io
+url: https://flisk.sh
 baseurl: /tdk-labs
 markdown: kramdown
 highlighter: rouge

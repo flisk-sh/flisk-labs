@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://tdk-landscape.github.io/tdk-labs/schemas/lab.schema.json",
+  "$id": "https://flisk-sh.github.io/tdk-labs/schemas/lab.schema.json",
   "title": "TDK Lab",
   "type": "object",
   "required": ["id", "title", "track", "level", "duration_min", "cli_version", "mode", "source", "terminal", "steps", "runbook"],

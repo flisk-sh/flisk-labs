@@ -47,7 +47,7 @@ No existing production data migration is required. Build the new static reposito
 
 ## Open Questions
 
-- Should the production URL be integrated into `tdk-website` at `/labs`, or hosted as `tdk-landscape.github.io/tdk-labs/`?
+- Should the production URL be integrated into `tdk-website` at `/labs`, or hosted as `flisk.sh/tdk-labs/`?
 - Which existing `tdk-website` sandbox implementation and CLI release are authoritative for component extraction and P0 capture?
 - Should catalog sync run nightly, on every build, or both? The brief permits nightly/build sync; implementation should choose based on upstream availability and CI reliability.
 - Which exact Docker image tag and supported CLI release should be used for the first verified captures?

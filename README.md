@@ -18,7 +18,7 @@ bundle exec jekyll serve
 
 ## Captures
 
-Captures use an isolated, version-tagged image named `tdk-landscape/tdk-cli-releases:<cli_version>`. That image is not currently published, so labs 02 and 03 are marked pending and their player controls are disabled. Do not replace pending transcript output with estimates. Once the image is available:
+Captures use an isolated, version-tagged image named `flisk-sh/releases:<cli_version>`. That image is not currently published, so labs 02 and 03 are marked pending and their player controls are disabled. Do not replace pending transcript output with estimates. Once the image is available:
 
 ```sh
 npm run capture -- 02-scaffold --write
@@ -30,6 +30,6 @@ Set `TDK_CAPTURE_IMAGE` to use a compatible image repository. Captures fail if t
 
 ## Publish
 
-The public repository is [tdk-landscape/tdk-labs](https://github.com/tdk-landscape/tdk-labs). GitHub Pages deploys from `.github/workflows/pages.yml` at <https://tdk-landscape.github.io/tdk-labs/>.
+The public repository is [flisk-sh/tdk-labs](https://github.com/flisk-sh/tdk-labs). GitHub Pages deploys from `.github/workflows/pages.yml` at <https://flisk-sh.github.io/tdk-labs/>.
 
 The P0 portal includes labs 01–03 and the catalog. Lab 01 has a local-source capture; project/resource generation captures remain pending until the isolated Docker image is available.

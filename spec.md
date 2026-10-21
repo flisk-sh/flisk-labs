@@ -1,7 +1,7 @@
 # TDK Labs — updated spec
 
 **Name:** `tdk-labs`  
-**Purpose:** A learning portal where people **see each step** of running TDK, then copy the same commands. Curriculum data comes from [awesome-tdk-framework](https://github.com/tdk-landscape/awesome-tdk-framework). The teaching surface is the existing website sandbox terminal (Play all / Step / Reset).
+**Purpose:** A learning portal where people **see each step** of running TDK, then copy the same commands. Curriculum data comes from [awesome-tdk-framework](https://github.com/flisk-sh/awesome-tdk-framework). The teaching surface is the existing website sandbox terminal (Play all / Step / Reset).
 
 This spec replaces the earlier draft. It does not cover Windows release PR #199.
 
@@ -86,7 +86,7 @@ cli_version: "1.1.0"    # pinned capture
 mode: replay            # replay only in v1
 source:
   catalog: [start-here, core-framework-and-releases]
-  docs: https://tdk-landscape.github.io/tdk-website/docs/quickstart/
+  docs: https://flisk.sh/docs/quickstart/
 terminal:
   title: tdk · labs · scaffold
   phase: pre-alpha
@@ -160,7 +160,7 @@ P0 ships **01–03** using the existing 7-step sandbox transcript. Player compon
 
 ## 6. Implementation
 
-**Stack:** same as `tdk-website` (static). Host `/labs` on the website or `tdk-landscape.github.io/tdk-labs/`.
+**Stack:** same as `tdk-website` (static). Host `/labs` on the website or `flisk.sh/tdk-labs/`.
 
 **Component:** `<tdk-lab-player lab-id>` with the existing CSS hooks (`sb-term-col`, `sb-term-bar`, `sb-term-dot`, `sb-term-title`, `sb-term-status`, `sb-term-body`, `sb-prompt`, `sb-cmd`, `sb-out`, `sb-caret`, `data-js="play-all|step|reset"`).
 

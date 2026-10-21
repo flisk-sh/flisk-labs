@@ -35,7 +35,7 @@ layout: default
   <aside class="lab-info">
     <section class="info-panel"><h3>What happened</h3><p data-step-explain>Advance one step to see what happens.</p></section>
     <section class="info-panel"><h3>Files written</h3><ul class="file-list" data-step-files><li>Advance one step to inspect file changes.</li></ul></section>
-    <section class="info-panel"><h3>Source</h3><p>Based on the official TDK curriculum.</p>{% for catalog_id in page.source.catalog %}<a class="source-line" href="https://github.com/tdk-landscape/awesome-tdk-framework">awesome-tdk · {{ catalog_id | replace: '-', ' ' }} ↗</a>{% endfor %}<a class="source-line" href="{{ page.source.docs }}">TDK documentation ↗</a></section>
+    <section class="info-panel"><h3>Source</h3><p>Based on the official TDK curriculum.</p>{% for catalog_id in page.source.catalog %}<a class="source-line" href="https://github.com/flisk-sh/awesome-tdk-framework">awesome-tdk · {{ catalog_id | replace: '-', ' ' }} ↗</a>{% endfor %}<a class="source-line" href="{{ page.source.docs }}">TDK documentation ↗</a></section>
     <section class="info-panel"><h3>Run for real</h3><p>Requires {{ page.runbook.needs | join: ', ' }}.</p><p style="margin:12px 0 6px">Install TDK</p><div class="copy-block">{{ page.runbook.install }}<button class="copy-action" data-copy-value="{{ page.runbook.install | escape }}">Copy</button></div><p style="margin:12px 0 6px">Official Docker shell</p><div class="copy-block">{{ page.runbook.live }}<button class="copy-action" data-copy-value="{{ page.runbook.live | escape }}">Copy</button></div></section>
     <a class="button secondary" href="{{ '/' | relative_url }}#{{ page.track }}">← Back to track</a>
   </aside>
