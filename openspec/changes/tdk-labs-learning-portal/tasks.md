@@ -1,6 +1,6 @@
 ## 1. Repository and content foundation
 
-- [x] 1.1 Create the standalone public `tdk-labs` repository with the static-site framework used by `tdk-website` and establish its deployment path.
+- [x] 1.1 Create the standalone public `tdk-labs` repository with the static-site framework used by `website` and establish its deployment path.
 - [x] 1.2 Define and validate YAML schemas for lab and track content, including replay mode, sources, steps, files, and runbooks.
 - [x] 1.3 Add the track definitions and initial lab records for labs 01–03, leaving captured output unverified until produced by the capture tool.
 
@@ -13,7 +13,7 @@
 
 ## 3. Learning portal and player
 
-- [ ] 3.1 Inspect `tdk-website` sandbox terminal and extract a shared player component while preserving existing `/sandbox` behavior and CSS hooks.
+- [ ] 3.1 Inspect `website` sandbox terminal and extract a shared player component while preserving existing `/sandbox` behavior and CSS hooks.
 - [x] 3.2 Implement lab routes and replay state with Step, Play all, Reset, counter, title, status, command, and captured output.
 - [x] 3.3 Add explanations, files-written deltas, source links, and copyable local runbooks for each lab.
 - [x] 3.4 Implement Space/P/R shortcuts outside editable controls and honor reduced-motion preferences.

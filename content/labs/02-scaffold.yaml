@@ -25,4 +25,4 @@ steps:
 runbook:
   needs: [Node.js 22.12 or newer, Docker for generated container workflows]
   install: npm install -g @flisk-sh/flisk
-  live: docker run --rm -it --entrypoint sh tdk-landscape/tdk-cli-releases:latest
+  live: docker run --rm -it --entrypoint sh flisk-sh/releases:latest

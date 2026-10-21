@@ -123,7 +123,7 @@ steps:
 runbook:
   needs: [Docker, Tilt]
   install: npm i -g @flisk-sh/flisk
-  live: docker run --rm -it --entrypoint sh tdk-landscape/tdk-cli-releases:latest
+  live: docker run --rm -it --entrypoint sh flisk-sh/releases:latest
 ```
 
 Rules:
@@ -160,7 +160,7 @@ P0 ships **01–03** using the existing 7-step sandbox transcript. Player compon
 
 ## 6. Implementation
 
-**Stack:** same as `tdk-website` (static). Host `/labs` on the website or `flisk.sh/tdk-labs/`.
+**Stack:** same as `website` (static). Host `/labs` on the website or `flisk.sh/tdk-labs/`.
 
 **Component:** `<tdk-lab-player lab-id>` with the existing CSS hooks (`sb-term-col`, `sb-term-bar`, `sb-term-dot`, `sb-term-title`, `sb-term-status`, `sb-term-body`, `sb-prompt`, `sb-cmd`, `sb-out`, `sb-caret`, `data-js="play-all|step|reset"`).
 
@@ -184,7 +184,7 @@ tdk-labs/
 
 ```
 scripts/capture-lab.ts
-  docker run tdk-cli-releases (pinned tag)
+  docker run flisk-sh/releases (pinned tag)
   run YAML cmds
   write stdout back into steps[].out
 ```
