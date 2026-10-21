@@ -50,7 +50,7 @@ steps:
 runbook:
   needs: [Node.js 22.12 or newer, Docker for local stack commands, Tilt for `tdk up`]
   install: npm install -g @flisk-sh/flisk
-  live: docker run --rm -it --entrypoint sh tdk-landscape/tdk-cli-releases:latest
+  live: docker run --rm -it --entrypoint sh flisk-sh/releases:latest
 troubleshooting:
   title: Fix the doctor checks on your machine
   description: The red Docker and Tilt checks above came from the capture machine, not your computer. Type a command, copy it to your terminal, run it there, then paste its output below to inspect it here.

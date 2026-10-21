@@ -2,11 +2,10 @@
   section: General
   classification: Official
   url: https://flisk.sh/docs/quickstart/
-  description: "| [Core repository](https://github.com/flisk-sh/flisk)
-    | [Examples](https://flisk.sh/docs/examples/) |
-    [Notes and gists](#notes-and-gists) | [CI and
-    benchmarks](#ci-and-benchmarks) | [Article
-    index](https://flisk.sh/blog/)"
+  description: "| [Core repository](https://github.com/flisk-sh/flisk) |
+    [Examples](https://flisk.sh/docs/examples/) | [Notes and
+    gists](#notes-and-gists) | [CI and benchmarks](#ci-and-benchmarks) |
+    [Article index](https://flisk.sh/blog/)"
   lab_ids: []
 - title: TDK website
   section: Start here
@@ -24,7 +23,7 @@
   lab_ids:
     - 01-installed
     - 02-scaffold
-- title: tdk-cli-core
+- title: flisk
   section: Start here
   classification: Official
   url: https://github.com/flisk-sh/flisk
@@ -52,7 +51,7 @@
     - 01-installed
     - 02-scaffold
     - 03-backend
-- title: tdk-cli-releases
+- title: releases
   section: Core framework and releases
   classification: Official
   url: https://github.com/flisk-sh/releases/releases
@@ -88,7 +87,7 @@
     - 01-installed
     - 02-scaffold
     - 03-backend
-- title: tdk-website
+- title: website
   section: Documentation and reference
   classification: Official
   url: https://github.com/flisk-sh/website
@@ -106,11 +105,47 @@
   url: https://github.com/flisk-sh/flisk/tree/main/docs
   description: detailed framework documentation. **Official**
   lab_ids: []
-- title: Contributing to tdk-cli-core
+- title: Contributing to flisk
   section: Documentation and reference
   classification: Official
   url: https://github.com/flisk-sh/flisk/blob/main/CONTRIBUTING.md
   description: development setup and contribution workflow. **Official**
+  lab_ids: []
+- title: MCP guide
+  section: Documentation and reference
+  classification: Official
+  url: https://github.com/flisk-sh/flisk/blob/main/docs/mcp.md
+  description: scaffold a Model Context Protocol server as a resource that `tdk
+    up` starts like any other service. **Official**
+  lab_ids: []
+- title: Bring-your-own (BYO) guide
+  section: Documentation and reference
+  classification: Official
+  url: https://github.com/flisk-sh/flisk/blob/main/docs/byo.md
+  description: wrap an existing service with TDK orchestration without generating
+    application code. **Official**
+  lab_ids: []
+- title: WSL2 guide
+  section: Documentation and reference
+  classification: Official
+  url: https://github.com/flisk-sh/flisk/blob/main/docs/wsl2.md
+  description: run TDK on Windows through WSL2. **Official**
+  lab_ids: []
+- title: Honest comparison
+  section: Documentation and reference
+  classification: Official
+  url: https://github.com/flisk-sh/flisk/blob/main/docs/compare-honest.md
+  description: where TDK fits next to Compose and Kubernetes, and where it does
+    not. **Official**
+  lab_ids: []
+- title: TDK Labs
+  section: Learning and articles
+  classification: Official
+  url: https://flisk-sh.github.io/tdk-labs/
+  description: "([source](https://github.com/flisk-sh/tdk-labs)): ordered lessons
+    with captured CLI output, the files each command writes, and a static
+    replay. Labs 02 and 03 are marked pending until their capture image is
+    published. **Official**"
   lab_ids: []
 - title: TDK blog
   section: Learning and articles
@@ -830,8 +865,40 @@
   url: https://github.com/flisk-sh/tdk-demo-animation
   description: source for a short visual tour of the CLI workflow and generated
     project ([view the
-    animation](https://flisk-sh.github.io/tdk-demo-animation/)).
-    **Official**
+    animation](https://flisk-sh.github.io/tdk-demo-animation/)). **Official**
+  lab_ids: []
+- title: tdk-skills
+  section: Agents and skills
+  classification: Official
+  url: https://github.com/flisk-sh/tdk-skills
+  description: portable Agent Skills (`tdk-doctor`, `tdk-troubleshoot`,
+    `layer-autoresearch`) plus `AGENTS.md` rule templates. Install with `npx
+    skills add flisk-sh/tdk-skills`. **Official**
+  lab_ids: []
+- title: Agents guide
+  section: Agents and skills
+  classification: Official
+  url: https://flisk.sh/docs/agents/
+  description: how agents should drive the TDK CLI. **Official**
+  lab_ids: []
+- title: Website llms.txt
+  section: Agents and skills
+  classification: Official
+  url: https://flisk.sh/llms.txt
+  description: machine-readable index of the TDK docs. **Official**
+  lab_ids: []
+- title: tdk-skills llms.txt
+  section: Agents and skills
+  classification: Official
+  url: https://github.com/flisk-sh/tdk-skills/blob/main/llms.txt
+  description: index of every skill and rules template with raw URLs. **Official**
+  lab_ids: []
+- title: Repository rule templates
+  section: Agents and skills
+  classification: Official
+  url: https://github.com/flisk-sh/tdk-skills/tree/main/rules
+  description: baseline `AGENTS.md` files for TDK project repos and for `flisk`
+    contributors. **Official**
   lab_ids: []
 - title: tdk-example
   section: Examples and demo applications
@@ -865,7 +932,7 @@
   description: 100-service ERP fixture across seven business domains, used for
     scale testing. **Official**
   lab_ids: []
-- title: create-tdk-stack
+- title: create-flisk
   section: Starters and scaffolding
   classification: Official
   url: https://github.com/flisk-sh/create-flisk
@@ -1188,17 +1255,16 @@
   classification: Archived
   url: https://github.com/flisk-sh/flisk
   description: "**Archived.** Earlier standalone service-discovery repository;
-    current development is in
-    [flisk](https://github.com/flisk-sh/flisk)."
+    current development is in [flisk](https://github.com/flisk-sh/flisk)."
   lab_ids: []
 - title: tdk-ext
   section: Extensions and historical projects
   classification: Archived
   url: https://github.com/flisk-sh/flisk
   description: "**Archived.** Earlier extensions repository; use the current
-    [tdk-cli-core extension
-    documentation](https://github.com/flisk-sh/flisk/tree/main/ext)
-    for current work."
+    [flisk extension
+    documentation](https://github.com/flisk-sh/flisk/tree/main/ext) for current
+    work."
   lab_ids: []
 - title: tdk
   section: Extensions and historical projects
@@ -1220,7 +1286,7 @@
   url: https://github.com/flisk-sh/.github/tree/main/profile
   description: source for the public TDK organization profile.
   lab_ids: []
-- title: Open an issue on tdk-cli-core
+- title: Open an issue on flisk
   section: Community and contribution
   classification: Community
   url: https://github.com/flisk-sh/flisk/issues
