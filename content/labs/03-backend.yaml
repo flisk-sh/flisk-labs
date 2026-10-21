@@ -17,7 +17,7 @@ terminal:
   phase: foundations
 steps:
   - id: resource-api
-    cmd: tdk resource api --type backend --stack pre-alpha --path services/pre-alpha/api --yes
+    cmd: flisk resource api --type backend --stack pre-alpha --path services/pre-alpha/api --yes
     out: ""
     verified: false
     explain: Creates a backend resource inside the pre-alpha stack. Exact output and generated files await an isolated CLI capture.

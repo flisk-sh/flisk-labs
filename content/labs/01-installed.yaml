@@ -23,7 +23,7 @@ steps:
     explain: Confirm which TDK CLI version is available on your PATH. Each capture records the exact CLI release used.
     files: []
   - id: doctor
-    cmd: tdk doctor --no-ping
+    cmd: flisk doctor --no-ping
     out: |
       TDK doctor checks your local Docker + Tilt development environment; it does not check cluster deployments.
 
@@ -32,7 +32,7 @@ steps:
       Checking environment...
 
       ✗ Docker daemon is not responding
-      ℹ Fix: Start Docker Desktop, OrbStack, or Colima, then retry: tdk doctor
+      ℹ Fix: Start Docker Desktop, OrbStack, or Colima, then retry: flisk doctor
       ✗ Tilt CLI not found
       ℹ Fix: curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/install.sh | bash
       ✓ HTTP 8080, HTTPS 8443, Postgres 15432
@@ -44,11 +44,11 @@ steps:
       ○ Not running in WSL2 - skipped project filesystem check
       ✓ Docker can create networks
 
-      ✗ Doctor failed. Fix the items above, then run: tdk doctor
+      ✗ Doctor failed. Fix the items above, then run: flisk doctor
     explain: Doctor checks local prerequisites such as Docker and Tilt. This capture reflects the capture machine's environment, so failures here describe that environment rather than the learner's computer.
     files: []
 runbook:
-  needs: [Node.js 22.12 or newer, Docker for local stack commands, Tilt for `tdk up`]
+  needs: [Node.js 22.12 or newer, Docker for local stack commands, Tilt for `flisk up`]
   install: npm install -g @flisk-sh/flisk
   live: docker run --rm -it --entrypoint sh flisk-sh/releases:latest
 troubleshooting:
@@ -62,4 +62,4 @@ troubleshooting:
     - label: Check TDK
       command: tdk --version
     - label: Rerun doctor
-      command: tdk doctor --no-ping
+      command: flisk doctor --no-ping

@@ -17,7 +17,7 @@ terminal:
   phase: foundations
 steps:
   - id: project
-    cmd: tdk project --yes
+    cmd: flisk project --yes
     out: ""
     verified: false
     explain: Initializes the current directory as a TDK project. Output awaits a successful isolated capture because the local Docker daemon was unavailable.
