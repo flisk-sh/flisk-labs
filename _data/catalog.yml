@@ -900,16 +900,16 @@
   description: baseline `AGENTS.md` files for TDK project repos and for `flisk`
     contributors. **Official**
   lab_ids: []
-- title: tdk-example
+- title: flisk-example
   section: Examples and demo applications
   classification: Official
-  url: https://github.com/flisk-sh/tdk-example
+  url: https://github.com/flisk-sh/flisk-example
   description: small project demonstrating the Project-Stack-Resource model. **Official**
   lab_ids: []
-- title: tdk-saas-starter
+- title: flisk-saas-starter
   section: Examples and demo applications
   classification: Official
-  url: https://github.com/flisk-sh/tdk-saas-starter
+  url: https://github.com/flisk-sh/flisk-saas-starter
   description: SaaS dashboard starter with a working checkout flow. **Official**
   lab_ids: []
 - title: tdk-restaurant-example
@@ -919,10 +919,10 @@
   description: restaurant operations example covering reservations, kitchen
     pacing, menu availability, and floor control. **Official**
   lab_ids: []
-- title: tdk-ecommerce-example
+- title: flisk-ecommerce-example
   section: Examples and demo applications
   classification: Official
-  url: https://github.com/flisk-sh/tdk-ecommerce-example
+  url: https://github.com/flisk-sh/flisk-ecommerce-example
   description: Vue storefront and Hono catalog API built with TDK. **Official**
   lab_ids: []
 - title: tdk-erp-system
@@ -1217,10 +1217,10 @@
   description: project and resource features, including monitoring, ELK, Debezium
     CDC, and local registry options. **Official**
   lab_ids: []
-- title: tdk-docker-compose-example
+- title: flisk-docker-compose-example
   section: Development, deployment, and observability
   classification: Official
-  url: https://github.com/flisk-sh/tdk-docker-compose-example
+  url: https://github.com/flisk-sh/flisk-docker-compose-example
   description: run the TDK CLI and its development workflow from Docker Compose.
     **Official**
   lab_ids: []
@@ -1230,17 +1230,17 @@
   url: https://github.com/flisk-sh/flisk/blob/main/SECURITY.md
   description: responsible vulnerability reporting for the core project. **Official**
   lab_ids: []
-- title: tdk-auth-queue-email-example
+- title: flisk-auth-queue-email-example
   section: Security and identity
   classification: Official
-  url: https://github.com/flisk-sh/tdk-auth-queue-email-example
+  url: https://github.com/flisk-sh/flisk-auth-queue-email-example
   description: local identity, queue, and email example with an OIDC emulator,
     NATS JetStream, and Mailpit. **Official**
   lab_ids: []
-- title: tdk-user-management
+- title: flisk-user-management
   section: Security and identity
   classification: Official
-  url: https://github.com/flisk-sh/tdk-user-management
+  url: https://github.com/flisk-sh/flisk-user-management
   description: identity and user-management demo organized into TDK stacks. **Official**
   lab_ids: []
 - title: Current CLI extensions
