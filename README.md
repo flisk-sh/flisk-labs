@@ -1,6 +1,6 @@
-# TDK Labs
+# Flisk Labs
 
-An ordered, replayable learning portal for TDK. Lessons show captured CLI output, explain each command, and list the files it writes. Browser replay is static: it does not execute TDK or launch Docker.
+An ordered, replayable learning portal for Flisk. Lessons show captured CLI output, explain each command, and list the files it writes. Browser replay is static: it does not execute Flisk or launch Docker.
 
 ## Local development
 

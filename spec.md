@@ -1,7 +1,7 @@
-# TDK Labs — updated spec
+# Flisk Labs — updated spec
 
 **Name:** `tdk-labs`  
-**Purpose:** A learning portal where people **see each step** of running TDK, then copy the same commands. Curriculum data comes from [awesome-tdk-framework](https://github.com/flisk-sh/awesome-tdk-framework). The teaching surface is the existing website sandbox terminal (Play all / Step / Reset).
+**Purpose:** A learning portal where people **see each step** of running Flisk, then copy the same commands. Curriculum data comes from [awesome-tdk-framework](https://github.com/flisk-sh/awesome-tdk-framework). The teaching surface is the existing website sandbox terminal (Play all / Step / Reset).
 
 This spec replaces the earlier draft. It does not cover Windows release PR #199.
 
@@ -9,7 +9,7 @@ This spec replaces the earlier draft. It does not cover Windows release PR #199.
 
 ## 1. Problem
 
-TDK already has docs, examples, awesome-tdk, and a sandbox tour with real captured CLI output. What is missing is a **path**: ordered labs, one command per step, file deltas visible, catalog items turned into lessons instead of a link dump.
+Flisk already has docs, examples, awesome-tdk, and a sandbox tour with real captured CLI output. What is missing is a **path**: ordered labs, one command per step, file deltas visible, catalog items turned into lessons instead of a link dump.
 
 ---
 
@@ -17,15 +17,15 @@ TDK already has docs, examples, awesome-tdk, and a sandbox tour with real captur
 
 **Goals**
 
-- First sitting: `tdk --version` → `tdk project --yes` → `tdk resource` in the player.
+- First sitting: `flisk --version` → `flisk project --yes` → `flisk resource` in the player.
 - Every lab is a stepped transcript: `step n/total`, Play all / Step / Reset.
 - awesome-tdk is the index of materials; labs point at catalog entries, they do not fork the README.
 - Default mode is **replay** (static, GitHub Pages). **Live Docker** is a copy-block, not hosted compute in v1.
 
 **Non-goals**
 
-- Cloud IDE, `tdk up` inside the browser, 100-service ERP in CI, LMS accounts.
-- Claiming native Windows `tdk up` from a lab replay.
+- Cloud IDE, `flisk up` inside the browser, 100-service ERP in CI, LMS accounts.
+- Claiming native Windows `flisk up` from a lab replay.
 
 ---
 
@@ -60,10 +60,10 @@ Keyboard: Space = step, P = play all, R = reset.
 | Track | Catalog section | First labs |
 |---|---|---|
 | Foundations | Start here, Core | version, doctor, install |
-| PSR | Docs / core | `tdk project --yes`, stacks, resources |
-| First service | Core CLI | `tdk resource` backend + frontend |
-| Run a stack | Quickstart | `tdk up`, `networks`, `down` (replay only; Tilt UI is a note) |
-| Example landscapes | Examples / starters | `tdk project example`, restaurant, saas |
+| PSR | Docs / core | `flisk project --yes`, stacks, resources |
+| First service | Core CLI | `flisk resource` backend + frontend |
+| Run a stack | Quickstart | `flisk up`, `networks`, `down` (replay only; Tilt UI is a note) |
+| Example landscapes | Examples / starters | `flisk project example`, restaurant, saas |
 | Architecture | Learning and articles | `service.json`, phases, AGENTS.md |
 | Scale & CI | CI and benchmarks | links + recorded facts; no live 100-svc |
 | Contribute | Extensions / CONTRIBUTING | how to add a catalog item |
@@ -92,24 +92,24 @@ terminal:
   phase: pre-alpha
 steps:
   - id: version
-    cmd: tdk --version
+    cmd: flisk --version
     out: |
       1.1.0
     explain: Confirm the CLI on PATH. Labs pin the captured version.
     files: []
   - id: project
-    cmd: tdk project --yes
+    cmd: flisk project --yes
     out: |
       [✓] Generated: .tdk/.tdk-out/Tiltfile
       [✓] Generated: .tdk/.tdk-out/spec.master
-      [✓] Vendored TDK extension → .tdk/.tdk-out/tdk-cli-ext/
+      [✓] Vendored Flisk extension → .tdk/.tdk-out/tdk-cli-ext/
       [✓] Project configuration complete!
     explain: Writes the PSR skeleton so later commands have a project root.
     files:
       - .tdk/project.json
       - .tdk/.tdk-out/Tiltfile
   - id: resource-api
-    cmd: tdk resource api --type backend --stack pre-alpha --path services/pre-alpha/api
+    cmd: flisk resource api --type backend --stack pre-alpha --path services/pre-alpha/api
     out: |
       generating Dockerfile
       writing backend source
@@ -142,13 +142,13 @@ Nightly / build: parse awesome-tdk README → `catalog.json` (title, section, Of
 
 | ID | Title | Teaches |
 |---|---|---|
-| 01 | Is TDK installed? | `--version`, `doctor` |
-| 02 | Scaffold the project | `tdk project --yes` |
-| 03 | Add a backend | `tdk resource … --type backend` |
-| 04 | Add a frontend | `tdk resource … --type frontend` |
-| 05 | Inspect PSR | `tdk stacks --services`, `tdk resources --ports` |
-| 06 | Boot one stack | `tdk up`, `networks`, `down` (replay + “open Tilt at :10350”) |
-| 07 | Example landscape | `tdk project example` |
+| 01 | Is Flisk installed? | `--version`, `doctor` |
+| 02 | Scaffold the project | `flisk project --yes` |
+| 03 | Add a backend | `flisk resource … --type backend` |
+| 04 | Add a frontend | `flisk resource … --type frontend` |
+| 05 | Inspect PSR | `flisk stacks --services`, `tdk resources --ports` |
+| 06 | Boot one stack | `flisk up`, `networks`, `down` (replay + “open Tilt at :10350”) |
+| 07 | Example landscape | `flisk project example` |
 | 08 | Read `service.json` | features, port, stack |
 | 09 | Phases | pre_alpha / alpha / beta |
 | 10 | AGENTS.md | generated don’t-edit contract |
@@ -215,6 +215,6 @@ scripts/capture-lab.ts
 
 ## 9. Explicit non-claims
 
-- A lab replay of `tdk up` is not a running stack.
+- A lab replay of `flisk up` is not a running stack.
 - awesome-tdk is an index, not lesson prose.
-- Windows native `tdk up` is out of scope for labs; WSL2 / Docker Desktop notes belong in the runbook only where official docs already say so.
+- Windows native `flisk up` is out of scope for labs; WSL2 / Docker Desktop notes belong in the runbook only where official docs already say so.

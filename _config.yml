@@ -1,5 +1,5 @@
-title: TDK Labs
-description: Step through TDK commands, inspect what they change, and run them on your machine.
+title: Flisk Labs
+description: Step through Flisk commands, inspect what they change, and run them on your machine.
 url: https://flisk.sh
 baseurl: /tdk-labs
 markdown: kramdown

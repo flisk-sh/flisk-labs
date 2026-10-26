@@ -7,7 +7,7 @@
     gists](#notes-and-gists) | [CI and benchmarks](#ci-and-benchmarks) |
     [Article index](https://flisk.sh/blog/)"
   lab_ids: []
-- title: TDK website
+- title: Flisk website
   section: Start here
   classification: Official
   url: https://flisk.sh/
@@ -19,7 +19,7 @@
   section: Start here
   classification: Official
   url: https://flisk.sh/docs/quickstart/
-  description: install TDK and run your first local stack. **Official**
+  description: install Flisk and run your first local stack. **Official**
   lab_ids:
     - 01-installed
     - 02-scaffold
@@ -36,7 +36,7 @@
   section: Core framework and releases
   classification: Official
   url: https://github.com/flisk-sh/flisk#quick-start
-  description: install TDK, create a project, scaffold a resource, and run a
+  description: install Flisk, create a project, scaffold a resource, and run a
     stack. **Official**
   lab_ids:
     - 01-installed
@@ -46,7 +46,7 @@
   section: Core framework and releases
   classification: Official
   url: https://www.npmjs.com/package/@flisk-sh/flisk
-  description: install the TDK CLI with npm or Bun. **Official**
+  description: install the Flisk CLI with npm or Bun. **Official**
   lab_ids:
     - 01-installed
     - 02-scaffold
@@ -55,7 +55,7 @@
   section: Core framework and releases
   classification: Official
   url: https://github.com/flisk-sh/releases/releases
-  description: prebuilt TDK CLI binaries for supported platforms. **Official**
+  description: prebuilt Flisk CLI binaries for supported platforms. **Official**
   lab_ids:
     - 01-installed
     - 02-scaffold
@@ -97,7 +97,7 @@
   section: Documentation and reference
   classification: Official
   url: https://flisk.sh/docs/examples/
-  description: walkthroughs of projects built with TDK. **Official**
+  description: walkthroughs of projects built with Flisk. **Official**
   lab_ids: []
 - title: Core repository docs
   section: Documentation and reference
@@ -122,23 +122,23 @@
   section: Documentation and reference
   classification: Official
   url: https://github.com/flisk-sh/flisk/blob/main/docs/byo.md
-  description: wrap an existing service with TDK orchestration without generating
+  description: wrap an existing service with Flisk orchestration without generating
     application code. **Official**
   lab_ids: []
 - title: WSL2 guide
   section: Documentation and reference
   classification: Official
   url: https://github.com/flisk-sh/flisk/blob/main/docs/wsl2.md
-  description: run TDK on Windows through WSL2. **Official**
+  description: run Flisk on Windows through WSL2. **Official**
   lab_ids: []
 - title: Honest comparison
   section: Documentation and reference
   classification: Official
   url: https://github.com/flisk-sh/flisk/blob/main/docs/compare-honest.md
-  description: where TDK fits next to Compose and Kubernetes, and where it does
+  description: where Flisk fits next to Compose and Kubernetes, and where it does
     not. **Official**
   lab_ids: []
-- title: TDK Labs
+- title: Flisk Labs
   section: Learning and articles
   classification: Official
   url: https://flisk-sh.github.io/tdk-labs/
@@ -147,7 +147,7 @@
     replay. Labs 02 and 03 are marked pending until their capture image is
     published. **Official**"
   lab_ids: []
-- title: TDK blog
+- title: Flisk blog
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/
@@ -157,7 +157,7 @@
   section: Learning and articles
   classification: Community
   url: https://dev.to/mynameis0d3c53a3/we-ran-100-microservices-on-a-16gb-laptop-no-kubernetes-590e
-  description: TDK overview and reproducible scale benchmark using the 100-service
+  description: Flisk overview and reproducible scale benchmark using the 100-service
     ERP example. **Community**
   lab_ids: []
 - title: AI Assistants Need Topology
@@ -178,7 +178,7 @@
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/stop-asking-ai-to-guess-your-architecture/
-  description: How TDK gives assistants concrete context before they suggest
+  description: How Flisk gives assistants concrete context before they suggest
     changes in the wrong layer. **Official**
   lab_ids: []
 - title: The AGENTS.md Advantage
@@ -360,7 +360,7 @@
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/no-kubernetes-before-lunch/
-  description: Why TDK keeps developers productive without asking every product
+  description: Why Flisk keeps developers productive without asking every product
     engineer to become a cluster operator. **Official**
   lab_ids: []
 - title: Ports Should Not Be Folklore
@@ -416,7 +416,7 @@
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/gradual-adoption-without-drama/
-  description: How teams can bring TDK into an existing repo without stopping
+  description: How teams can bring Flisk into an existing repo without stopping
     product work. **Official**
   lab_ids: []
 - title: Making Brownfield Code Legible
@@ -438,7 +438,7 @@
   classification: Official
   url: https://flisk.sh/blog/articles/the-first-manifest-to-write/
   description: Where to start when turning an existing service into an explicit
-    TDK service definition. **Official**
+    Flisk service definition. **Official**
   lab_ids: []
 - title: Generated Does Not Mean Disposable
   section: Learning and articles
@@ -474,14 +474,14 @@
   url: https://flisk.sh/blog/articles/the-escape-hatch-is-the-product/
   description: How no-lock-in design makes a developer tool safer to adopt. **Official**
   lab_ids: []
-- title: The DevOps Case for TDK
+- title: The DevOps Case for Flisk
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/the-devops-case-for-tdk/
   description: How generated local environments keep platform attention closer to
     production reliability. **Official**
   lab_ids: []
-- title: The Platform Engineer Case for TDK
+- title: The Platform Engineer Case for Flisk
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/the-platform-engineer-case-for-tdk/
@@ -492,7 +492,7 @@
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/a-better-default-for-service-teams/
-  description: Why TDK is built for teams that want standard tools, faster
+  description: Why Flisk is built for teams that want standard tools, faster
     feedback, and less local ceremony. **Official**
   lab_ids: []
 - title: Local First Does Not Mean Local Only
@@ -506,17 +506,17 @@
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/the-difference-between-simple-and-simplistic/
-  description: How TDK tries to reduce local complexity without pretending
+  description: How Flisk tries to reduce local complexity without pretending
     distributed systems are easy. **Official**
   lab_ids: []
-- title: Why TDK Does Not Hide the Stack
+- title: Why Flisk Does Not Hide the Stack
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/why-tdk-does-not-hide-the-stack/
-  description: TDK exposes standard tools because hiding every detail makes teams
+  description: Flisk exposes standard tools because hiding every detail makes teams
     weaker when debugging starts. **Official**
   lab_ids: []
-- title: Why TDK Is Not a Cloud IDE
+- title: Why Flisk Is Not a Cloud IDE
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/why-tdk-is-not-a-cloud-ide/
@@ -537,7 +537,7 @@
   description: Why a development CLI should guide without burying engineers under
     flags and hidden states. **Official**
   lab_ids: []
-- title: The Product Engineer Case for TDK
+- title: The Product Engineer Case for Flisk
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/the-product-engineer-case-for-tdk/
@@ -607,7 +607,7 @@
   description: A practical look at stale assumptions, missing edge cases, and the
     false comfort of tidy requirements. **Official**
   lab_ids: []
-- title: Why TDK Matters After the Spec
+- title: Why Flisk Matters After the Spec
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/why-tdk-matters-after-the-spec/
@@ -642,11 +642,11 @@
   description: Why a runnable multi-service demo beats screenshots when teams need
     product feedback. **Official**
   lab_ids: []
-- title: The Founder Case for TDK
+- title: The Founder Case for Flisk
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/the-founder-case-for-tdk/
-  description: How TDK reduces setup drag so tiny teams spend more time on
+  description: How Flisk reduces setup drag so tiny teams spend more time on
     customer-facing decisions. **Official**
   lab_ids: []
 - title: A Better First Week for Founding Engineers
@@ -768,7 +768,7 @@
   description: Why small deterministic orchestration rules can beat a pile of
     custom shell scripts. **Official**
   lab_ids: []
-- title: tdk doctor as Team Memory
+- title: flisk doctor as Team Memory
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/tdk-doctor-as-team-memory/
@@ -800,7 +800,7 @@
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/tilt-without-the-cluster-tax/
-  description: How TDK uses Tilt and Starlark for local orchestration without
+  description: How Flisk uses Tilt and Starlark for local orchestration without
     forcing Kubernetes concepts into every task. **Official**
   lab_ids: []
 - title: Traefik Without Mystery
@@ -828,7 +828,7 @@
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/from-product-intent-to-runnable-services/
-  description: How TDK turns service definitions into local systems developers can
+  description: How Flisk turns service definitions into local systems developers can
     actually inspect and run. **Official**
   lab_ids: []
 - title: Frontend and Backend in One Loop
@@ -845,7 +845,7 @@
   description: Why one reliable command can be more valuable than a thick setup
     guide. **Official**
   lab_ids: []
-- title: What Belongs in CI After TDK
+- title: What Belongs in CI After Flisk
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/what-belongs-in-ci-after-tdk/
@@ -859,7 +859,7 @@
   description: How simple repeated commands can hold a large service graph
     together. **Official**
   lab_ids: []
-- title: TDK demo animation
+- title: Flisk demo animation
   section: Learning and articles
   classification: Official
   url: https://github.com/flisk-sh/tdk-demo-animation
@@ -879,13 +879,13 @@
   section: Agents and skills
   classification: Official
   url: https://flisk.sh/docs/agents/
-  description: how agents should drive the TDK CLI. **Official**
+  description: how agents should drive the Flisk CLI. **Official**
   lab_ids: []
 - title: Website llms.txt
   section: Agents and skills
   classification: Official
   url: https://flisk.sh/llms.txt
-  description: machine-readable index of the TDK docs. **Official**
+  description: machine-readable index of the Flisk docs. **Official**
   lab_ids: []
 - title: tdk-skills llms.txt
   section: Agents and skills
@@ -897,7 +897,7 @@
   section: Agents and skills
   classification: Official
   url: https://github.com/flisk-sh/tdk-skills/tree/main/rules
-  description: baseline `AGENTS.md` files for TDK project repos and for `flisk`
+  description: baseline `AGENTS.md` files for Flisk project repos and for `flisk`
     contributors. **Official**
   lab_ids: []
 - title: flisk-example
@@ -912,10 +912,10 @@
   url: https://github.com/flisk-sh/flisk-saas-starter
   description: SaaS dashboard starter with a working checkout flow. **Official**
   lab_ids: []
-- title: tdk-restaurant-example
+- title: flisk-restaurant-example
   section: Examples and demo applications
   classification: Official
-  url: https://github.com/flisk-sh/tdk-restaurant-example
+  url: https://github.com/flisk-sh/flisk-restaurant-example
   description: restaurant operations example covering reservations, kitchen
     pacing, menu availability, and floor control. **Official**
   lab_ids: []
@@ -923,12 +923,12 @@
   section: Examples and demo applications
   classification: Official
   url: https://github.com/flisk-sh/flisk-ecommerce-example
-  description: Vue storefront and Hono catalog API built with TDK. **Official**
+  description: Vue storefront and Hono catalog API built with Flisk. **Official**
   lab_ids: []
-- title: tdk-erp-system
+- title: flisk-erp-system
   section: Examples and demo applications
   classification: Official
-  url: https://github.com/flisk-sh/tdk-erp-system
+  url: https://github.com/flisk-sh/flisk-erp-system
   description: 100-service ERP fixture across seven business domains, used for
     scale testing. **Official**
   lab_ids: []
@@ -936,13 +936,13 @@
   section: Starters and scaffolding
   classification: Official
   url: https://github.com/flisk-sh/create-flisk
-  description: starter generator and landing page for creating a TDK stack. **Official**
+  description: starter generator and landing page for creating a Flisk stack. **Official**
   lab_ids: []
 - title: More example repositories
   section: Starters and scaffolding
   classification: Official
   url: https://github.com/flisk-sh?tab=repositories&q=example
-  description: browse public TDK example repositories. **Official**
+  description: browse public Flisk example repositories. **Official**
   lab_ids: []
 - title: Node.js
   section: Tools and technologies
@@ -962,7 +962,7 @@
   section: Tools and technologies
   classification: Official
   url: https://docs.npmjs.com/
-  description: publishes and installs the TDK CLI package; generated services can
+  description: publishes and installs the Flisk CLI package; generated services can
     use a local registry. **Core and optional service**
   lab_ids: []
 - title: TypeScript
@@ -994,7 +994,7 @@
   section: Tools and technologies
   classification: Official
   url: https://react.dev/
-  description: default frontend framework and the rendering foundation for TDK's
+  description: default frontend framework and the rendering foundation for Flisk's
     terminal interface. **Core and generated apps**
   lab_ids: []
 - title: Vue
@@ -1021,7 +1021,7 @@
   section: Tools and technologies
   classification: Official
   url: https://github.com/tj/commander.js
-  description: command and option parsing for the `tdk` CLI. **Core CLI**
+  description: command and option parsing for the `flisk` CLI. **Core CLI**
   lab_ids: []
 - title: Handlebars
   section: Tools and technologies
@@ -1083,7 +1083,7 @@
   url: https://docs.nats.io/
   description: ", including
     [JetStream](https://docs.nats.io/nats-concepts/jetstream): messaging and
-    persistence demonstrated in TDK's queue example. **Optional service and
+    persistence demonstrated in Flisk's queue example. **Optional service and
     example**"
   lab_ids: []
 - title: Debezium
@@ -1123,7 +1123,7 @@
   section: Tools and technologies
   classification: Official
   url: https://skywalking.apache.org/docs/
-  description: alternative observability option listed by TDK. **Optional infrastructure**
+  description: alternative observability option listed by Flisk. **Optional infrastructure**
   lab_ids: []
 - title: OpenID Connect
   section: Tools and technologies
@@ -1143,13 +1143,13 @@
   section: Tools and technologies
   classification: Official
   url: https://www.verdaccio.org/docs/installation/
-  description: private local npm registry. Requires a TDK license. **Paid optional service**
+  description: private local npm registry. Requires a Flisk license. **Paid optional service**
   lab_ids: []
 - title: Sablier
   section: Tools and technologies
   classification: Official
   url: https://sablierapp.dev/
-  description: on-demand service start and stop. Requires a TDK license. **Paid
+  description: on-demand service start and stop. Requires a Flisk license. **Paid
     optional service**
   lab_ids: []
 - title: Biome
@@ -1174,7 +1174,7 @@
   section: Tools and technologies
   classification: Official
   url: https://playwright.dev/
-  description: browser test configuration available through a licensed TDK
+  description: browser test configuration available through a licensed Flisk
     extension. **Paid generator**
   lab_ids: []
 - title: GitHub Actions
@@ -1221,7 +1221,7 @@
   section: Development, deployment, and observability
   classification: Official
   url: https://github.com/flisk-sh/flisk-docker-compose-example
-  description: run the TDK CLI and its development workflow from Docker Compose.
+  description: run the Flisk CLI and its development workflow from Docker Compose.
     **Official**
   lab_ids: []
 - title: Security policy
@@ -1241,7 +1241,7 @@
   section: Security and identity
   classification: Official
   url: https://github.com/flisk-sh/flisk-user-management
-  description: identity and user-management demo organized into TDK stacks. **Official**
+  description: identity and user-management demo organized into Flisk stacks. **Official**
   lab_ids: []
 - title: Current CLI extensions
   section: Extensions and historical projects
@@ -1274,7 +1274,7 @@
     repository; consult the current core repository and website for maintained
     material."
   lab_ids: []
-- title: TDK organization
+- title: Flisk organization
   section: Community and contribution
   classification: Community
   url: https://github.com/flisk-sh
@@ -1284,7 +1284,7 @@
   section: Community and contribution
   classification: Community
   url: https://github.com/flisk-sh/.github/tree/main/profile
-  description: source for the public TDK organization profile.
+  description: source for the public Flisk organization profile.
   lab_ids: []
 - title: Open an issue on flisk
   section: Community and contribution

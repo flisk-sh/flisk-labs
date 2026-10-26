@@ -1,5 +1,5 @@
 id: 01-installed
-title: Is TDK installed?
+title: Is Flisk installed?
 track: foundations
 level: beginner
 duration_min: 5
@@ -7,7 +7,7 @@ cli_version: "1.3.80"
 capture_source: local-source
 capture_verified: true
 capture_date: "2026-10-01"
-capture_environment: "Local TDK CLI source 1.3.80; Docker daemon unavailable; Tilt unavailable"
+capture_environment: "Local Flisk CLI source 1.3.80; Docker daemon unavailable; Tilt unavailable"
 mode: replay
 source:
   catalog: [start-here, core-framework-and-releases]
@@ -17,17 +17,17 @@ terminal:
   phase: foundations
 steps:
   - id: version
-    cmd: tdk --version
+    cmd: flisk --version
     out: |
       1.3.80
-    explain: Confirm which TDK CLI version is available on your PATH. Each capture records the exact CLI release used.
+    explain: Confirm which Flisk CLI version is available on your PATH. Each capture records the exact CLI release used.
     files: []
   - id: doctor
     cmd: flisk doctor --no-ping
     out: |
-      TDK doctor checks your local Docker + Tilt development environment; it does not check cluster deployments.
+      Flisk doctor checks your local Docker + Tilt development environment; it does not check cluster deployments.
 
-      🔍 TDK Doctor
+      🔍 Flisk Doctor
 
       Checking environment...
 
@@ -59,7 +59,7 @@ troubleshooting:
       command: docker info
     - label: Check Tilt
       command: tilt version
-    - label: Check TDK
-      command: tdk --version
+    - label: Check Flisk
+      command: flisk --version
     - label: Rerun doctor
       command: flisk doctor --no-ping

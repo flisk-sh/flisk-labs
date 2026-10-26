@@ -1,6 +1,6 @@
 - id: foundations
   title: Foundations
-  description: Get oriented, confirm your CLI, and make a project that TDK can understand.
+  description: Get oriented, confirm your CLI, and make a project that Flisk can understand.
   catalog_section: Start here, Core
   labs: [01-installed, 02-scaffold, 03-backend]
 - id: psr

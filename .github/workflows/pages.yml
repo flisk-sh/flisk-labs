@@ -1,4 +1,4 @@
-name: Build and publish TDK Labs
+name: Build and publish Flisk Labs
 on:
   push:
     branches: [main]
