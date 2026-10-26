@@ -13,7 +13,7 @@ source:
   catalog: [start-here, core-framework-and-releases]
   docs: https://flisk.sh/docs/quickstart/
 terminal:
-  title: tdk · labs · installed
+  title: flisk · labs · installed
   phase: foundations
 steps:
   - id: version

@@ -1,10 +1,10 @@
 {
-  "name": "tdk-labs",
+  "name": "flisk-labs",
   "private": true,
   "type": "module",
   "scripts": {
     "validate": "node scripts/validate-content.mjs",
-    "sync:catalog": "node scripts/sync-awesome-tdk.mjs",
+    "sync:catalog": "node scripts/sync-awesome-flisk.mjs",
     "sync:content": "node scripts/sync-content.mjs",
     "generate:pages": "node scripts/generate-lab-pages.mjs",
     "capture": "node scripts/capture-lab.mjs",

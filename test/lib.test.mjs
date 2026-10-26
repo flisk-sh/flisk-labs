@@ -8,7 +8,7 @@ import { readYaml, fail } from '../scripts/lib.mjs';
 
 // this test readYaml() parses a valid YAML file
 test('readYaml should parse a valid YAML file', (t) => {
-  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'tdk-labs-'));
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'flisk-labs-'));
   t.after(() => fs.rmSync(tempDir, { recursive: true, force: true }));
   const filePath = path.join(tempDir, 'sample.yaml');
   fs.writeFileSync(filePath, 'name: Sample Lab\nlevel: beginner\n');
@@ -21,7 +21,7 @@ test('readYaml should parse a valid YAML file', (t) => {
 
 // this test readYaml() throws when file does not exist
 test('readYaml should throw for a missing YAML file', (t) => {
-  const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'tdk-labs-'));
+  const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'flisk-labs-'));
 
   t.after(() => {
     fs.rmSync(tempDirectory, {recursive: true, force: true})
@@ -45,7 +45,7 @@ test('fail should log an error and set exitCode to 1', (t) => {
     process.exitCode = 0;
     fail('Test error');
     assert.equal(process.exitCode, 1);
-    assert.deepEqual(messages, ['tdk-labs: Test error']);
+    assert.deepEqual(messages, ['flisk-labs: Test error']);
   } finally {
     process.exitCode = originalExitCode;
   }

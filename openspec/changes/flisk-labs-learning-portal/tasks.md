@@ -1,6 +1,6 @@
 ## 1. Repository and content foundation
 
-- [x] 1.1 Create the standalone public `tdk-labs` repository with the static-site framework used by `website` and establish its deployment path.
+- [x] 1.1 Create the standalone public `flisk-labs` repository with the static-site framework used by `website` and establish its deployment path.
 - [x] 1.2 Define and validate YAML schemas for lab and track content, including replay mode, sources, steps, files, and runbooks.
 - [x] 1.3 Add the track definitions and initial lab records for labs 01–03, leaving captured output unverified until produced by the capture tool.
 
@@ -8,7 +8,7 @@
 
 - [ ] 2.1 Implement isolated Docker capture at each lab's pinned CLI version and write actual stdout to lab content.
 - [x] 2.2 Add capture comparison checks that report changed steps and fail CI on drift.
-- [x] 2.3 Implement awesome-tdk README synchronization into catalog data with official/community/archived classifications and lab links.
+- [x] 2.3 Implement awesome-flisk README synchronization into catalog data with official/community/archived classifications and lab links.
 - [x] 2.4 Validate official catalog URLs used by labs and report broken references with their lab IDs.
 
 ## 3. Learning portal and player

@@ -13,7 +13,7 @@ source:
   catalog: [core-framework-and-releases]
   docs: https://flisk.sh/docs/quickstart/
 terminal:
-  title: tdk · labs · backend
+  title: flisk · labs · backend
   phase: foundations
 steps:
   - id: resource-api

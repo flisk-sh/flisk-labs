@@ -3,9 +3,9 @@ import path from 'node:path';
 import { root } from './lib.mjs';
 import yaml from 'yaml';
 
-const source = process.argv[2] ?? 'https://raw.githubusercontent.com/flisk-sh/awesome-tdk-framework/main/README.md';
+const source = process.argv[2] ?? 'https://raw.githubusercontent.com/flisk-sh/awesome-flisk-framework/main/README.md';
 const response = await fetch(source);
-if (!response.ok) throw new Error(`Could not read awesome-tdk README (${response.status}): ${source}`);
+if (!response.ok) throw new Error(`Could not read awesome-flisk README (${response.status}): ${source}`);
 const readme = await response.text();
 const lines = readme.split(/\r?\n/);
 const records = [];

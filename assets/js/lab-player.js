@@ -1,4 +1,4 @@
-class TdkLabPlayer extends HTMLElement {
+class FliskLabPlayer extends HTMLElement {
   connectedCallback() {
     this.steps = JSON.parse(this.querySelector('script[type="application/json"]').textContent);
     this.verified = this.dataset.verified === 'true';
@@ -76,4 +76,4 @@ class TdkLabPlayer extends HTMLElement {
     else if (current && !current.files.length) { const li = document.createElement('li'); li.textContent = 'No files written'; li.dataset.empty = 'true'; this.files.append(li); }
   }
 }
-customElements.define('tdk-lab-player', TdkLabPlayer);
+customElements.define('flisk-lab-player', FliskLabPlayer);

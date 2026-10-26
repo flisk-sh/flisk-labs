@@ -115,7 +115,7 @@
   section: Documentation and reference
   classification: Official
   url: https://github.com/flisk-sh/flisk/blob/main/docs/mcp.md
-  description: scaffold a Model Context Protocol server as a resource that `tdk
+  description: scaffold a Model Context Protocol server as a resource that `flisk
     up` starts like any other service. **Official**
   lab_ids: []
 - title: Bring-your-own (BYO) guide
@@ -141,8 +141,8 @@
 - title: Flisk Labs
   section: Learning and articles
   classification: Official
-  url: https://flisk-sh.github.io/tdk-labs/
-  description: "([source](https://github.com/flisk-sh/tdk-labs)): ordered lessons
+  url: https://flisk-sh.github.io/flisk-labs/
+  description: "([source](https://github.com/flisk-sh/flisk-labs)): ordered lessons
     with captured CLI output, the files each command writes, and a static
     replay. Labs 02 and 03 are marked pending until their capture image is
     published. **Official**"
@@ -477,14 +477,14 @@
 - title: The DevOps Case for Flisk
   section: Learning and articles
   classification: Official
-  url: https://flisk.sh/blog/articles/the-devops-case-for-tdk/
+  url: https://flisk.sh/blog/articles/the-devops-case-for-flisk/
   description: How generated local environments keep platform attention closer to
     production reliability. **Official**
   lab_ids: []
 - title: The Platform Engineer Case for Flisk
   section: Learning and articles
   classification: Official
-  url: https://flisk.sh/blog/articles/the-platform-engineer-case-for-tdk/
+  url: https://flisk.sh/blog/articles/the-platform-engineer-case-for-flisk/
   description: Why platform teams should automate local development instead of
     becoming laptop support. **Official**
   lab_ids: []
@@ -512,14 +512,14 @@
 - title: Why Flisk Does Not Hide the Stack
   section: Learning and articles
   classification: Official
-  url: https://flisk.sh/blog/articles/why-tdk-does-not-hide-the-stack/
+  url: https://flisk.sh/blog/articles/why-flisk-does-not-hide-the-stack/
   description: Flisk exposes standard tools because hiding every detail makes teams
     weaker when debugging starts. **Official**
   lab_ids: []
 - title: Why Flisk Is Not a Cloud IDE
   section: Learning and articles
   classification: Official
-  url: https://flisk.sh/blog/articles/why-tdk-is-not-a-cloud-ide/
+  url: https://flisk.sh/blog/articles/why-flisk-is-not-a-cloud-ide/
   description: The difference between renting a remote machine and generating a
     better local development surface. **Official**
   lab_ids: []
@@ -540,7 +540,7 @@
 - title: The Product Engineer Case for Flisk
   section: Learning and articles
   classification: Official
-  url: https://flisk.sh/blog/articles/the-product-engineer-case-for-tdk/
+  url: https://flisk.sh/blog/articles/the-product-engineer-case-for-flisk/
   description: How product developers can ship across services without memorizing
     infrastructure internals. **Official**
   lab_ids: []
@@ -610,7 +610,7 @@
 - title: Why Flisk Matters After the Spec
   section: Learning and articles
   classification: Official
-  url: https://flisk.sh/blog/articles/why-tdk-matters-after-the-spec/
+  url: https://flisk.sh/blog/articles/why-flisk-matters-after-the-spec/
   description: A closing argument for pairing spec-driven thinking with a
     development workbench that can actually run the system. **Official**
   lab_ids: []
@@ -645,7 +645,7 @@
 - title: The Founder Case for Flisk
   section: Learning and articles
   classification: Official
-  url: https://flisk.sh/blog/articles/the-founder-case-for-tdk/
+  url: https://flisk.sh/blog/articles/the-founder-case-for-flisk/
   description: How Flisk reduces setup drag so tiny teams spend more time on
     customer-facing decisions. **Official**
   lab_ids: []
@@ -771,7 +771,7 @@
 - title: flisk doctor as Team Memory
   section: Learning and articles
   classification: Official
-  url: https://flisk.sh/blog/articles/tdk-doctor-as-team-memory/
+  url: https://flisk.sh/blog/articles/flisk-doctor-as-team-memory/
   description: How health checks can replace long troubleshooting threads with
     actionable local diagnostics. **Official**
   lab_ids: []
@@ -848,7 +848,7 @@
 - title: What Belongs in CI After Flisk
   section: Learning and articles
   classification: Official
-  url: https://flisk.sh/blog/articles/what-belongs-in-ci-after-tdk/
+  url: https://flisk.sh/blog/articles/what-belongs-in-ci-after-flisk/
   description: How local reproducibility changes what teams expect from continuous
     integration. **Official**
   lab_ids: []
@@ -862,18 +862,18 @@
 - title: Flisk demo animation
   section: Learning and articles
   classification: Official
-  url: https://github.com/flisk-sh/tdk-demo-animation
+  url: https://github.com/flisk-sh/flisk-demo-animation
   description: source for a short visual tour of the CLI workflow and generated
     project ([view the
-    animation](https://flisk-sh.github.io/tdk-demo-animation/)). **Official**
+    animation](https://flisk-sh.github.io/flisk-demo-animation/)). **Official**
   lab_ids: []
-- title: tdk-skills
+- title: flisk-skills
   section: Agents and skills
   classification: Official
-  url: https://github.com/flisk-sh/tdk-skills
-  description: portable Agent Skills (`tdk-doctor`, `tdk-troubleshoot`,
+  url: https://github.com/flisk-sh/flisk-skills
+  description: portable Agent Skills (`flisk-doctor`, `flisk-troubleshoot`,
     `layer-autoresearch`) plus `AGENTS.md` rule templates. Install with `npx
-    skills add flisk-sh/tdk-skills`. **Official**
+    skills add flisk-sh/flisk-skills`. **Official**
   lab_ids: []
 - title: Agents guide
   section: Agents and skills
@@ -887,16 +887,16 @@
   url: https://flisk.sh/llms.txt
   description: machine-readable index of the Flisk docs. **Official**
   lab_ids: []
-- title: tdk-skills llms.txt
+- title: flisk-skills llms.txt
   section: Agents and skills
   classification: Official
-  url: https://github.com/flisk-sh/tdk-skills/blob/main/llms.txt
+  url: https://github.com/flisk-sh/flisk-skills/blob/main/llms.txt
   description: index of every skill and rules template with raw URLs. **Official**
   lab_ids: []
 - title: Repository rule templates
   section: Agents and skills
   classification: Official
-  url: https://github.com/flisk-sh/tdk-skills/tree/main/rules
+  url: https://github.com/flisk-sh/flisk-skills/tree/main/rules
   description: baseline `AGENTS.md` files for Flisk project repos and for `flisk`
     contributors. **Official**
   lab_ids: []
@@ -1250,14 +1250,14 @@
   description: extension and IDE integration source maintained in the core
     monorepo. **Official**
   lab_ids: []
-- title: tdk-discovery
+- title: flisk-discovery
   section: Extensions and historical projects
   classification: Archived
   url: https://github.com/flisk-sh/flisk
   description: "**Archived.** Earlier standalone service-discovery repository;
     current development is in [flisk](https://github.com/flisk-sh/flisk)."
   lab_ids: []
-- title: tdk-ext
+- title: flisk-ext
   section: Extensions and historical projects
   classification: Archived
   url: https://github.com/flisk-sh/flisk
@@ -1266,7 +1266,7 @@
     documentation](https://github.com/flisk-sh/flisk/tree/main/ext) for current
     work."
   lab_ids: []
-- title: tdk
+- title: flisk
   section: Extensions and historical projects
   classification: Archived
   url: https://github.com/flisk-sh/tdk

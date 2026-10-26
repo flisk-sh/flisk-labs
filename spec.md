@@ -1,7 +1,7 @@
 # Flisk Labs — updated spec
 
-**Name:** `tdk-labs`  
-**Purpose:** A learning portal where people **see each step** of running Flisk, then copy the same commands. Curriculum data comes from [awesome-tdk-framework](https://github.com/flisk-sh/awesome-tdk-framework). The teaching surface is the existing website sandbox terminal (Play all / Step / Reset).
+**Name:** `flisk-labs`  
+**Purpose:** A learning portal where people **see each step** of running Flisk, then copy the same commands. Curriculum data comes from [awesome-flisk-framework](https://github.com/flisk-sh/awesome-flisk-framework). The teaching surface is the existing website sandbox terminal (Play all / Step / Reset).
 
 This spec replaces the earlier draft. It does not cover Windows release PR #199.
 
@@ -9,7 +9,7 @@ This spec replaces the earlier draft. It does not cover Windows release PR #199.
 
 ## 1. Problem
 
-Flisk already has docs, examples, awesome-tdk, and a sandbox tour with real captured CLI output. What is missing is a **path**: ordered labs, one command per step, file deltas visible, catalog items turned into lessons instead of a link dump.
+Flisk already has docs, examples, awesome-flisk, and a sandbox tour with real captured CLI output. What is missing is a **path**: ordered labs, one command per step, file deltas visible, catalog items turned into lessons instead of a link dump.
 
 ---
 
@@ -19,7 +19,7 @@ Flisk already has docs, examples, awesome-tdk, and a sandbox tour with real capt
 
 - First sitting: `flisk --version` → `flisk project --yes` → `flisk resource` in the player.
 - Every lab is a stepped transcript: `step n/total`, Play all / Step / Reset.
-- awesome-tdk is the index of materials; labs point at catalog entries, they do not fork the README.
+- awesome-flisk is the index of materials; labs point at catalog entries, they do not fork the README.
 - Default mode is **replay** (static, GitHub Pages). **Live Docker** is a copy-block, not hosted compute in v1.
 
 **Non-goals**
@@ -32,14 +32,14 @@ Flisk already has docs, examples, awesome-tdk, and a sandbox tour with real capt
 ## 3. Product
 
 ```
-Home → Tracks → Lab player → Catalog (awesome-tdk) → Run on your machine
+Home → Tracks → Lab player → Catalog (awesome-flisk) → Run on your machine
 ```
 
 ### Lab player (required UX)
 
 Reuse the sandbox chrome:
 
-- Title: `tdk · labs · <lab-id>`
+- Title: `flisk · labs · <lab-id>`
 - Status: `idle` | `playing` (accent `#7c4dff`)
 - Body: `$` prompt, command, stdout, caret
 - Controls: Play all, Step, Reset
@@ -49,13 +49,13 @@ New panes:
 
 - **What happened** — 1–3 sentences
 - **Files written** — tree delta
-- **Source** — awesome-tdk section + docs URL
+- **Source** — awesome-flisk section + docs URL
 - **Run for real** — copy-paste local commands + official `docker run` one-liner
 
 Keyboard: Space = step, P = play all, R = reset.  
 `prefers-reduced-motion`: no typewriter.
 
-### Tracks (mapped from awesome-tdk)
+### Tracks (mapped from awesome-flisk)
 
 | Track | Catalog section | First labs |
 |---|---|---|
@@ -88,7 +88,7 @@ source:
   catalog: [start-here, core-framework-and-releases]
   docs: https://flisk.sh/docs/quickstart/
 terminal:
-  title: tdk · labs · scaffold
+  title: flisk · labs · scaffold
   phase: pre-alpha
 steps:
   - id: version
@@ -100,14 +100,14 @@ steps:
   - id: project
     cmd: flisk project --yes
     out: |
-      [✓] Generated: .tdk/.tdk-out/Tiltfile
-      [✓] Generated: .tdk/.tdk-out/spec.master
-      [✓] Vendored Flisk extension → .tdk/.tdk-out/tdk-cli-ext/
+      [✓] Generated: .flisk/.flisk-out/Tiltfile
+      [✓] Generated: .flisk/.flisk-out/spec.master
+      [✓] Vendored Flisk extension → .flisk/.flisk-out/flisk-cli-ext/
       [✓] Project configuration complete!
     explain: Writes the PSR skeleton so later commands have a project root.
     files:
-      - .tdk/project.json
-      - .tdk/.tdk-out/Tiltfile
+      - .flisk/project.json
+      - .flisk/.flisk-out/Tiltfile
   - id: resource-api
     cmd: flisk resource api --type backend --stack pre-alpha --path services/pre-alpha/api
     out: |
@@ -134,7 +134,7 @@ Rules:
 
 ### Catalog sync
 
-Nightly / build: parse awesome-tdk README → `catalog.json` (title, section, Official|Community|Archived, url, linked lab ids). CI fails on 404 for Official URLs used by labs.
+Nightly / build: parse awesome-flisk README → `catalog.json` (title, section, Official|Community|Archived, url, linked lab ids). CI fails on 404 for Official URLs used by labs.
 
 ---
 
@@ -146,13 +146,13 @@ Nightly / build: parse awesome-tdk README → `catalog.json` (title, section, Of
 | 02 | Scaffold the project | `flisk project --yes` |
 | 03 | Add a backend | `flisk resource … --type backend` |
 | 04 | Add a frontend | `flisk resource … --type frontend` |
-| 05 | Inspect PSR | `flisk stacks --services`, `tdk resources --ports` |
+| 05 | Inspect PSR | `flisk stacks --services`, `flisk resources --ports` |
 | 06 | Boot one stack | `flisk up`, `networks`, `down` (replay + “open Tilt at :10350”) |
 | 07 | Example landscape | `flisk project example` |
 | 08 | Read `service.json` | features, port, stack |
 | 09 | Phases | pre_alpha / alpha / beta |
 | 10 | AGENTS.md | generated don’t-edit contract |
-| 11 | Add a catalog entry | awesome-tdk CONTRIBUTING |
+| 11 | Add a catalog entry | awesome-flisk CONTRIBUTING |
 
 P0 ships **01–03** using the existing 7-step sandbox transcript. Player component is extracted from `sb-term-*` so `/sandbox` and `/labs/:id` share one widget.
 
@@ -160,20 +160,20 @@ P0 ships **01–03** using the existing 7-step sandbox transcript. Player compon
 
 ## 6. Implementation
 
-**Stack:** same as `website` (static). Host `/labs` on the website or `flisk.sh/tdk-labs/`.
+**Stack:** same as `website` (static). Host `/labs` on the website or `flisk.sh/flisk-labs/`.
 
-**Component:** `<tdk-lab-player lab-id>` with the existing CSS hooks (`sb-term-col`, `sb-term-bar`, `sb-term-dot`, `sb-term-title`, `sb-term-status`, `sb-term-body`, `sb-prompt`, `sb-cmd`, `sb-out`, `sb-caret`, `data-js="play-all|step|reset"`).
+**Component:** `<flisk-lab-player lab-id>` with the existing CSS hooks (`sb-term-col`, `sb-term-bar`, `sb-term-dot`, `sb-term-title`, `sb-term-status`, `sb-term-body`, `sb-prompt`, `sb-cmd`, `sb-out`, `sb-caret`, `data-js="play-all|step|reset"`).
 
 **Replay state:** `idle → playing → idle`; Step pauses after one command; Reset → step 0.
 
 **Repo**
 
 ```
-tdk-labs/
+flisk-labs/
   spec.md
   content/labs/*.yaml
   content/tracks.yaml
-  scripts/sync-awesome-tdk.ts
+  scripts/sync-awesome-flisk.ts
   scripts/capture-lab.ts
   src/components/LabPlayer.*
   src/pages/labs/[id].*
@@ -196,7 +196,7 @@ scripts/capture-lab.ts
 1. `/labs/01-scaffold-project` steps version → project → resource with the sandbox control chrome.
 2. Counter and `idle`/`playing` status work.
 3. Output matches a pinned CLI capture.
-4. Catalog page lists awesome-tdk sections with labels and lab links.
+4. Catalog page lists awesome-flisk sections with labels and lab links.
 5. Each lab has a copy-paste runbook including the docker one-liner.
 6. Reduced-motion: instant commands.
 
@@ -216,5 +216,5 @@ scripts/capture-lab.ts
 ## 9. Explicit non-claims
 
 - A lab replay of `flisk up` is not a running stack.
-- awesome-tdk is an index, not lesson prose.
+- awesome-flisk is an index, not lesson prose.
 - Windows native `flisk up` is out of scope for labs; WSL2 / Docker Desktop notes belong in the runbook only where official docs already say so.

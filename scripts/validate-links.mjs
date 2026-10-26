@@ -13,9 +13,9 @@ for (const record of records.filter((item) => item.classification === 'Official'
     continue;
   }
   let response;
-  try { response = await fetch(record.url, { method: 'GET', redirect: 'follow', headers: { 'user-agent': 'tdk-labs-link-check/1.0' } }); } catch { response = null; }
+  try { response = await fetch(record.url, { method: 'GET', redirect: 'follow', headers: { 'user-agent': 'flisk-labs-link-check/1.0' } }); } catch { response = null; }
   if (response?.status === 403 || response?.status === 405) {
-    try { response = await fetch(record.url, { method: 'HEAD', redirect: 'follow', headers: { 'user-agent': 'Mozilla/5.0 tdk-labs-link-check/1.0' } }); } catch { response = null; }
+    try { response = await fetch(record.url, { method: 'HEAD', redirect: 'follow', headers: { 'user-agent': 'Mozilla/5.0 flisk-labs-link-check/1.0' } }); } catch { response = null; }
   }
   if (!response || !response.ok) { console.error(`Official URL failed (${response?.status ?? 'network error'}): ${record.url}; labs: ${referencing.map((lab) => lab.id).join(', ')}`); errors++; }
 }

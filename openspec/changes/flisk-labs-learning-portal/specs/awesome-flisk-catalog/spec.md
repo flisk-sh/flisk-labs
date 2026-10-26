@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: Catalog synchronization
-The site build SHALL generate catalog data from the awesome-tdk-framework README containing each item's title, section, classification, URL, and linked lab IDs.
+The site build SHALL generate catalog data from the awesome-flisk-framework README containing each item's title, section, classification, URL, and linked lab IDs.
 
 #### Scenario: Build catalog data
 - **WHEN** catalog synchronization processes the upstream README

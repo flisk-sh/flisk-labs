@@ -26,10 +26,10 @@ npm run capture -- 03-backend --write
 npm run check:capture
 ```
 
-Set `TDK_CAPTURE_IMAGE` to use a compatible image repository. Captures fail if the image's CLI version does not match the lab pin.
+Set `FLISK_CAPTURE_IMAGE` to use a compatible image repository. Captures fail if the image's CLI version does not match the lab pin.
 
 ## Publish
 
-The public repository is [flisk-sh/tdk-labs](https://github.com/flisk-sh/tdk-labs). GitHub Pages deploys from `.github/workflows/pages.yml` at <https://flisk-sh.github.io/tdk-labs/>.
+The public repository is [flisk-sh/flisk-labs](https://github.com/flisk-sh/flisk-labs). GitHub Pages deploys from `.github/workflows/pages.yml` at <https://flisk-sh.github.io/flisk-labs/>.
 
 The P0 portal includes labs 01–03 and the catalog. Lab 01 has a local-source capture; project/resource generation captures remain pending until the isolated Docker image is available.

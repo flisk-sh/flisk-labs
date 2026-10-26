@@ -1,7 +1,7 @@
 name: Refresh lab captures
 on:
   repository_dispatch:
-    types: [tdk-cli-release]
+    types: [flisk-cli-release]
   workflow_dispatch:
     inputs:
       lab_id:

@@ -42,14 +42,14 @@ Every displayed lab step SHALL provide its explanation and a files-written view 
 - **THEN** the player shows its explanation and the files added or changed by that step
 
 ### Requirement: Sources and local runbook
-Every lab SHALL identify its awesome-tdk catalog sources and documentation URL and provide copyable local commands plus the official Docker run command required by its runbook.
+Every lab SHALL identify its awesome-flisk catalog sources and documentation URL and provide copyable local commands plus the official Docker run command required by its runbook.
 
 #### Scenario: Inspect sources and runbook
 - **WHEN** a learner opens a lab
 - **THEN** the source catalog entries, documentation link, prerequisites, install command, and live Docker command are available
 
 #### Scenario: Explain replay limits
-- **WHEN** a lab teaches `tdk up` through captured output
+- **WHEN** a lab teaches `flisk up` through captured output
 - **THEN** the page identifies the experience as replay and states that no stack has been launched in the browser
 
 ### Requirement: Initial learning path
@@ -57,11 +57,11 @@ P0 SHALL provide the first three labs covering CLI version/doctor, project scaff
 
 #### Scenario: First sitting path
 - **WHEN** a learner follows the P0 path from the beginning
-- **THEN** the lessons progress from checking TDK installation to `tdk project --yes` and then creating a backend resource
+- **THEN** the lessons progress from checking Flisk installation to `flisk project --yes` and then creating a backend resource
 
 ### Requirement: Platform support claims
-Labs SHALL NOT claim native Windows `tdk up` support; Windows guidance SHALL be limited to WSL2/Docker Desktop notes supported by official documentation.
+Labs SHALL NOT claim native Windows `flisk up` support; Windows guidance SHALL be limited to WSL2/Docker Desktop notes supported by official documentation.
 
 #### Scenario: Windows runbook guidance
 - **WHEN** a lab includes Windows runbook notes
-- **THEN** those notes link to or accurately reflect official TDK documentation and do not claim native Windows `tdk up`
+- **THEN** those notes link to or accurately reflect official Flisk documentation and do not claim native Windows `flisk up`

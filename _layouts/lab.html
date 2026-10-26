@@ -16,7 +16,7 @@ layout: default
 </section>
 <section class="wrap lab-layout">
   <div>
-    <tdk-lab-player class="player-shell" data-verified="{{ page.capture_verified }}" aria-label="Replay for {{ page.title }}">
+    <flisk-lab-player class="player-shell" data-verified="{{ page.capture_verified }}" aria-label="Replay for {{ page.title }}">
       <div class="sb-term-col">
         <div class="sb-term-bar"><span class="sb-term-dot"></span><span class="sb-term-dot"></span><span class="sb-term-dot"></span><span class="sb-term-title">{{ page.terminal.title }}</span><span class="sb-term-status" data-state="idle">idle</span></div>
         <div class="sb-term-body" tabindex="0" aria-live="polite"><span class="sb-prompt">$</span> <span class="sb-caret"></span></div>
@@ -29,13 +29,13 @@ layout: default
         </div>
       </div>
       <script type="application/json">{{ page.steps | jsonify }}</script>
-    </tdk-lab-player>
+    </flisk-lab-player>
     <div class="callout"><strong>Replay, not hosted compute.</strong> The terminal shows captured output. Commands do not execute in this browser, and replaying <code>flisk up</code> does not launch a stack.</div>
   </div>
   <aside class="lab-info">
     <section class="info-panel"><h3>What happened</h3><p data-step-explain>Advance one step to see what happens.</p></section>
     <section class="info-panel"><h3>Files written</h3><ul class="file-list" data-step-files><li>Advance one step to inspect file changes.</li></ul></section>
-    <section class="info-panel"><h3>Source</h3><p>Based on the official Flisk curriculum.</p>{% for catalog_id in page.source.catalog %}<a class="source-line" href="https://github.com/flisk-sh/awesome-tdk-framework">awesome-tdk · {{ catalog_id | replace: '-', ' ' }} ↗</a>{% endfor %}<a class="source-line" href="{{ page.source.docs }}">Flisk documentation ↗</a></section>
+    <section class="info-panel"><h3>Source</h3><p>Based on the official Flisk curriculum.</p>{% for catalog_id in page.source.catalog %}<a class="source-line" href="https://github.com/flisk-sh/awesome-flisk-framework">awesome-flisk · {{ catalog_id | replace: '-', ' ' }} ↗</a>{% endfor %}<a class="source-line" href="{{ page.source.docs }}">Flisk documentation ↗</a></section>
     <section class="info-panel"><h3>Run for real</h3><p>Requires {{ page.runbook.needs | join: ', ' }}.</p><p style="margin:12px 0 6px">Install Flisk</p><div class="copy-block">{{ page.runbook.install }}<button class="copy-action" data-copy-value="{{ page.runbook.install | escape }}">Copy</button></div><p style="margin:12px 0 6px">Official Docker shell</p><div class="copy-block">{{ page.runbook.live }}<button class="copy-action" data-copy-value="{{ page.runbook.live | escape }}">Copy</button></div></section>
     <a class="button secondary" href="{{ '/' | relative_url }}#{{ page.track }}">← Back to track</a>
   </aside>

@@ -9,13 +9,13 @@ const args = process.argv.slice(2);
 const id = args.find((arg) => !arg.startsWith('--'));
 const write = args.includes('--write');
 if (!id) throw new Error('Usage: npm run capture -- <lab-id> [--write]');
-const contentDir = process.env.TDK_CAPTURE_CONTENT_DIR ?? path.join(root, 'content');
+const contentDir = process.env.FLISK_CAPTURE_CONTENT_DIR ?? path.join(root, 'content');
 const file = path.join(contentDir, 'labs', `${id}.yaml`);
 const lab = yaml.parse(fs.readFileSync(file, 'utf8'));
-const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'tdk-lab-'));
-const image = process.env.TDK_CAPTURE_IMAGE ?? 'flisk-sh/releases';
+const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'flisk-lab-'));
+const image = process.env.FLISK_CAPTURE_IMAGE ?? 'flisk-sh/releases';
 const tag = lab.cli_version;
-const docker = spawnSync('docker', ['run', '--rm', '-v', `${temp}:/workspace`, '-w', '/workspace', image + ':' + tag, 'sh', '-lc', 'command -v tdk >/dev/null || { echo "tdk CLI missing from capture image" >&2; exit 127; }; test "$(flisk --version)" = "' + tag + '"'], { encoding: 'utf8' });
+const docker = spawnSync('docker', ['run', '--rm', '-v', `${temp}:/workspace`, '-w', '/workspace', image + ':' + tag, 'sh', '-lc', 'command -v flisk >/dev/null || { echo "flisk CLI missing from capture image" >&2; exit 127; }; test "$(flisk --version)" = "' + tag + '"'], { encoding: 'utf8' });
 if (docker.status !== 0) {
   console.error(`Docker capture image unavailable or failed: ${image}:${tag}\n${docker.stderr || docker.stdout}`);
   process.exit(docker.status || 1);
