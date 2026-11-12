@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs, { readFile } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { readYaml, fail } from '../scripts/lib.mjs';
+import { readYaml, fail, captureProblem } from '../scripts/lib.mjs';
 
 
 // this test readYaml() parses a valid YAML file
@@ -49,4 +49,15 @@ test('fail should log an error and set exitCode to 1', (t) => {
   } finally {
     process.exitCode = originalExitCode;
   }
+});
+
+// capture_verified is only set by capture-lab.mjs --write, together with capture_source: docker
+test('captureProblem rejects a verified capture that is not from docker', () => {
+  assert.match(captureProblem({ capture_verified: true, capture_source: 'local-source' }), /capture_source: docker/);
+  assert.match(captureProblem({ capture_verified: true }), /found none/);
+});
+
+test('captureProblem accepts docker captures and unverified labs', () => {
+  assert.equal(captureProblem({ capture_verified: true, capture_source: 'docker' }), null);
+  assert.equal(captureProblem({ capture_verified: false, capture_source: 'local-source' }), null);
 });

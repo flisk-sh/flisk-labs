@@ -1,4 +1,4 @@
-import { readLabs, readYaml, root, fail } from './lib.mjs';
+import { readLabs, readYaml, root, fail, captureProblem } from './lib.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -9,6 +9,8 @@ for (const { file, data } of readLabs()) {
   const label = path.basename(file);
   if (!data || typeof data !== 'object') { console.error(`${label}: expected an object`); problems++; continue; }
   for (const key of schema.required) if (data[key] === undefined) { console.error(`${label}: missing ${key}`); problems++; }
+  const capture = captureProblem(data);
+  if (capture) { console.error(`${label}: ${capture}`); problems++; }
   if (ids.has(data.id)) { console.error(`${label}: duplicate lab id ${data.id}`); problems++; }
   ids.add(data.id);
   if (!['replay'].includes(data.mode)) { console.error(`${label}: mode must be replay`); problems++; }
