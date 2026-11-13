@@ -81,7 +81,7 @@
 - title: Changelog
   section: Core framework and releases
   classification: Official
-  url: https://github.com/flisk-sh/flisk/blob/main/CHANGELOG.md
+  url: https://github.com/flisk-sh/flisk/releases
   description: notable CLI and framework changes. **Official**
   lab_ids:
     - 01-installed
