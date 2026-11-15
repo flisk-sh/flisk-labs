@@ -17,6 +17,18 @@ layout: default
 </section>
 <section class="wrap lab-layout">
   <div>
+    <section class="info-panel pod-panel" data-pod-panel data-lab="{{ page.lab_id }}" data-steps="{{ page.steps.size }}" data-fleet="https://fleet.flisk.si">
+      <h3>Run it in a pod <span class="pod-optional">optional</span></h3>
+      <p>No setup on your machine: each step runs in a throwaway pod on <a href="https://fleet.flisk.si">fleet</a>, and the step is marked passed when the command exits 0. Your keys stay in this browser tab and go only to fleet.</p>
+      <div class="pod-fields">
+        <label>Fleet key<input type="password" data-pod-fleet-key placeholder="fleet_…" autocomplete="off"></label>
+        <label>Provider<select data-pod-provider><option value="e2b">E2B (free tier)</option><option value="daytona">Daytona</option><option value="freestyle">Freestyle</option><option value="tensorlake">Tensorlake</option><option value="upstash">Upstash Box</option></select></label>
+        <label>Provider key<input type="password" data-pod-provider-key placeholder="your provider key" autocomplete="off"></label>
+      </div>
+      <p class="pod-status" data-pod-status role="status"></p>
+      <p class="pod-progress" data-pod-progress></p>
+      <div class="actions"><button class="button secondary" type="button" data-pod-stop>Stop pod</button> <button class="button secondary" type="button" data-pod-reset>Reset progress</button></div>
+    </section>
     <ol class="guide-steps">
     {% for step in page.steps %}
       <li class="guide-step info-panel" id="{{ step.id }}">
@@ -25,13 +37,15 @@ layout: default
         {% if step.explain %}<p>{{ step.explain }}</p>{% endif %}
         <p class="guide-label">Run this to check</p>
         <div class="copy-block guide-cmd">{{ step.cmd | escape }}<button class="copy-action" data-copy-value="{{ step.cmd | escape }}">Copy</button></div>
+        <p class="guide-run"><button class="button" type="button" data-pod-run="{{ step.cmd | escape }}">Run in a pod</button></p>
+        <pre class="pod-out" data-pod-out hidden></pre>
         <p class="guide-label">You pass when</p>
         <p class="guide-expect">{{ step.expect }}</p>
         {% if step.files.size > 0 %}<p class="guide-label">Files you write</p><ul class="file-list">{% for file in step.files %}<li>{{ file }}</li>{% endfor %}</ul>{% endif %}
       </li>
     {% endfor %}
     </ol>
-    <div class="callout"><strong>No transcript here on purpose.</strong> This page does not show terminal output, because model answers differ from run to run. Each step says what a pass looks like; your own terminal is the proof.</div>
+    <div class="callout"><strong>Two ways to do it.</strong> Run each command on your own machine and check it against "You pass when", or use "Run in a pod" above and let the page check the exit code for you.</div>
     {% include lab-pager.html %}
   </div>
   <aside class="lab-info">
@@ -42,3 +56,4 @@ layout: default
     <a class="button secondary" href="{{ '/' | relative_url }}#{{ page.track }}">← Back to track</a>
   </aside>
 </section>
+<script src="{{ '/assets/js/pod.js' | relative_url }}" defer></script>
