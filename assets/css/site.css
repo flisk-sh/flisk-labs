@@ -16,3 +16,5 @@
 .pod-out[data-ok="1"]{border-color:#1a7f37}
 .guide-step[data-passed="1"]{border-left:4px solid #1a7f37}.guide-step[data-passed="1"] .card-meta::after{content:" · passed ✓"}
 .step-toc li[data-passed="1"] a::after{content:" ✓"}
+.pod-panel>summary{cursor:pointer;list-style:none}.pod-panel>summary::-webkit-details-marker{display:none}.pod-panel>summary::before{content:"▸ "}.pod-panel[open]>summary::before{content:"▾ "}
+.pod-how{margin:12px 0 0 1.2em;display:grid;gap:10px}.pod-how .button{margin-right:8px}.pod-note{font-size:.8rem;opacity:.7}
