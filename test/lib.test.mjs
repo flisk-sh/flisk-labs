@@ -105,3 +105,14 @@ test('labNeighbours walks a course across its parts and stops at course ends', a
   assert.deepEqual(n.get('20-c'), { prev: '11-b', next: null });
   assert.deepEqual(n.get('01-x'), { prev: null, next: '02-y' });
 });
+
+test('labNeighbours keeps a lab shared by two parts in its first place', async () => {
+  const { labNeighbours } = await import('../scripts/lib.mjs');
+  const n = labNeighbours([
+    { id: 'foundations', course: 'flisk', labs: ['01-x', '02-y', '03-z'] },
+    { id: 'structure', course: 'flisk', labs: ['02-y', '03-z'] },
+    { id: 'service', course: 'flisk', labs: ['03-z'] }
+  ]);
+  assert.deepEqual(n.get('02-y'), { prev: '01-x', next: '03-z' });
+  assert.deepEqual(n.get('03-z'), { prev: '02-y', next: null });
+});
