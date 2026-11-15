@@ -21,7 +21,7 @@ steps:
     files: []
   - id: ask
     task: Ask it one question from the terminal
-    cmd: "M=$(if [ \"$(awk '/MemAvailable/{print $2}' /proc/meminfo 2>/dev/null)\" -lt 1000000 ] 2>/dev/null; then echo smollm2:135m; else echo llama3.2; fi); ollama run $M \"In one sentence, what is a token?\""
+    cmd: "M=$(if [ \"$(awk '/MemAvailable/{print $2}' /proc/meminfo 2>/dev/null)\" -lt 1000000 ] 2>/dev/null; then echo smollm2:135m; else echo llama3.2; fi); ollama run $M \"In one sentence, what is a token?\" | cat"
     expect: One sentence prints and you get your prompt back.
     files: []
   - id: http
