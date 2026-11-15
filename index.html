@@ -18,11 +18,9 @@ description: Free hands-on labs for building with AI. Run a model, give it tools
   {% else %}<div class="eyebrow">Course 02</div><h2>Flisk CLI</h2><p>Step through Flisk commands as a replay, see what each one writes, then run them yourself.</p>{% endif %}
 </section>
 <section class="section wrap">
-  <div class="track-grid">
-  {% for track in course_tracks %}
-    <a class="track-card" href="#{{ track.id }}"><span class="track-index">0{{ forloop.index }} / PART</span><h3>{{ track.title }}</h3><p>{{ track.description }}</p><div class="track-foot">{{ track.labs.size }} LABS · {{ track.catalog_section }}</div></a>
-  {% endfor %}
-  </div>
+  <nav class="part-jump" aria-label="Parts">
+  {% for track in course_tracks %}<a href="#{{ track.id }}"><b>0{{ forloop.index }}</b> {{ track.title }} <span>{{ track.labs.size }}</span></a>{% endfor %}
+  </nav>
 </section>
 {% for track in course_tracks %}
 <section class="section wrap" id="{{ track.id }}">
