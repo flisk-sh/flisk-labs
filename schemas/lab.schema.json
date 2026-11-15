@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://flisk-sh.github.io/flisk-labs/schemas/lab.schema.json",
+  "$id": "https://labs.flisk.si/schemas/lab.schema.json",
   "title": "Flisk Lab",
   "type": "object",
   "required": ["id", "title", "track", "level", "duration_min", "cli_version", "mode", "source", "terminal", "steps", "runbook"],

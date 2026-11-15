@@ -1,6 +1,6 @@
 # Learn AI
 
-Free hands-on labs for AI engineering, by [Flisk](https://flisk.si). Live at <https://flisk-sh.github.io/flisk-labs/>.
+Free hands-on labs for AI engineering, by [Flisk](https://flisk.si). Live at <https://labs.flisk.si/>.
 
 There are two courses:
 

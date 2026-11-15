@@ -1,7 +1,7 @@
 title: Learn AI
 description: Free hands-on labs for building with AI, from a first model call to an assistant you can hand to a customer. By Flisk.
-url: https://flisk.sh
-baseurl: /flisk-labs
+url: https://labs.flisk.si
+baseurl: ""
 markdown: kramdown
 highlighter: rouge
 plugins:
