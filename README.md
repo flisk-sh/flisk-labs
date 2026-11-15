@@ -77,13 +77,7 @@ bundle exec jekyll serve
 
 ## Captures (replay labs)
 
-Captures use an isolated, version-tagged image named `flisk-sh/releases:<cli_version>`. That image is not currently published, so labs 02 and 03 are marked pending and their player controls are disabled. Do not replace pending transcript output with estimates. Once the image is available:
-
-```sh
-npm run capture -- 02-scaffold --write
-npm run capture -- 03-backend --write
-npm run check:capture
-```
+Every lab is a hands-on guide today. Replay labs, which play back a recorded terminal session, are still supported: a capture runs in an isolated, version-tagged image named `flisk-sh/releases:<cli_version>` (`npm run capture -- <lab> --write`, then `npm run check:capture`). Do not replace transcript output with estimates.
 
 Set `FLISK_CAPTURE_IMAGE` to use a compatible image repository. Captures fail if the image's CLI version does not match the lab pin.
 

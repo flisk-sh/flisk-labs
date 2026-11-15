@@ -3,26 +3,24 @@ title: Scaffold a project
 track: foundations
 level: beginner
 duration_min: 8
-cli_version: "1.3.80"
-capture_source: local-source
-capture_verified: false
-capture_date: "2026-10-01"
-capture_environment: "Local Flisk CLI source 1.3.80; Docker daemon unavailable; generation not captured"
-mode: replay
-source:
-  catalog: [start-here, core-framework-and-releases]
-  docs: https://flisk.sh/docs/quickstart/
-terminal:
-  title: flisk · labs · scaffold
-  phase: foundations
+mode: guide
+goal: "Create a new Flisk project in an empty folder."
+build: A project folder that Flisk recognises, ready for its first service.
+needs:
+  - The Flisk CLI from Lab 01
+  - An empty folder
+docs:
+  - label: Flisk quickstart
+    url: https://flisk.sh/docs/quickstart/
 steps:
-  - id: project
-    cmd: flisk project --yes
-    out: ""
-    verified: false
-    explain: Initializes the current directory as a Flisk project. Output awaits a successful isolated capture because the local Docker daemon was unavailable.
+  - id: folder
+    task: Make an empty folder and go into it
+    cmd: mkdir my-app && cd my-app
+    expect: Your prompt now ends in my-app.
     files: []
-runbook:
-  needs: [Node.js 22.12 or newer, Docker for generated container workflows]
-  install: npm install -g @flisk-sh/flisk
-  live: docker run --rm -it --entrypoint sh flisk-sh/releases:latest
+  - id: project
+    task: Create the project
+    explain: --yes accepts the defaults, so nothing asks you questions.
+    cmd: flisk project --yes
+    expect: Flisk says the project was created, and ls shows package.json, AGENTS.md and a services folder.
+    files: []

@@ -3,26 +3,23 @@ title: Add a backend resource
 track: first-service
 level: beginner
 duration_min: 10
-cli_version: "1.3.80"
-capture_source: local-source
-capture_verified: false
-capture_date: "2026-10-01"
-capture_environment: "Local Flisk CLI source 1.3.80; Docker daemon unavailable; generation not captured"
-mode: replay
-source:
-  catalog: [core-framework-and-releases]
-  docs: https://flisk.sh/docs/quickstart/
-terminal:
-  title: flisk · labs · backend
-  phase: foundations
+mode: guide
+goal: "Add your first backend service to the project and see Flisk pick it up."
+build: An api service in services/pre-alpha/api, counted in flisk status.
+needs:
+  - The project from Lab 02
+docs:
+  - label: Flisk quickstart
+    url: https://flisk.sh/docs/quickstart/
 steps:
-  - id: resource-api
+  - id: resource
+    task: Add a backend called api
+    explain: A resource is one service. Flisk writes its service.json for you, so you never hand-write container files.
     cmd: flisk resource api --type backend --stack pre-alpha --path services/pre-alpha/api --yes
-    out: ""
-    verified: false
-    explain: Creates a backend resource inside the pre-alpha stack. Exact output and generated files await an isolated CLI capture.
+    expect: Flisk says the api resource was created, and services/pre-alpha/api holds a service.json.
     files: []
-runbook:
-  needs: [Node.js 22.12 or newer, Docker for generated container workflows]
-  install: npm install -g @flisk-sh/flisk
-  live: docker run --rm -it --entrypoint sh flisk-sh/releases:latest
+  - id: list
+    task: Check that Flisk sees it
+    cmd: flisk status
+    expect: "Stacks shows pre-alpha: 1 resource. Services stay stopped until you run flisk up pre-alpha."
+    files: []
