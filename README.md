@@ -84,3 +84,7 @@ Set `FLISK_CAPTURE_IMAGE` to use a compatible image repository. Captures fail if
 ## Publish
 
 The repository is [flisk-sh/flisk-labs](https://github.com/flisk-sh/flisk-labs). GitHub Pages deploys from `.github/workflows/pages.yml` on every push to `main`.
+
+## Git hooks
+
+`bun install` (or `npm install`) points git at `.githooks/` through the `prepare` script. `pre-commit` checks your changes and `pre-push` runs the tests. To skip either once, add `--no-verify`. To set up by hand: `git config core.hooksPath .githooks`.
