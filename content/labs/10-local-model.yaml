@@ -16,7 +16,7 @@ steps:
   - id: pull
     task: Install Ollama and pull a small model
     explain: Everything in this course can start on a model this size. Bigger models come later, when you can measure whether they are worth it.
-    cmd: "command -v ollama >/dev/null || curl -fsSL https://ollama.com/install.sh | sh; (ollama serve >/dev/null 2>&1 &); sleep 3; ollama pull llama3.2 && ollama list"
+    cmd: "command -v ollama >/dev/null || { command -v zstd >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq zstd; }; curl -fsSL https://ollama.com/install.sh | sudo sh; }; (ollama serve >/dev/null 2>&1 &); sleep 4; ollama pull llama3.2 && ollama list"
     expect: The list shows llama3.2 with a size of about 2 GB.
     files: []
   - id: ask
