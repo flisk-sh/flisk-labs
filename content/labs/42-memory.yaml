@@ -34,7 +34,7 @@ steps:
     files: []
   - id: walls
     task: Ask the same question as another customer
-    explain: Filter by customer in the database query, not in the prompt. A prompt can be talked out of a rule; a filter cannot.
+    explain: "Filter by customer in the database query, not in the prompt: a user can talk a model out of a prompt rule."
     cmd: uv run --with openai --with qdrant-client --with requests harness.py --customer ben "When should you deliver to me?"
     expect: It does not know. Ana's fact never appears in Ben's session.
     files:

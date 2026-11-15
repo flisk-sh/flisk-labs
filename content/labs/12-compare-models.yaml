@@ -18,7 +18,7 @@ docs:
 steps:
   - id: prompts
     task: Write five real tasks from your own work, one per line
-    explain: Public leaderboards rank models on other people's tasks. Five of your own tell you more than any of them.
+    explain: Leaderboards score models on other people's tasks. Use tasks from your own work.
     cmd: wc -l prompts.jsonl
     expect: Five lines. Each is something you would really ask, with an answer you can judge.
     files:

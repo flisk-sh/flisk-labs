@@ -35,7 +35,6 @@ steps:
       - lefthook.yml
   - id: prove
     task: Try to commit a file with an unused import
-    explain: Checks a machine runs are the only review that scales with the amount of code an agent writes.
     cmd: git commit -am "should fail"; echo "exit $?"
     expect: The commit is refused and the exit code is not 0. Add the three commands to AGENTS.md so the agent runs them itself.
     files:

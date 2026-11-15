@@ -21,7 +21,7 @@ steps:
       - interviews/
   - id: score
     task: "List five candidate use cases and score each: reach, impact, confidence, effort"
-    explain: The top score is rarely the most exciting idea. It is usually the dull task many people do every day.
+    explain: High reach usually means a routine task many people do every day.
     cmd: grep -c "^|" rice.md
     expect: A table with five scored rows and a total (reach times impact times confidence, divided by effort).
     files:

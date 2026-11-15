@@ -13,16 +13,15 @@ layout: default
   <h1>{{ page.title }}</h1>
   <p>{{ page.goal }}</p>
   <div class="actions"><a class="button" href="#{{ page.steps[0].id }}">Start step 1 <span>↓</span></a></div>
-  <div class="hero-note">HANDS-ON LAB · YOU RUN IT ON YOUR MACHINE · {{ page.steps.size }} STEPS</div>
 </section>
 <section class="wrap lab-layout">
   <div>
     <details class="info-panel pod-panel" data-pod-panel data-lab="{{ page.lab_id }}" data-steps="{{ page.steps.size }}" data-fleet="https://fleet.flisk.si">
-      <summary><strong>Run the steps in a pod instead</strong> <span class="pod-optional">no install · <span data-pod-progress>0 of {{ page.steps.size }} steps passed</span></span></summary>
+      <summary><strong>Or run the steps in a cloud pod</strong> <span class="pod-optional"><span data-pod-progress>0 of {{ page.steps.size }} steps passed</span></span></summary>
       <ol class="pod-how">
-        <li><a class="button" data-pod-getkey href="https://fleet.flisk.si/console/lab-key" rel="noopener">Get a fleet key</a> <span data-pod-haskey></span> Sign in with GitHub, press one button, and you come back here with the key filled in.</li>
-        <li>Pick where the pod runs. <a data-pod-provider-link href="https://e2b.dev/dashboard?tab=keys" target="_blank" rel="noopener">Get a free E2B key ↗</a>, paste it below. Already connected a provider in your fleet console? Leave it empty.</li>
-        <li>Press "Run in a pod" on any step. It passes when the command exits 0.</li>
+        <li><a class="button" data-pod-getkey href="https://fleet.flisk.si/console/lab-key" rel="noopener">Get a fleet key</a> <span data-pod-haskey></span> Sign in with GitHub; the key fills in here.</li>
+        <li>Paste a provider key, such as a free <a data-pod-provider-link href="https://e2b.dev/dashboard?tab=keys" target="_blank" rel="noopener">E2B key ↗</a>. Skip this if you connected a provider in the fleet console.</li>
+        <li>Press "Run in a pod" on a step. The step passes when the command exits 0.</li>
       </ol>
       <div class="pod-fields">
         <label>Fleet key<input type="password" data-pod-fleet-key placeholder="comes back automatically, or paste fleet_…" autocomplete="off"></label>
@@ -39,21 +38,20 @@ layout: default
         <div class="card-meta">Step {{ forloop.index }} of {{ page.steps.size }}</div>
         <h2>{{ step.task }}</h2>
         {% if step.explain %}<p>{{ step.explain }}</p>{% endif %}
-        <p class="guide-label">Run this to check</p>
+        <p class="guide-label">Command</p>
         <div class="copy-block guide-cmd">{{ step.cmd | escape }}<button class="copy-action" data-copy-value="{{ step.cmd | escape }}">Copy</button></div>
         <p class="guide-run"><button class="button" type="button" data-pod-run="{{ step.cmd | escape }}">Run in a pod</button></p>
         <pre class="pod-out" data-pod-out hidden></pre>
-        <p class="guide-label">You pass when</p>
+        <p class="guide-label">Expected result</p>
         <p class="guide-expect">{{ step.expect }}</p>
         {% if step.files.size > 0 %}<p class="guide-label">Files you write</p><ul class="file-list">{% for file in step.files %}<li>{{ file }}</li>{% endfor %}</ul>{% endif %}
       </li>
     {% endfor %}
     </ol>
-    <div class="callout"><strong>Two ways to do it.</strong> Run each command on your own machine and check it against "You pass when", or use "Run in a pod" above and let the page check the exit code for you.</div>
     {% include lab-pager.html %}
   </div>
   <aside class="lab-info">
-    <section class="info-panel step-toc"><h3>Steps</h3><ol>{% for step in page.steps %}<li><a href="#{{ step.id }}">{{ step.task }}</a></li>{% endfor %}</ol></section>
+    {% if page.steps.size > 3 %}<section class="info-panel step-toc"><h3>Steps</h3><ol>{% for step in page.steps %}<li><a href="#{{ step.id }}">{{ step.task }}</a></li>{% endfor %}</ol></section>{% endif %}
     <section class="info-panel"><h3>What you build</h3><p>{{ page.build }}</p></section>
     <section class="info-panel"><h3>What you need</h3><ul>{% for need in page.needs %}<li>{{ need }}</li>{% endfor %}</ul></section>
     <section class="info-panel"><h3>Read more</h3>{% for doc in page.docs %}<a class="source-line" href="{{ doc.url }}">{{ doc.label }} ↗</a>{% endfor %}</section>

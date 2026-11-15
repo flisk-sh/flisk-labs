@@ -15,7 +15,7 @@ docs:
 steps:
   - id: write
     task: "Write AGENTS.md: what the repo is, the test and lint commands, three rules, known traps"
-    explain: Write what a new colleague gets wrong in week one. Leave out what the code already says.
+    explain: Include what a new colleague would get wrong; leave out what the code already shows.
     cmd: wc -l AGENTS.md
     expect: Under 60 lines. Every command in it runs as written.
     files:
@@ -33,6 +33,6 @@ steps:
   - id: trap
     task: Add the first thing it got wrong to AGENTS.md
     cmd: git log --oneline -n 2 -- AGENTS.md
-    expect: A second commit to AGENTS.md. The file grows from real mistakes, not guesses.
+    expect: A second commit to AGENTS.md that adds the mistake.
     files:
       - AGENTS.md

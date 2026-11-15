@@ -15,7 +15,7 @@ docs:
 steps:
   - id: collect
     task: Collect 300 claim emails labelled lost, damaged or late
-    explain: Reading your own data is the step people skip and the one that pays most. Note how many of your 30 were wrong.
+    explain: Generated labels contain mistakes. Note how many of your 30 were wrong.
     cmd: wc -l data/all.jsonl
     expect: 300 lines of text and label. Have a model write them if you have none, then read 30 yourself and fix wrong labels.
     files:

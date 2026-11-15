@@ -28,7 +28,7 @@ steps:
       - JUDGE.md
   - id: agree
     task: Print agreement beyond chance (Cohen's kappa)
-    explain: Plain agreement flatters a judge when most answers are right. Kappa takes out the agreement you would get by luck.
+    explain: When most answers are right, plain agreement is high even for a bad judge. Kappa subtracts the agreement expected by chance.
     cmd: uv run --with openai --with scikit-learn judge.py labels.csv --kappa
     expect: A number up to 1. Below 0.6, read the rows you disagree on, tighten the judge prompt and run again.
     files:

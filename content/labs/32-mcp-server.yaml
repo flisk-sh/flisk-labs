@@ -15,7 +15,7 @@ docs:
 steps:
   - id: server
     task: "Write a server with two tools: lookup_parcel and list_claims"
-    explain: The server runs as a child process and talks over standard input and output. Nothing listens on the network yet.
+    explain: The server runs as a child process and talks over standard input and output.
     cmd: npx @modelcontextprotocol/inspector uv run --with mcp server.py
     expect: The inspector opens and lists both tools with a description and typed arguments.
     files:
