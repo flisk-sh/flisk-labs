@@ -12,6 +12,7 @@ layout: default
   <div class="eyebrow">{{ page.track | replace: '-', ' ' }} · {{ page.level }} · {{ page.duration_min }} min</div>
   <h1>{{ page.title }}</h1>
   <p>{{ page.goal }}</p>
+  <div class="actions"><a class="button" href="#{{ page.steps[0].id }}">Start step 1 <span>↓</span></a></div>
   <div class="hero-note">HANDS-ON LAB · YOU RUN IT ON YOUR MACHINE · {{ page.steps.size }} STEPS</div>
 </section>
 <section class="wrap lab-layout">
@@ -34,6 +35,7 @@ layout: default
     {% include lab-pager.html %}
   </div>
   <aside class="lab-info">
+    <section class="info-panel step-toc"><h3>Steps</h3><ol>{% for step in page.steps %}<li><a href="#{{ step.id }}">{{ step.task }}</a></li>{% endfor %}</ol></section>
     <section class="info-panel"><h3>What you build</h3><p>{{ page.build }}</p></section>
     <section class="info-panel"><h3>What you need</h3><ul>{% for need in page.needs %}<li>{{ need }}</li>{% endfor %}</ul></section>
     <section class="info-panel"><h3>Read more</h3>{% for doc in page.docs %}<a class="source-line" href="{{ doc.url }}">{{ doc.label }} ↗</a>{% endfor %}</section>
