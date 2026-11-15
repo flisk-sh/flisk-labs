@@ -22,7 +22,7 @@ for (const line of lines) {
 }
 if (!records.length || !lines.some((line) => /^#{2,4}\s+/.test(line))) throw new Error('README structure was not recognized; no catalog entries were parsed.');
 const labs = fs.readdirSync(path.join(root, 'content/labs')).filter((name) => name.endsWith('.yaml')).map((name) => yaml.parse(fs.readFileSync(path.join(root, 'content/labs', name), 'utf8')));
-for (const record of records) for (const lab of labs) if (lab.source.catalog.some((key) => `${record.title} ${record.section}`.toLowerCase().includes(key.replaceAll('-', ' ').toLowerCase()))) record.lab_ids.push(lab.id);
+for (const record of records) for (const lab of labs) if ((lab.source?.catalog ?? []).some((key) => `${record.title} ${record.section}`.toLowerCase().includes(key.replaceAll('-', ' ').toLowerCase()))) record.lab_ids.push(lab.id);
 const output = path.join(root, '_data/catalog.yml');
 fs.writeFileSync(output, yaml.stringify(records));
 console.log(`Wrote ${records.length} catalog entries to ${path.relative(root, output)}.`);
