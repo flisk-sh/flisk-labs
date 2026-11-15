@@ -88,3 +88,7 @@ The repository is [flisk-sh/flisk-labs](https://github.com/flisk-sh/flisk-labs).
 ## Git hooks
 
 `bun install` (or `npm install`) points git at `.githooks/` through the `prepare` script. `pre-commit` checks your changes and `pre-push` runs the tests. To skip either once, add `--no-verify`. To set up by hand: `git config core.hooksPath .githooks`.
+
+## End-to-end tests
+
+`cd e2e && bun install && bun run test` runs the Playwright suite against https://practice.flisk.si with your installed Chrome (Fleet is mocked). Set `BASE_URL` to test a local `jekyll serve`.
