@@ -41,7 +41,7 @@ steps:
       - COST.md
   - id: teardown
     task: Stop everything the course started
-    explain: Leaving things running is how a free experiment becomes a bill. Make teardown the last step of every delivery.
+    explain: Containers left running keep using memory and, on hosted machines, money.
     cmd: docker rm -f pd learn-pg learn-qdrant; docker ps --format "{{.Names}}"
     expect: None of the lab containers are listed. Stop Langfuse with docker compose down in its folder.
     files: []

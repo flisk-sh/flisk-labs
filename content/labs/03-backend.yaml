@@ -14,7 +14,7 @@ docs:
 steps:
   - id: resource
     task: Add a backend called api
-    explain: A resource is one service. Flisk writes its service.json for you, so you never hand-write container files.
+    explain: A resource is one service. Flisk writes its service.json.
     cmd: flisk resource api --type backend --stack pre-alpha --path services/pre-alpha/api --yes
     expect: Flisk says the api resource was created, and services/pre-alpha/api holds a service.json.
     files: []

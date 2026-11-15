@@ -29,7 +29,6 @@ steps:
       - fanout.py
   - id: fail
     task: Make one call in five fail at random, and retry twice with a growing wait
-    explain: A batch that reports 18 of 20 with no word on the other two is the failure that reaches customers.
     cmd: uv run --with openai --with pydantic fanout.py claims/ --max 4 --chaos 0.2
     expect: Every claim ends as done or as failed after three tries. The count of both adds up to 20.
     files:

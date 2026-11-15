@@ -23,7 +23,7 @@ steps:
       - harness.py
   - id: ask
     task: Add a write_file tool that asks y or n before it runs
-    explain: Reading is safe to allow. Writing, running commands and spending money ask first. That one split is most of agent safety.
+    explain: Allow reads without asking. Ask before writes, shell commands and anything that spends money.
     cmd: uv run --with openai harness.py "Create notes.txt with one line saying hello"
     expect: "It asks before writing. Answer n: no file appears and the model is told it was refused."
     files:

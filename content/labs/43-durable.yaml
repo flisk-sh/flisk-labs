@@ -31,7 +31,7 @@ steps:
       - claim_flow.py
   - id: resume
     task: Approve it from a new process
-    explain: The second run is the real test. Any step that moves money must be safe to repeat.
+    explain: Run the resume twice. A step that pays must pay only once.
     cmd: uv run --with langgraph --with langgraph-checkpoint-postgres --with "psycopg[binary]" --with openai claim_flow.py resume --thread t1 --approve
     expect: "It carries on from the saved step and pays. Run the same command again: there is still exactly one payment row for t1."
     files:

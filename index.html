@@ -6,16 +6,15 @@ description: Free hands-on labs for building with AI. Run a model, give it tools
 <section class="hero">
   <div class="eyebrow">Free · hands-on · runs on your machine</div>
   <h1>Practice & Learn AI<br><em>by building it.</em></h1>
-  <p class="hero-copy">{{ site.data.labs | where: "mode", "guide" | size }} short labs that take you from your first model call to an assistant a customer can rely on. No videos. Every lab has a task, a command that checks it, and a plain description of a pass.</p>
+  <p class="hero-copy">{{ site.data.labs | where: "mode", "guide" | size }} short labs that take you from your first model call to an assistant a customer can rely on. Each lab has a task, a command that checks it, and the result to expect.</p>
   <div class="actions"><a class="button" href="{{ '/labs/10-local-model/' | relative_url }}">Start with Lab 10 <span>→</span></a><a class="button secondary" href="#flisk">Flisk CLI labs</a></div>
-  <div class="hero-note">NO ACCOUNT · NO TRANSCRIPTS TO TRUST · YOUR TERMINAL IS THE PROOF</div>
 </section>
 {% assign courses = "ai,flisk" | split: "," %}
 {% for course in courses %}
 {% assign course_tracks = site.data.tracks | where: "course", course %}
 <section class="wrap course-head" id="{{ course }}">
   {% if course == "ai" %}<div class="eyebrow">Course 01</div><h2>AI engineering</h2><p>Five parts, in order: call a model, give it knowledge, build the harness around it, make it reliable, and deliver it to a customer.</p>
-  {% else %}<div class="eyebrow">Course 02</div><h2>Flisk CLI</h2><p>Step through Flisk commands as a replay, see what each one writes, then run them yourself.</p>{% endif %}
+  {% else %}<div class="eyebrow">Course 02</div><h2>Flisk CLI</h2><p>Install the Flisk CLI, create a project and add a backend service.</p>{% endif %}
 </section>
 <section class="section wrap">
   <nav class="part-jump" aria-label="Parts">
@@ -33,4 +32,3 @@ description: Free hands-on labs for building with AI. Run a model, give it tools
 </section>
 {% endfor %}
 {% endfor %}
-<section class="wrap callout"><strong>Two kinds of lab.</strong> Hands-on labs give you a task and a check, and you run everything yourself. Replay labs show terminal output captured from a pinned Flisk release; they do not run Docker or Flisk in your browser.</section>

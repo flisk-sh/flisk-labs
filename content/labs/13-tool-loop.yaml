@@ -17,7 +17,7 @@ steps:
     task: "Describe two tools to the model: list_dir and read_file"
     explain: "A tool is a name, a sentence and a JSON schema. The model never runs anything: it only asks."
     cmd: uv run --with openai agent.py --once "Which files are in this folder?"
-    expect: The script prints a tool call the model asked for (list_dir with a path) and stops. Nothing is executed yet.
+    expect: The script prints the tool call the model asked for (list_dir with a path) and stops before running it.
     files:
       - agent.py
   - id: execute
@@ -28,7 +28,7 @@ steps:
       - agent.py
   - id: loop
     task: Loop until the model stops asking for tools, with a limit of 8 turns
-    explain: The turn limit is your first safety control. Without it a confused model loops until your budget is gone.
+    explain: Without a turn limit, a model that keeps calling tools runs until your budget is spent.
     cmd: uv run --with openai agent.py "Which file in this folder has the most lines, and how many?"
     expect: It lists the folder, reads several files, then names the right file. Check the number with wc -l.
     files:

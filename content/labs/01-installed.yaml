@@ -15,13 +15,13 @@ docs:
 steps:
   - id: version
     task: Install the CLI and print its version
-    explain: Install it once with npm install -g @flisk-sh/flisk. Every later lab assumes this command works.
-    cmd: flisk --version
+    explain: The next two labs use this CLI.
+    cmd: npm install -g @flisk-sh/flisk && flisk --version
     expect: A version number such as 1.4.61 prints.
     files: []
   - id: doctor
     task: Check your machine
-    explain: Doctor checks Docker, Tilt, free ports and your project. It does not check any cloud cluster.
+    explain: flisk doctor checks Docker, Tilt, free ports and the current project.
     cmd: flisk doctor
-    expect: Each check shows a green tick. A red line names what is missing and the command that fixes it; run that and try again.
+    expect: Every check passes. A failed check names what is missing and the command that installs it.
     files: []

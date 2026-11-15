@@ -24,7 +24,7 @@ steps:
       - docs/
   - id: break
     task: Run the attacks
-    explain: "If none succeed, your attacks are too polite. Write the instruction the way an attacker would: as part of the document."
+    explain: "If no attack works, put the instruction inside the document text, the way an attacker would."
     cmd: uv run --with openai redteam.py
     expect: At least one attack makes the secret appear in an answer or an outgoing call. Keep the output.
     files: []

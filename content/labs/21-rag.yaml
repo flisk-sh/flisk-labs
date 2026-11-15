@@ -37,7 +37,7 @@ steps:
       - ask.py
   - id: refuse
     task: Ask something the pages do not cover
-    explain: An answerer that guesses is worse than no answerer. This refusal is the most important line in your prompt.
+    explain: Tell the model in the prompt to say so when the chunks do not contain the answer.
     cmd: uv run --with openai --with requests --with "psycopg[binary]" ask.py "Do you ship live animals to Mars?"
     expect: It says the documents do not cover this. It does not make up a policy.
     files:
