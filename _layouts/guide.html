@@ -17,18 +17,22 @@ layout: default
 </section>
 <section class="wrap lab-layout">
   <div>
-    <section class="info-panel pod-panel" data-pod-panel data-lab="{{ page.lab_id }}" data-steps="{{ page.steps.size }}" data-fleet="https://fleet.flisk.si">
-      <h3>Run it in a pod <span class="pod-optional">optional</span></h3>
-      <p>No setup on your machine: each step runs in a throwaway pod on <a href="https://fleet.flisk.si">fleet</a>, and the step is marked passed when the command exits 0. Your keys stay in this browser tab and go only to fleet.</p>
+    <details class="info-panel pod-panel" data-pod-panel data-lab="{{ page.lab_id }}" data-steps="{{ page.steps.size }}" data-fleet="https://fleet.flisk.si">
+      <summary><strong>Run the steps in a pod instead</strong> <span class="pod-optional">no install · <span data-pod-progress>0 of {{ page.steps.size }} steps passed</span></span></summary>
+      <ol class="pod-how">
+        <li><a class="button" data-pod-getkey href="https://fleet.flisk.si/console/lab-key" rel="noopener">Get a fleet key</a> <span data-pod-haskey></span> Sign in with GitHub, press one button, and you come back here with the key filled in.</li>
+        <li>Pick where the pod runs. <a data-pod-provider-link href="https://e2b.dev/dashboard?tab=keys" target="_blank" rel="noopener">Get a free E2B key ↗</a>, paste it below. Already connected a provider in your fleet console? Leave it empty.</li>
+        <li>Press "Run in a pod" on any step. It passes when the command exits 0.</li>
+      </ol>
       <div class="pod-fields">
-        <label>Fleet key<input type="password" data-pod-fleet-key placeholder="fleet_…" autocomplete="off"></label>
-        <label>Provider<select data-pod-provider><option value="e2b">E2B (free tier)</option><option value="daytona">Daytona</option><option value="freestyle">Freestyle</option><option value="tensorlake">Tensorlake</option><option value="upstash">Upstash Box</option></select></label>
-        <label>Provider key<input type="password" data-pod-provider-key placeholder="your provider key" autocomplete="off"></label>
+        <label>Fleet key<input type="password" data-pod-fleet-key placeholder="comes back automatically, or paste fleet_…" autocomplete="off"></label>
+        <label>Provider<select data-pod-provider><option value="e2b">E2B (free)</option><option value="daytona">Daytona</option><option value="freestyle">Freestyle</option><option value="tensorlake">Tensorlake</option><option value="upstash">Upstash Box</option></select></label>
+        <label>Provider key (optional)<input type="password" data-pod-provider-key placeholder="skip if connected in fleet" autocomplete="off"></label>
       </div>
       <p class="pod-status" data-pod-status role="status"></p>
-      <p class="pod-progress" data-pod-progress></p>
       <div class="actions"><button class="button secondary" type="button" data-pod-stop>Stop pod</button> <button class="button secondary" type="button" data-pod-reset>Reset progress</button></div>
-    </section>
+      <p class="pod-note">Keys stay in this browser tab and go only to fleet.flisk.si.</p>
+    </details>
     <ol class="guide-steps">
     {% for step in page.steps %}
       <li class="guide-step info-panel" id="{{ step.id }}">

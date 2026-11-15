@@ -13,9 +13,21 @@
   const saveDone = (set) => { try { localStorage.setItem(doneKey, JSON.stringify([...set])); } catch {} };
 
   const fleetKey = $('[data-pod-fleet-key]', root), provider = $('[data-pod-provider]', root), providerKey = $('[data-pod-provider-key]', root), status = $('[data-pod-status]', root);
+  const hash = new URLSearchParams(location.hash.slice(1));
+  if (hash.get('fleet-key')) {
+    store('practice:fleet', hash.get('fleet-key'));
+    history.replaceState(null, '', location.pathname + location.search);
+    root.open = true;
+  }
+  const getKey = $('[data-pod-getkey]', root);
+  getKey.href = root.dataset.fleet + '/console/lab-key?return=' + encodeURIComponent(location.origin + location.pathname);
   fleetKey.value = store('practice:fleet') || ''; providerKey.value = store('practice:pkey') || ''; provider.value = store('practice:provider') || 'e2b';
+  const LINKS = { e2b: 'https://e2b.dev/dashboard?tab=keys', daytona: 'https://app.daytona.io/dashboard/keys', freestyle: 'https://dash.freestyle.sh', tensorlake: 'https://cloud.tensorlake.ai', upstash: 'https://console.upstash.com' };
+  const hasKey = $('[data-pod-haskey]', root), plink = $('[data-pod-provider-link]', root);
+  const refresh = () => { hasKey.textContent = fleetKey.value.trim() ? '✓ key added.' : ''; plink.href = LINKS[provider.value]; plink.textContent = 'Get a ' + (provider.value === 'e2b' ? 'free ' : '') + provider.options[provider.selectedIndex].text.replace(' (free)', '') + ' key ↗'; };
+  refresh();
   const say = (t, bad) => { status.textContent = t; status.dataset.bad = bad ? '1' : ''; };
-  const headers = () => ({ authorization: 'Bearer ' + fleetKey.value.trim(), 'content-type': 'application/json', [PROVIDERS[provider.value]]: providerKey.value.trim() });
+  const headers = () => ({ authorization: 'Bearer ' + fleetKey.value.trim(), 'content-type': 'application/json', ...(providerKey.value.trim() ? { [PROVIDERS[provider.value]]: providerKey.value.trim() } : {}) });
   const call = async (method, path, body) => {
     const res = await fetch(FLEET + path, { method, headers: headers(), body: body ? JSON.stringify(body) : undefined });
     const data = await res.json().catch(() => ({}));
@@ -27,7 +39,7 @@
   let podId = store('practice:pod:' + LAB), starting = null;
   const ensurePod = async () => {
     if (podId) return podId;
-    if (!fleetKey.value.trim() || !providerKey.value.trim()) throw new Error('Add your fleet key and your ' + provider.value + ' key first.');
+    if (!fleetKey.value.trim()) { root.open = true; throw new Error('Press "Get a fleet key" first (step 1 above).'); }
     save();
     starting = starting || (async () => {
       say('Starting a pod on ' + provider.value + '…');
@@ -66,5 +78,5 @@
     }
     if (e.target.closest('[data-pod-reset]')) { saveDone(new Set()); location.reload(); }
   });
-  [fleetKey, providerKey, provider].forEach((el) => el.addEventListener('change', save));
+  [fleetKey, providerKey, provider].forEach((el) => el.addEventListener('change', () => { save(); refresh(); }));
 })();
