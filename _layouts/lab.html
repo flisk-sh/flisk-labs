@@ -31,6 +31,7 @@ layout: default
       <script type="application/json">{{ page.steps | jsonify }}</script>
     </flisk-lab-player>
     <div class="callout"><strong>Replay, not hosted compute.</strong> The terminal shows captured output. Commands do not execute in this browser, and replaying <code>flisk up</code> does not launch a stack.</div>
+    {% include lab-pager.html %}
   </div>
   <aside class="lab-info">
     <section class="info-panel"><h3>What happened</h3><p data-step-explain>Advance one step to see what happens.</p></section>

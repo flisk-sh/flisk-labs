@@ -1,0 +1,4 @@
+{% if page.prev_lab or page.next_lab %}<div class="lab-pager" role="navigation" aria-label="Lab order">
+      {% if page.prev_lab %}<a class="pager-link" href="{{ '/labs/' | append: page.prev_lab.id | append: '/' | relative_url }}" rel="prev"><span>← Previous lab</span>{{ page.prev_lab.title }}</a>{% endif %}
+      {% if page.next_lab %}<a class="pager-link next" href="{{ '/labs/' | append: page.next_lab.id | append: '/' | relative_url }}" rel="next"><span>Next lab →</span>{{ page.next_lab.title }}</a>{% endif %}
+    </div>{% endif %}
