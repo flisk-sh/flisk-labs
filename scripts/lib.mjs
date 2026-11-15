@@ -48,7 +48,8 @@ export function labNeighbours(tracks) {
   const byCourse = new Map();
   for (const track of tracks) {
     const key = track.course ?? track.id;
-    byCourse.set(key, [...(byCourse.get(key) ?? []), ...(track.labs ?? [])]);
+    // A lab listed in more than one part of a course keeps its first place.
+    byCourse.set(key, [...new Set([...(byCourse.get(key) ?? []), ...(track.labs ?? [])])]);
   }
   const neighbours = new Map();
   for (const ids of byCourse.values()) {
