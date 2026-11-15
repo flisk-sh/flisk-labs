@@ -1,0 +1,42 @@
+id: 14-structured-output
+title: Get data back, not prose
+track: models
+level: intermediate
+duration_min: 30
+mode: guide
+goal: Turn messy customer emails into validated records your code can trust.
+build: "extract.py: reads an email, returns a checked Claim record, and retries once when the model gets the shape wrong."
+needs:
+  - Python 3.11 or newer and uv
+  - An OpenRouter key (free models are enough)
+docs:
+  - label: Pydantic docs
+    url: https://docs.pydantic.dev
+  - label: OpenRouter docs
+    url: https://openrouter.ai/docs
+steps:
+  - id: samples
+    task: "Write ten short customer emails about parcels: lost, damaged, late"
+    explain: This is Parcel Desk, the small courier the rest of the course works for. Its customers email in claims for refunds.
+    cmd: ls samples | wc -l
+    expect: "Ten files. Make two of them awkward: one with no parcel number, one with two amounts."
+    files:
+      - samples/
+  - id: model
+    task: "Define a Claim: parcel id, reason (lost, damaged or late), amount, currency"
+    cmd: uv run --with pydantic python -c "from extract import Claim; print(Claim.model_json_schema()['required'])"
+    expect: The required fields print. Reason only accepts the three values.
+    files:
+      - extract.py
+  - id: extract
+    task: Ask the model for JSON in that shape and validate it
+    cmd: uv run --with openai --with pydantic extract.py samples/
+    expect: Ten lines of valid JSON, one per email. The email with no parcel number has a null id, not an invented one.
+    files:
+      - extract.py
+  - id: retry
+    task: On a validation error, send the error back to the model once, then give up loudly
+    cmd: uv run --with openai --with pydantic extract.py samples/; echo "exit $?"
+    expect: Exit 0 when all ten validate. Break one on purpose (ask for a fourth reason value) and the exit code is not 0.
+    files:
+      - extract.py

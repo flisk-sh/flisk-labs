@@ -1,0 +1,41 @@
+id: 40-evals-judge
+title: Grade with a judge you have checked
+track: reliable
+level: intermediate
+duration_min: 50
+mode: guide
+goal: Use a model to grade answers, and prove first that it grades the way you do.
+build: labels.csv with 40 decisions you graded by hand, judge.py, and an agreement score.
+needs:
+  - Python 3.11 or newer and uv
+  - An OpenRouter key (free models are enough)
+docs:
+  - label: scikit-learn user guide
+    url: https://scikit-learn.org/stable/user_guide.html
+steps:
+  - id: label
+    task: "Grade 40 claim decisions yourself: right or wrong"
+    cmd: wc -l labels.csv
+    expect: "41 lines: a header and 40 rows of claim, decision and your grade. Make about a quarter of them wrong decisions."
+    files:
+      - labels.csv
+  - id: judge
+    task: Write a judge prompt and grade the same 40 with a model
+    cmd: uv run --with openai --with scikit-learn judge.py labels.csv
+    expect: A 2 by 2 table of your grade against the judge's, with precision and recall.
+    files:
+      - judge.py
+      - JUDGE.md
+  - id: agree
+    task: Print agreement beyond chance (Cohen's kappa)
+    explain: Plain agreement flatters a judge when most answers are right. Kappa takes out the agreement you would get by luck.
+    cmd: uv run --with openai --with scikit-learn judge.py labels.csv --kappa
+    expect: A number up to 1. Below 0.6, read the rows you disagree on, tighten the judge prompt and run again.
+    files:
+      - JUDGE.md
+  - id: cost
+    task: "Decide which mistake is worse: paying a bad claim or refusing a good one"
+    cmd: cat COSTS.md
+    expect: A price on each mistake, and the judge setting you chose because of it.
+    files:
+      - COSTS.md

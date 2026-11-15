@@ -1,0 +1,45 @@
+id: 12-compare-models
+title: Pick a model with numbers
+track: models
+level: beginner
+duration_min: 30
+mode: guide
+goal: Run the same five tasks on three models and choose one from a table of speed, cost and quality.
+build: "bench.py and results.csv: 15 rows you scored yourself, and a three-line DECISION.md."
+needs:
+  - Python 3.11 or newer and uv
+  - Ollama
+  - An OpenRouter key (free models are enough)
+docs:
+  - label: OpenRouter docs
+    url: https://openrouter.ai/docs
+  - label: Ollama docs
+    url: https://docs.ollama.com
+steps:
+  - id: prompts
+    task: Write five real tasks from your own work, one per line
+    explain: Public leaderboards rank models on other people's tasks. Five of your own tell you more than any of them.
+    cmd: wc -l prompts.jsonl
+    expect: Five lines. Each is something you would really ask, with an answer you can judge.
+    files:
+      - prompts.jsonl
+  - id: bench
+    task: "Write bench.py: every prompt on one local and two hosted models, timed"
+    cmd: uv run --with openai bench.py && column -s, -t results.csv | head -20
+    expect: 15 rows, each with model, prompt number, seconds, tokens in, tokens out and cost.
+    files:
+      - bench.py
+      - results.csv
+  - id: score
+    task: Score every answer from 1 to 5 without looking at the model name
+    explain: Hide the model column while you score. Knowing which model wrote an answer changes how you grade it.
+    cmd: uv run bench.py --summary
+    expect: "One line per model: average score, average seconds, total cost."
+    files:
+      - results.csv
+  - id: decide
+    task: Write down your pick and the number that decided it
+    cmd: cat DECISION.md
+    expect: "Three lines: the model, the reason as a number from your table, and what would make you switch."
+    files:
+      - DECISION.md

@@ -1,0 +1,42 @@
+id: 44-fan-out
+title: Many workers, one dispatcher
+track: reliable
+level: advanced
+duration_min: 45
+mode: guide
+goal: Process a batch of claims in parallel with a cap on how many run at once, retries for the ones that fail, and no claim lost.
+build: "fanout.py: 20 claims, at most four at a time, each with a final result."
+needs:
+  - Python 3.11 or newer and uv
+  - An OpenRouter key (free models are enough)
+  - Lab 14 done (the extractor)
+docs:
+  - label: LangGraph docs
+    url: https://langchain-ai.github.io/langgraph/
+steps:
+  - id: batch
+    task: Make 20 claim emails and process them one after another, timed
+    cmd: time uv run --with openai --with pydantic fanout.py claims/ --max 1
+    expect: 20 results and a total time. This is the number to beat.
+    files:
+      - claims/
+      - fanout.py
+  - id: parallel
+    task: Run them four at a time
+    cmd: time uv run --with openai --with pydantic fanout.py claims/ --max 4
+    expect: The same 20 results in well under the first time. The log never shows more than four in flight.
+    files:
+      - fanout.py
+  - id: fail
+    task: Make one call in five fail at random, and retry twice with a growing wait
+    explain: A batch that reports 18 of 20 with no word on the other two is the failure that reaches customers.
+    cmd: uv run --with openai --with pydantic fanout.py claims/ --max 4 --chaos 0.2
+    expect: Every claim ends as done or as failed after three tries. The count of both adds up to 20.
+    files:
+      - fanout.py
+  - id: report
+    task: "Print a summary: done, retried, failed, total cost"
+    cmd: uv run --with openai --with pydantic fanout.py claims/ --max 4 --chaos 0.2 --summary
+    expect: Four numbers, and the ids of any claim that failed for good.
+    files:
+      - fanout.py

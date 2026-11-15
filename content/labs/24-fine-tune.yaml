@@ -1,0 +1,45 @@
+id: 24-fine-tune
+title: Fine-tune a small open model
+track: knowledge
+level: advanced
+duration_min: 90
+mode: guide
+goal: Train a small adapter (LoRA) on your dataset and prove with the test rows whether it beat the baselines.
+build: "A trained adapter and a three-row table: classic baseline, untuned model, tuned model."
+needs:
+  - An Apple Silicon Mac (mlx-lm) or a free cloud notebook with a GPU (PEFT)
+  - Lab 23 done
+docs:
+  - label: mlx-lm
+    url: https://github.com/ml-explore/mlx-lm
+  - label: Hugging Face PEFT (LoRA)
+    url: https://huggingface.co/docs/peft
+steps:
+  - id: format
+    task: "Convert train and validation rows to chat format: the email in, the label out"
+    cmd: head -n 1 data/train.chat.jsonl
+    expect: "One JSON line with a messages list: a user message and a one-word assistant message."
+    files:
+      - data/train.chat.jsonl
+      - data/valid.chat.jsonl
+  - id: before
+    task: Score the untuned small model on the test rows
+    cmd: uv run eval_tuned.py --base
+    expect: An accuracy number, usually below your classic baseline.
+    files:
+      - eval_tuned.py
+  - id: train
+    task: Train an adapter and log training and validation loss every 50 steps
+    explain: An adapter trains a few million numbers and leaves the model untouched, which is why it fits on a laptop.
+    cmd: tail -n 5 train.log
+    expect: Both losses went down from the first line of the log. The adapter is a small file, not a new model.
+    files:
+      - train.log
+      - adapters/
+  - id: overfit
+    task: Find the step where validation loss stops falling and keep that checkpoint
+    explain: When training loss keeps falling and validation loss turns up, the model is memorising. Stop there.
+    cmd: uv run eval_tuned.py --adapter adapters/
+    expect: A tuned accuracy on the same 30 rows. In RESULTS.md, say which step you kept and why.
+    files:
+      - RESULTS.md

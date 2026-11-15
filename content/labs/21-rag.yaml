@@ -1,0 +1,44 @@
+id: 21-rag
+title: Answer from your documents, with sources
+track: knowledge
+level: intermediate
+duration_min: 45
+mode: guide
+goal: Build a question answerer that reads your own documents, names the file each answer came from, and says so when the answer is not there.
+build: ingest.py and ask.py over six pages of Parcel Desk policy.
+needs:
+  - Python 3.11 or newer and uv
+  - Ollama
+  - Docker
+  - Lab 20 done (the learn-pg container)
+docs:
+  - label: pgvector
+    url: https://github.com/pgvector/pgvector
+  - label: Ollama docs
+    url: https://docs.ollama.com
+steps:
+  - id: docs
+    task: "Write six short policy pages: refunds, damage, lost parcels, international, time limits, exclusions"
+    cmd: ls docs/*.md | wc -l
+    expect: Six files, each under 300 words, with at least one concrete number (days, amounts).
+    files:
+      - docs/
+  - id: ingest
+    task: Split each page into chunks and store them with their file name
+    cmd: uv run --with requests --with "psycopg[binary]" ingest.py docs/
+    expect: It prints how many chunks it stored per file. Running it twice does not double the rows.
+    files:
+      - ingest.py
+  - id: ask
+    task: Fetch the four closest chunks and answer only from them, naming the files
+    cmd: uv run --with openai --with requests --with "psycopg[binary]" ask.py "How many days do I have to report a damaged parcel?"
+    expect: The number from your damage page, followed by the file name it came from.
+    files:
+      - ask.py
+  - id: refuse
+    task: Ask something the pages do not cover
+    explain: An answerer that guesses is worse than no answerer. This refusal is the most important line in your prompt.
+    cmd: uv run --with openai --with requests --with "psycopg[binary]" ask.py "Do you ship live animals to Mars?"
+    expect: It says the documents do not cover this. It does not make up a policy.
+    files:
+      - ask.py

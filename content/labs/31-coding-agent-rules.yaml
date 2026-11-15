@@ -1,0 +1,38 @@
+id: 31-coding-agent-rules
+title: Put a coding agent on rails
+track: harness
+level: beginner
+duration_min: 30
+mode: guide
+goal: Write the instruction file a coding agent reads, and use permission modes so it plans before it edits.
+build: An AGENTS.md under 60 lines in a repo of yours, and one small change made by a coding agent under your rules.
+needs:
+  - A coding agent you already use (Claude Code, Codex, OpenCode or similar)
+  - A small git repo with a test command
+docs:
+  - label: AGENTS.md format
+    url: https://agents.md
+steps:
+  - id: write
+    task: "Write AGENTS.md: what the repo is, the test and lint commands, three rules, known traps"
+    explain: Write what a new colleague gets wrong in week one. Leave out what the code already says.
+    cmd: wc -l AGENTS.md
+    expect: Under 60 lines. Every command in it runs as written.
+    files:
+      - AGENTS.md
+  - id: plan
+    task: Give the agent a small issue in its read-only or plan mode
+    cmd: git status --short
+    expect: Nothing changed on disk, and you have a plan that names the files it will touch.
+    files: []
+  - id: edit
+    task: Allow edits and let it carry out the plan
+    cmd: git diff --stat
+    expect: The diff touches only the files the plan named, and the agent ran your test command without being told to in the prompt.
+    files: []
+  - id: trap
+    task: Add the first thing it got wrong to AGENTS.md
+    cmd: git log --oneline -n 2 -- AGENTS.md
+    expect: A second commit to AGENTS.md. The file grows from real mistakes, not guesses.
+    files:
+      - AGENTS.md

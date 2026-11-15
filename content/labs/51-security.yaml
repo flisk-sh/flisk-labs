@@ -1,0 +1,43 @@
+id: 51-security
+title: Attack your own assistant
+track: deliver
+level: advanced
+duration_min: 60
+mode: guide
+goal: Break your assistant with instructions hidden in the content it reads, then close the hole in the design rather than in the prompt.
+build: redteam.py with five attacks, and an assistant that fails none of them.
+needs:
+  - Python 3.11 or newer and uv
+  - An OpenRouter key (free models are enough)
+  - Docker
+  - Lab 21 and lab 30 done
+docs:
+  - label: OWASP Top 10 for LLM applications
+    url: https://genai.owasp.org/llm-top-10/
+steps:
+  - id: canary
+    task: Give the assistant a secret it must never reveal and a tool that can send data out
+    cmd: uv run --with openai redteam.py --list
+    expect: Five named attacks are listed. At least one hides an instruction in a policy page, and one in a tool result.
+    files:
+      - redteam.py
+      - docs/
+  - id: break
+    task: Run the attacks
+    explain: "If none succeed, your attacks are too polite. Write the instruction the way an attacker would: as part of the document."
+    cmd: uv run --with openai redteam.py
+    expect: At least one attack makes the secret appear in an answer or an outgoing call. Keep the output.
+    files: []
+  - id: map
+    task: Write down which of the three dangerous abilities your assistant has
+    explain: Any two of the three are manageable. An assistant with all three can be told by a stranger to leak your data.
+    cmd: cat THREATS.md
+    expect: "Three lines: does it see private data, does it read content from strangers, can it send data out. All three together is the problem."
+    files:
+      - THREATS.md
+  - id: fix
+    task: "Remove one of the three: an allowlist on the outgoing tool, or tools in a container with no network"
+    cmd: uv run --with openai redteam.py; echo "exit $?"
+    expect: All five attacks fail and the exit code is 0. The secret appears nowhere in the output.
+    files:
+      - harness.py

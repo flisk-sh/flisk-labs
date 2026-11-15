@@ -1,0 +1,43 @@
+id: 52-gateway-policy
+title: One door for every tool, with rules
+track: deliver
+level: advanced
+duration_min: 50
+mode: guide
+goal: Put every tool call through one checkpoint that decides allow, deny or ask a person, from rules kept in a file.
+build: gateway.py and policy.yaml, with tests for each kind of decision and a record of every call.
+needs:
+  - Python 3.11 or newer and uv
+docs:
+  - label: Cedar policy language
+    url: https://docs.cedarpolicy.com
+  - label: Model Context Protocol
+    url: https://modelcontextprotocol.io
+steps:
+  - id: gate
+    task: Route every tool call through one function that knows who is calling, which tool and with what
+    cmd: uv run pytest tests/test_gateway.py -q
+    expect: A test passes showing that no tool can be reached without going through the gateway.
+    files:
+      - gateway.py
+      - tests/test_gateway.py
+  - id: rules
+    task: "Write three rules: support staff cannot pay, refunds over 100 need a person, everyone can look up a parcel"
+    explain: Rules in a file can be read and signed off by someone who does not read code. Larger teams use a policy language such as Cedar for the same job.
+    cmd: uv run pytest tests/test_policy.py -q
+    expect: Tests pass for one allow, one deny and one needs-approval case.
+    files:
+      - policy.yaml
+      - tests/test_policy.py
+  - id: default
+    task: Call a tool that no rule mentions
+    cmd: uv run pytest tests/test_policy.py -q -k unknown
+    expect: It is denied. Anything not allowed by a rule is refused.
+    files:
+      - tests/test_policy.py
+  - id: audit
+    task: Record every decision with its reason
+    cmd: tail -n 3 audit.jsonl
+    expect: "One line per call: who, tool, decision and the rule that decided it."
+    files:
+      - audit.jsonl

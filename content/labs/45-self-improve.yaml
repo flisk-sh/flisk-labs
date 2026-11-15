@@ -1,0 +1,43 @@
+id: 45-self-improve
+title: Let it improve itself, and prove it
+track: reliable
+level: advanced
+duration_min: 60
+mode: guide
+goal: Have a model propose changes to your prompt from its own failures, and accept a change only when held-back data says it helped.
+build: "improve.py: proposes one prompt change, scores it, and prints ACCEPT or REJECT with the numbers."
+needs:
+  - Python 3.11 or newer and uv
+  - An OpenRouter key (free models are enough)
+  - Lab 40 done (the judge)
+docs:
+  - label: OpenRouter docs
+    url: https://openrouter.ai/docs
+steps:
+  - id: split
+    task: Split 60 graded examples into 40 to learn from and 20 held back
+    cmd: wc -l dev.jsonl heldout.jsonl
+    expect: 40 and 20 lines, with no example in both.
+    files:
+      - dev.jsonl
+      - heldout.jsonl
+  - id: noise
+    task: Score the current prompt on the held-back set three times
+    explain: The same prompt scores differently on each run. Until you know by how much, you cannot tell an improvement from luck.
+    cmd: uv run --with openai improve.py --baseline
+    expect: Three scores and their spread. Any gain smaller than that spread is noise.
+    files:
+      - improve.py
+  - id: propose
+    task: Show the improver the failures from the 40 and ask for one prompt change
+    cmd: uv run --with openai improve.py --propose
+    expect: A changed prompt saved as a candidate, with one sentence on what it changes.
+    files:
+      - prompts/candidate.md
+  - id: decide
+    task: Score the candidate on the held-back 20 and decide
+    cmd: uv run --with openai improve.py --decide && grep -c heldout improver.log
+    expect: "ACCEPT or REJECT with both scores. The count is 0: the improver never saw the held-back set."
+    files:
+      - improve.py
+      - improver.log

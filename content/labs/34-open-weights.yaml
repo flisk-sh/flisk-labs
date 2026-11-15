@@ -1,0 +1,38 @@
+id: 34-open-weights
+title: Choose and run open models
+track: harness
+level: intermediate
+duration_min: 35
+mode: guide
+goal: Measure what a smaller, more compressed copy of a model costs you in quality and gives you in speed and memory.
+build: "A table for one model at two compression levels: size, memory, tokens per second, and your score."
+needs:
+  - Ollama
+  - About 6 GB of free disk
+  - Lab 12 done (your five prompts)
+docs:
+  - label: Ollama docs
+    url: https://docs.ollama.com
+steps:
+  - id: pull
+    task: Pull the same model at 4-bit and 8-bit
+    explain: Quantising stores each weight in fewer bits. The file shrinks and runs faster; some accuracy is lost. How much is what you measure.
+    cmd: ollama pull llama3.2:3b-instruct-q4_K_M && ollama pull llama3.2:3b-instruct-q8_0 && ollama list
+    expect: Two entries for the same model. The 8-bit one is clearly larger on disk.
+    files: []
+  - id: speed
+    task: Time both on one prompt
+    cmd: ollama run llama3.2:3b-instruct-q4_K_M --verbose "Write a haiku about parcels"
+    expect: After the answer, a block of timings with an eval rate in tokens per second. Run it for both and note the two rates.
+    files: []
+  - id: memory
+    task: See what is loaded and how much memory it takes
+    cmd: ollama ps
+    expect: The loaded model with its size in memory and whether it runs on the GPU.
+    files: []
+  - id: quality
+    task: Run your five prompts from lab 12 on both and score them blind
+    cmd: cat QUANT.md
+    expect: A table with size, memory, speed and average score for each, and the one you would ship.
+    files:
+      - QUANT.md

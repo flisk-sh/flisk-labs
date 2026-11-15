@@ -9,6 +9,7 @@ const files = fs.readdirSync(dir).filter((name) => name.endsWith('.yaml'));
 let failed = false;
 for (const name of files) {
   const lab = yaml.parse(fs.readFileSync(path.join(dir, name), 'utf8'));
+  if (lab.mode === 'guide') continue;
   if (!lab.capture_verified) { console.error(`${lab.id}: capture is pending`); failed = true; continue; }
   const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'flisk-labs-check-'));
   const copy = path.join(temporary, 'content');

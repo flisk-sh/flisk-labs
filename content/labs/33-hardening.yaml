@@ -1,0 +1,42 @@
+id: 33-hardening
+title: Make AI-written code safe to merge
+track: harness
+level: intermediate
+duration_min: 40
+mode: guide
+goal: "Set up the checks that catch a coding agent's mistakes before a person has to: lint, types, tests with a coverage floor, and a commit hook."
+build: A repo where a bad commit is refused on your machine, by tools rather than by review.
+needs:
+  - Python 3.11 or newer and uv
+  - Any small Python project (the harness from lab 30 works)
+docs:
+  - label: Ruff
+    url: https://docs.astral.sh/ruff/
+  - label: Lefthook
+    url: https://lefthook.dev
+steps:
+  - id: lint
+    task: Add a linter and a type checker and fix what they find
+    cmd: uv run ruff check . && uv run pyright
+    expect: Both exit 0.
+    files:
+      - pyproject.toml
+  - id: cover
+    task: Write tests until coverage reaches 80 percent, and make less than that a failure
+    cmd: uv run pytest --cov --cov-fail-under=80
+    expect: Tests pass and the coverage line shows 80 percent or more.
+    files:
+      - tests/
+  - id: hook
+    task: Run all three before every commit
+    cmd: lefthook install && lefthook run pre-commit
+    expect: The hook runs lint, types and tests and passes.
+    files:
+      - lefthook.yml
+  - id: prove
+    task: Try to commit a file with an unused import
+    explain: Checks a machine runs are the only review that scales with the amount of code an agent writes.
+    cmd: git commit -am "should fail"; echo "exit $?"
+    expect: The commit is refused and the exit code is not 0. Add the three commands to AGENTS.md so the agent runs them itself.
+    files:
+      - AGENTS.md

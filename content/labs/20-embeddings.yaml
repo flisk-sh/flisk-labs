@@ -1,0 +1,41 @@
+id: 20-embeddings
+title: Search by meaning
+track: knowledge
+level: beginner
+duration_min: 30
+mode: guide
+goal: Turn text into vectors and find the closest sentences, first in memory and then in a database.
+build: "search.py: finds the right sentence even when it shares no words with the question."
+needs:
+  - Python 3.11 or newer and uv
+  - Ollama
+  - Docker
+docs:
+  - label: Ollama docs
+    url: https://docs.ollama.com
+  - label: pgvector
+    url: https://github.com/pgvector/pgvector
+steps:
+  - id: embed
+    task: Pull an embedding model and embed one sentence
+    cmd: ollama pull nomic-embed-text && curl -s http://localhost:11434/api/embed -d '{"model":"nomic-embed-text","input":"my box arrived crushed"}' | head -c 200
+    expect: JSON with an embeddings array of numbers.
+    files: []
+  - id: search
+    task: Write 30 sentences about parcels and rank them against a question by cosine similarity
+    cmd: uv run --with numpy --with requests search.py "my box arrived crushed"
+    expect: The top three are about damage, though none of them contains the word crushed.
+    files:
+      - sentences.txt
+      - search.py
+  - id: db
+    task: Start Postgres with pgvector
+    cmd: docker run -d --name learn-pg -e POSTGRES_PASSWORD=learn -p 5433:5432 pgvector/pgvector:pg17 && sleep 5 && docker exec learn-pg psql -U postgres -c "CREATE EXTENSION IF NOT EXISTS vector; SELECT extversion FROM pg_extension WHERE extname='vector';"
+    expect: One row with the extension version.
+    files: []
+  - id: store
+    task: Store the vectors in a table and run the same search in SQL
+    cmd: uv run --with numpy --with requests --with "psycopg[binary]" search.py --db "my box arrived crushed"
+    expect: The same top three as the in-memory search.
+    files:
+      - search.py

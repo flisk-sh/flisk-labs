@@ -1,0 +1,38 @@
+id: 41-tracing
+title: "See every step: traces"
+track: reliable
+level: intermediate
+duration_min: 40
+mode: guide
+goal: Record every model call and tool call of a run so you can see where the time and money went.
+build: A local tracing dashboard showing one run of your harness, step by step, with cost.
+needs:
+  - Docker
+  - Python 3.11 or newer and uv
+  - Lab 30 done
+docs:
+  - label: Langfuse docs
+    url: https://langfuse.com/docs
+steps:
+  - id: start
+    task: Start Langfuse on your machine
+    cmd: git clone https://github.com/langfuse/langfuse.git && cd langfuse && docker compose up -d
+    expect: The containers start. The first start pulls several images and takes a few minutes.
+    files: []
+  - id: health
+    task: Check that it answers
+    cmd: curl -s -o /dev/null -w "%{http_code}\n" http://localhost:3000/api/public/health
+    expect: 200. Open http://localhost:3000, create a local account and a project, and copy its two keys into your environment.
+    files: []
+  - id: instrument
+    task: Send one span per model call and per tool call from your harness
+    cmd: uv run --with openai --with langfuse harness.py "Which file here is the largest?"
+    expect: One new trace in the dashboard, with tool calls nested under the run and token counts on each model call.
+    files:
+      - harness.py
+  - id: read
+    task: Find the slowest step and the most expensive step of that run
+    cmd: cat TRACE-NOTES.md
+    expect: Two lines naming each step, with its seconds and cost, and one idea to cut each.
+    files:
+      - TRACE-NOTES.md

@@ -1,0 +1,40 @@
+id: 54-capstone
+title: "Capstone: the claims desk"
+track: deliver
+level: advanced
+duration_min: 180
+mode: guide
+goal: Put the course together into one assistant for Parcel Desk and hand it to someone else to run.
+build: An assistant that reads a claim email, checks policy, decides, asks a person for large amounts, pays once, and comes with a runbook.
+needs:
+  - Labs 14, 21, 30, 40, 43, 51 and 53 done
+docs:
+  - label: Flisk docs
+    url: https://flisk.sh/docs/
+  - label: LangGraph docs
+    url: https://langchain-ai.github.io/langgraph/
+steps:
+  - id: wire
+    task: "Join the parts: extract the claim, look up policy, decide, approve over 100, pay"
+    cmd: uv run claim_desk.py samples/damaged-01.txt
+    expect: A decision with the policy page it relied on. A large claim stops and waits for approval.
+    files:
+      - claim_desk.py
+  - id: measure
+    task: Score it on 40 graded claims with your checked judge
+    cmd: uv run eval.py --suite capstone
+    expect: It meets the success number you wrote in lab 50. If not, the trace of the worst failures tells you which part to fix.
+    files:
+      - eval.py
+  - id: attack
+    task: Run your five attacks against the finished assistant
+    cmd: uv run redteam.py; echo "exit $?"
+    expect: "Exit 0: none succeed."
+    files: []
+  - id: handover
+    task: "Write the runbook: start, stop, where the logs are, the three most likely failures and their fix"
+    explain: The work is finished when it keeps running after you have left.
+    cmd: wc -l RUNBOOK.md
+    expect: "Under 80 lines. Give it to a colleague: they start the assistant, break it and fix it without asking you."
+    files:
+      - RUNBOOK.md

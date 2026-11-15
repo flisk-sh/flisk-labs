@@ -1,0 +1,42 @@
+id: 30-harness
+title: A model plus a harness
+track: harness
+level: intermediate
+duration_min: 45
+mode: guide
+goal: "Wrap your tool loop in the parts that make it usable: instructions in a file, a permission question, a budget and a log."
+build: "harness.py: your loop from lab 13 that asks before it writes, stops at a budget, and logs every message."
+needs:
+  - Python 3.11 or newer and uv
+  - An OpenRouter key (free models are enough)
+  - Lab 13 done
+docs:
+  - label: OpenRouter docs
+    url: https://openrouter.ai/docs
+steps:
+  - id: prompt
+    task: Move the instructions into SYSTEM.md and load them at start
+    cmd: uv run --with openai harness.py "What are your rules?"
+    expect: It answers from SYSTEM.md. Change a rule in the file and the answer changes with no code edit.
+    files:
+      - SYSTEM.md
+      - harness.py
+  - id: ask
+    task: Add a write_file tool that asks y or n before it runs
+    explain: Reading is safe to allow. Writing, running commands and spending money ask first. That one split is most of agent safety.
+    cmd: uv run --with openai harness.py "Create notes.txt with one line saying hello"
+    expect: "It asks before writing. Answer n: no file appears and the model is told it was refused."
+    files:
+      - harness.py
+  - id: budget
+    task: Stop the run at a turn limit and a token limit
+    cmd: uv run --with openai harness.py --max-tokens 2000 "Read every file here and summarise each one"
+    expect: It stops with a clear message that the budget ran out, and says how far it got.
+    files:
+      - harness.py
+  - id: log
+    task: Append every message and tool result to a log file
+    cmd: wc -l transcript.jsonl && tail -n 1 transcript.jsonl
+    expect: One JSON line per message, with a timestamp and token counts. You can replay a run from the file alone.
+    files:
+      - transcript.jsonl

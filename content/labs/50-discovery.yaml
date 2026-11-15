@@ -1,0 +1,40 @@
+id: 50-discovery
+title: Find the use case worth building
+track: deliver
+level: beginner
+duration_min: 45
+mode: guide
+goal: Turn a customer's vague wish for AI into one use case with a number that says when it worked.
+build: A scored list of five candidate use cases and a one-page brief for the winner.
+needs:
+  - A real or imagined customer (Parcel Desk works)
+  - No code
+docs:
+  - label: OpenRouter docs
+    url: https://openrouter.ai/docs
+steps:
+  - id: notes
+    task: "Write up three short interviews: who does what today, how long it takes, what goes wrong"
+    cmd: ls interviews | wc -l
+    expect: Three files, each with at least one number someone gave you (hours a week, claims a day, error rate).
+    files:
+      - interviews/
+  - id: score
+    task: "List five candidate use cases and score each: reach, impact, confidence, effort"
+    explain: The top score is rarely the most exciting idea. It is usually the dull task many people do every day.
+    cmd: grep -c "^|" rice.md
+    expect: A table with five scored rows and a total (reach times impact times confidence, divided by effort).
+    files:
+      - rice.md
+  - id: criteria
+    task: For the winner, write the success number and how it will be measured
+    cmd: grep -n -i "success" BRIEF.md
+    expect: "A sentence with a number and a date, such as: 70 percent of claims under 100 decided with no human, at under 2 percent wrong payouts, by week six."
+    files:
+      - BRIEF.md
+  - id: brief
+    task: "Finish the brief: problem, users, success number, what is out of scope, what needs a human"
+    cmd: wc -w BRIEF.md
+    expect: Under 400 words. A person who was not in the interviews can say what you are building and how you will know it worked.
+    files:
+      - BRIEF.md
