@@ -17,13 +17,13 @@ steps:
   - id: pull
     task: Pull the same model at 4-bit and 8-bit
     explain: Quantising stores each weight in fewer bits. The file shrinks and runs faster; some accuracy is lost. How much is what you measure.
-    cmd: ollama pull llama3.2:3b-instruct-q4_K_M && ollama pull llama3.2:3b-instruct-q8_0 && ollama list
-    expect: Two entries for the same model. The 8-bit one is clearly larger on disk.
+    cmd: M=$(if [ "$(awk '/MemAvailable/{print $2}' /proc/meminfo 2>/dev/null)" -lt 1000000 ] 2>/dev/null; then echo smollm2:135m-instruct; else echo llama3.2:3b-instruct; fi); ollama pull $M-q4_K_M && ollama pull $M-q8_0 && ollama list
+    expect: Two entries for the same model. The 8-bit one is clearly larger on disk. On a machine with under 1 GB of free memory (a small pod), the lab uses the tiny smollm2:135m-instruct instead of llama3.2 3B.
     files: []
   - id: speed
     task: Time both on one prompt
-    cmd: ollama run llama3.2:3b-instruct-q4_K_M --verbose "Write a haiku about parcels"
-    expect: After the answer, a block of timings with an eval rate in tokens per second. Run it for both and note the two rates.
+    cmd: M=$(if [ "$(awk '/MemAvailable/{print $2}' /proc/meminfo 2>/dev/null)" -lt 1000000 ] 2>/dev/null; then echo smollm2:135m-instruct; else echo llama3.2:3b-instruct; fi); ollama run $M-q4_K_M --verbose "Write a haiku about parcels"; ollama stop $M-q4_K_M; ollama run $M-q8_0 --verbose "Write a haiku about parcels"
+    expect: After each answer, a block of timings with an eval rate in tokens per second. Note the two rates. The stop between the runs frees the first model; a small machine cannot hold both.
     files: []
   - id: memory
     task: See what is loaded and how much memory it takes
