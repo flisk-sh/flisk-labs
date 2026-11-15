@@ -3,63 +3,25 @@ title: Is Flisk installed?
 track: foundations
 level: beginner
 duration_min: 5
-cli_version: "1.3.80"
-capture_source: local-source
-capture_verified: false
-capture_date: "2026-10-01"
-capture_environment: "Local Flisk CLI source 1.3.80; Docker daemon unavailable; Tilt unavailable"
-mode: replay
-source:
-  catalog: [start-here, core-framework-and-releases]
-  docs: https://flisk.sh/docs/quickstart/
-terminal:
-  title: flisk · labs · installed
-  phase: foundations
+mode: guide
+goal: "Check that the Flisk CLI is on your PATH and that your machine can run a local stack."
+build: A machine that passes flisk doctor, ready for the next lab.
+needs:
+  - Node.js 20 or newer
+  - Docker Desktop, Colima or OrbStack (only for container stacks)
+docs:
+  - label: Flisk quickstart
+    url: https://flisk.sh/docs/quickstart/
 steps:
   - id: version
+    task: Install the CLI and print its version
+    explain: Install it once with npm install -g @flisk-sh/flisk. Every later lab assumes this command works.
     cmd: flisk --version
-    out: |
-      1.3.80
-    explain: Confirm which Flisk CLI version is available on your PATH. Each capture records the exact CLI release used.
+    expect: A version number such as 1.4.61 prints.
     files: []
   - id: doctor
-    cmd: flisk doctor --no-ping
-    out: |
-      Flisk doctor checks your local Docker + Tilt development environment; it does not check cluster deployments.
-
-      🔍 Flisk Doctor
-
-      Checking environment...
-
-      ✗ Docker daemon is not responding
-      ℹ Fix: Start Docker Desktop, OrbStack, or Colima, then retry: flisk doctor
-      ✗ Tilt CLI not found
-      ℹ Fix: curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/install.sh | bash
-      ✓ HTTP 8080, HTTPS 8443, Postgres 15432
-      ○ Docker not available - skipped ingress port check
-      ○ Docker OS unavailable - daemon failure reported separately
-      ✓ Docker Compose plugin available
-      ✓ Docker Engine 29.5.2 and Compose 5.1.3 support generated healthchecks
-      ○ Not in a project - skipping Bun check
-      ○ Not running in WSL2 - skipped project filesystem check
-      ✓ Docker can create networks
-
-      ✗ Doctor failed. Fix the items above, then run: flisk doctor
-    explain: Doctor checks local prerequisites such as Docker and Tilt. This capture reflects the capture machine's environment, so failures here describe that environment rather than the learner's computer.
+    task: Check your machine
+    explain: Doctor checks Docker, Tilt, free ports and your project. It does not check any cloud cluster.
+    cmd: flisk doctor
+    expect: Each check shows a green tick. A red line names what is missing and the command that fixes it; run that and try again.
     files: []
-runbook:
-  needs: [Node.js 22.12 or newer, Docker for local stack commands, Tilt for `flisk up`]
-  install: npm install -g @flisk-sh/flisk
-  live: docker run --rm -it --entrypoint sh flisk-sh/releases:latest
-troubleshooting:
-  title: Fix the doctor checks on your machine
-  description: The red Docker and Tilt checks above came from the capture machine, not your computer. Type a command, copy it to your terminal, run it there, then paste its output below to inspect it here.
-  commands:
-    - label: Check Docker
-      command: docker info
-    - label: Check Tilt
-      command: tilt version
-    - label: Check Flisk
-      command: flisk --version
-    - label: Rerun doctor
-      command: flisk doctor --no-ping
