@@ -1,0 +1,47 @@
+id: 53-deploy
+title: Ship it and know the bill
+track: deliver
+level: intermediate
+duration_min: 50
+mode: guide
+goal: Package your assistant so it runs the same anywhere, keep secrets out of the package, and work out what a request costs.
+build: A container image of your assistant with a health check, and a cost per request you measured.
+needs:
+  - Docker
+  - Python 3.11 or newer and uv
+  - Lab 30 done
+docs:
+  - label: Dockerfile reference
+    url: https://docs.docker.com/reference/dockerfile/
+steps:
+  - id: serve
+    task: "Put the harness behind two HTTP routes: /health and /ask"
+    cmd: curl -s localhost:8080/health
+    expect: '{"status":"ok"} from the server running on your machine.'
+    files:
+      - app.py
+  - id: image
+    task: Write a Dockerfile and run the image with keys passed in at start
+    cmd: docker build -t parcel-desk . && docker run -d --name pd -p 8080:8080 --env-file .env parcel-desk && sleep 3 && curl -s localhost:8080/health
+    expect: The same health answer, now from the container.
+    files:
+      - Dockerfile
+      - .dockerignore
+  - id: secrets
+    task: Check that no key is inside the image
+    cmd: docker history --no-trunc parcel-desk | grep -c -i "api_key"; docker run --rm --entrypoint ls parcel-desk -a
+    expect: The count is 0 and no .env file is listed. Keys arrive when the container starts, never when it is built.
+    files: []
+  - id: bill
+    task: Send 50 requests and work out the cost of one
+    cmd: uv run --with requests load.py --n 50
+    expect: Average seconds and average cost per request, and what 1,000 requests a day would cost a month.
+    files:
+      - load.py
+      - COST.md
+  - id: teardown
+    task: Stop everything the course started
+    explain: Leaving things running is how a free experiment becomes a bill. Make teardown the last step of every delivery.
+    cmd: docker rm -f pd learn-pg learn-qdrant; docker ps --format "{{.Names}}"
+    expect: None of the lab containers are listed. Stop Langfuse with docker compose down in its folder.
+    files: []

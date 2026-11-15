@@ -1,0 +1,41 @@
+id: 22-rag-evals
+title: Measure retrieval before you tune it
+track: knowledge
+level: intermediate
+duration_min: 40
+mode: guide
+goal: Put a number on how often the right page is found, then change one thing and see if the number moves.
+build: evalset.jsonl with 20 questions, eval.py, and a before and after table.
+needs:
+  - Python 3.11 or newer and uv
+  - Lab 21 done
+docs:
+  - label: pgvector
+    url: https://github.com/pgvector/pgvector
+steps:
+  - id: set
+    task: Write 20 questions, each with the file that holds the answer
+    cmd: wc -l evalset.jsonl
+    expect: 20 lines. Include five that use different words from the page.
+    files:
+      - evalset.jsonl
+  - id: measure
+    task: Print recall at 4 and the mean reciprocal rank
+    explain: "Recall at 4: how often the right page is in the four chunks you fetch. Reciprocal rank: 1 if it is first, 1/2 if second, and so on."
+    cmd: uv run --with requests --with "psycopg[binary]" eval.py evalset.jsonl
+    expect: Two numbers between 0 and 1, and a list of the questions that missed.
+    files:
+      - eval.py
+  - id: change
+    task: "Change one thing: chunk size, overlap, or a rerank step"
+    cmd: uv run --with requests --with "psycopg[binary]" eval.py evalset.jsonl --label after
+    expect: The same two numbers for the new setup.
+    files:
+      - ingest.py
+      - eval.py
+  - id: record
+    task: Write the before and after in a table and keep or revert the change
+    cmd: cat RESULTS.md
+    expect: Two rows and a one-line decision. A change that does not move the number is reverted.
+    files:
+      - RESULTS.md

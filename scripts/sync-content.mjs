@@ -6,7 +6,7 @@ const tracks = yaml.parse(fs.readFileSync(path.join(root, 'content/tracks.yaml')
 const labDir = path.join(root, 'content/labs');
 const labs = fs.readdirSync(labDir).filter((name) => name.endsWith('.yaml')).sort().map((name) => {
   const lab = yaml.parse(fs.readFileSync(path.join(labDir, name), 'utf8'));
-  return { ...lab, lab_id: lab.id, url: `/labs/${lab.id}/` };
+  return { ...lab, lab_id: lab.id, description: lab.goal ?? lab.steps?.[0]?.explain, url: `/labs/${lab.id}/` };
 });
 fs.writeFileSync(path.join(root, '_data/tracks.yml'), yaml.stringify(tracks));
 fs.writeFileSync(path.join(root, '_data/labs.yml'), yaml.stringify(labs));

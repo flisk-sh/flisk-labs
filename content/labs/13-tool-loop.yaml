@@ -1,0 +1,41 @@
+id: 13-tool-loop
+title: "Give a model tools: the loop from scratch"
+track: models
+level: intermediate
+duration_min: 40
+mode: guide
+goal: Write the loop that lets a model call your functions, with no framework, so you know what every framework is doing for you.
+build: "agent.py: about 80 lines that answer questions about a folder by listing and reading files."
+needs:
+  - Python 3.11 or newer and uv
+  - An OpenRouter key (free models are enough), or Ollama with a model that supports tools
+docs:
+  - label: OpenRouter docs
+    url: https://openrouter.ai/docs
+steps:
+  - id: schema
+    task: "Describe two tools to the model: list_dir and read_file"
+    explain: "A tool is a name, a sentence and a JSON schema. The model never runs anything: it only asks."
+    cmd: uv run --with openai agent.py --once "Which files are in this folder?"
+    expect: The script prints a tool call the model asked for (list_dir with a path) and stops. Nothing is executed yet.
+    files:
+      - agent.py
+  - id: execute
+    task: Run the tool the model asked for and send the result back
+    cmd: uv run --with openai agent.py --once "Which files are in this folder?"
+    expect: Now the answer lists the real files in the folder.
+    files:
+      - agent.py
+  - id: loop
+    task: Loop until the model stops asking for tools, with a limit of 8 turns
+    explain: The turn limit is your first safety control. Without it a confused model loops until your budget is gone.
+    cmd: uv run --with openai agent.py "Which file in this folder has the most lines, and how many?"
+    expect: It lists the folder, reads several files, then names the right file. Check the number with wc -l.
+    files:
+      - agent.py
+  - id: trace
+    task: "Print one line per step: who spoke, which tool, how many tokens"
+    cmd: uv run --with openai agent.py --trace "How many Python files are here?"
+    expect: A numbered trace prints before the answer, and reading a file that does not exist shows up as a tool error the model recovers from, not a crash.
+    files:
+      - agent.py

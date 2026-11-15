@@ -1,0 +1,43 @@
+id: 23-dataset-baseline
+title: Build a dataset and a baseline to beat
+track: knowledge
+level: intermediate
+duration_min: 45
+mode: guide
+goal: Make a small labelled dataset and score two cheap baselines on it, so later work has a number to beat.
+build: data/ with train, validation and test files, and two accuracy numbers on the same test rows.
+needs:
+  - Python 3.11 or newer and uv
+  - An OpenRouter key (free models are enough)
+docs:
+  - label: scikit-learn user guide
+    url: https://scikit-learn.org/stable/user_guide.html
+steps:
+  - id: collect
+    task: Collect 300 claim emails labelled lost, damaged or late
+    explain: Reading your own data is the step people skip and the one that pays most. Note how many of your 30 were wrong.
+    cmd: wc -l data/all.jsonl
+    expect: 300 lines of text and label. Have a model write them if you have none, then read 30 yourself and fix wrong labels.
+    files:
+      - data/all.jsonl
+  - id: split
+    task: Shuffle once with a fixed seed and split 240, 30, 30
+    cmd: wc -l data/train.jsonl data/valid.jsonl data/test.jsonl
+    expect: 240, 30 and 30 lines. No email appears in two files.
+    files:
+      - data/train.jsonl
+      - data/valid.jsonl
+      - data/test.jsonl
+  - id: classic
+    task: Train word counts plus logistic regression and score it on the test rows
+    cmd: uv run --with scikit-learn baseline.py
+    expect: An accuracy number and a 3 by 3 table of which label was mistaken for which.
+    files:
+      - baseline.py
+  - id: zero-shot
+    task: Score a hosted model on the same 30 rows with no training
+    cmd: uv run --with openai baseline.py --llm
+    expect: "A second accuracy number and its cost. Write both in RESULTS.md: this is the bar."
+    files:
+      - baseline.py
+      - RESULTS.md

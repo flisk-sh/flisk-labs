@@ -1,0 +1,44 @@
+id: 43-durable
+title: Survive a restart, wait for a person
+track: reliable
+level: advanced
+duration_min: 60
+mode: guide
+goal: Build a claim flow that saves its place after every step, pauses for a human on large amounts, and pays exactly once.
+build: "claim_flow.py: intake, decide, approve, pay, with its state in Postgres."
+needs:
+  - Python 3.11 or newer and uv
+  - Docker
+  - An OpenRouter key (free models are enough)
+  - The learn-pg container from lab 20
+docs:
+  - label: LangGraph docs
+    url: https://langchain-ai.github.io/langgraph/
+  - label: Flisk docs
+    url: https://flisk.sh/docs/
+steps:
+  - id: graph
+    task: Write the four steps as a graph and run one small claim end to end
+    cmd: uv run --with langgraph --with langgraph-checkpoint-postgres --with "psycopg[binary]" --with openai claim_flow.py start --thread t0 --amount 20
+    expect: The claim is paid in one run, and a payments table has one row for t0.
+    files:
+      - claim_flow.py
+  - id: pause
+    task: Stop and wait for approval when the amount is over 100
+    cmd: uv run --with langgraph --with langgraph-checkpoint-postgres --with "psycopg[binary]" --with openai claim_flow.py start --thread t1 --amount 250
+    expect: The process prints that it is waiting for approval and exits. Nothing is paid.
+    files:
+      - claim_flow.py
+  - id: resume
+    task: Approve it from a new process
+    explain: The second run is the real test. Any step that moves money must be safe to repeat.
+    cmd: uv run --with langgraph --with langgraph-checkpoint-postgres --with "psycopg[binary]" --with openai claim_flow.py resume --thread t1 --approve
+    expect: "It carries on from the saved step and pays. Run the same command again: there is still exactly one payment row for t1."
+    files:
+      - claim_flow.py
+  - id: stack
+    task: See the same contract in a ready-made stack
+    explain: Optional. Flisk's agent resource keeps sessions in a checkpoint store in the same way your flow keeps threads in Postgres.
+    cmd: flisk project agent-stack && flisk up
+    expect: A local stack starts with an agent, tools and a database. flisk status --json shows the resources; flisk agent sessions <resource> lists stored sessions, and they are still listed after flisk restart <resource>.
+    files: []

@@ -1,0 +1,40 @@
+id: 32-mcp-server
+title: Build a tool server any assistant can use
+track: harness
+level: intermediate
+duration_min: 45
+mode: guide
+goal: Publish your tools over the Model Context Protocol so any assistant that speaks it can call them.
+build: "server.py: an MCP server with two Parcel Desk tools, tested in the inspector and connected to a coding agent."
+needs:
+  - Python 3.11 or newer and uv
+  - Node.js 22 or newer (for the inspector)
+docs:
+  - label: Model Context Protocol
+    url: https://modelcontextprotocol.io
+steps:
+  - id: server
+    task: "Write a server with two tools: lookup_parcel and list_claims"
+    explain: The server runs as a child process and talks over standard input and output. Nothing listens on the network yet.
+    cmd: npx @modelcontextprotocol/inspector uv run --with mcp server.py
+    expect: The inspector opens and lists both tools with a description and typed arguments.
+    files:
+      - server.py
+  - id: errors
+    task: Call lookup_parcel with an id that does not exist
+    cmd: npx @modelcontextprotocol/inspector uv run --with mcp server.py
+    expect: The tool returns a plain sentence saying the parcel was not found. No stack trace reaches the caller.
+    files:
+      - server.py
+  - id: connect
+    task: Add the server to your coding agent and ask about a parcel
+    cmd: claude mcp add parcel -- uv run --with mcp server.py && claude mcp list
+    expect: The server is listed as connected, and the agent answers a parcel question by calling your tool. Other agents have their own add command.
+    files: []
+  - id: http
+    task: Serve the same tools over HTTP so a remote assistant can reach them
+    explain: Local process for tools on your machine, HTTP for tools shared by a team. Flisk scaffolds the second kind with flisk resource <name> --type mcp.
+    cmd: npx @modelcontextprotocol/inspector
+    expect: With the server started in HTTP mode, the inspector connects by URL and shows the same two tools.
+    files:
+      - server.py

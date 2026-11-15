@@ -1,0 +1,32 @@
+id: 10-local-model
+title: Run a model on your laptop
+track: models
+level: beginner
+duration_min: 15
+mode: guide
+goal: "Run a small open model on your own machine and call it two ways: from the terminal and over HTTP."
+build: A local model that answers on http://localhost:11434, with no account and no bill.
+needs:
+  - Ollama
+  - About 3 GB of free disk
+docs:
+  - label: Ollama docs
+    url: https://docs.ollama.com
+steps:
+  - id: pull
+    task: Install Ollama and pull a small model
+    explain: Everything in this course can start on a model this size. Bigger models come later, when you can measure whether they are worth it.
+    cmd: ollama pull llama3.2 && ollama list
+    expect: The list shows llama3.2 with a size of about 2 GB.
+    files: []
+  - id: ask
+    task: Ask it one question from the terminal
+    cmd: ollama run llama3.2 "In one sentence, what is a token?"
+    expect: One sentence prints and you get your prompt back.
+    files: []
+  - id: http
+    task: Call the same model over HTTP
+    explain: This is the same request shape most hosted models accept. Every later lab is this call with more around it.
+    cmd: "curl -s http://localhost:11434/v1/chat/completions -H 'Content-Type: application/json' -d '{\"model\":\"llama3.2\",\"messages\":[{\"role\":\"user\",\"content\":\"Say hi in three words.\"}]}'"
+    expect: JSON comes back with the answer under choices[0].message.content and a usage block that counts prompt and completion tokens.
+    files: []

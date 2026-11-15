@@ -1,0 +1,43 @@
+id: 11-chat-api
+title: Call a hosted model and read the bill
+track: models
+level: beginner
+duration_min: 25
+mode: guide
+goal: Send a chat request to a hosted model from your own script, keep a conversation going, and print what each call costs.
+build: "chat.py: a 60-line chat client that prints the answer, the token counts and the cost of every call."
+needs:
+  - Python 3.11 or newer and uv
+  - An OpenRouter key (free models are enough)
+docs:
+  - label: OpenRouter docs
+    url: https://openrouter.ai/docs
+  - label: uv docs
+    url: https://docs.astral.sh/uv/
+steps:
+  - id: key
+    task: Put your key and a model name in the environment
+    explain: Keep the key in your shell or a .env file that git ignores. Never paste it into a script.
+    cmd: test -n "$OPENROUTER_API_KEY" && test -n "$MODEL" && echo ready
+    expect: "It prints ready. MODEL holds a model id you picked from the OpenRouter model list (filter by price: free)."
+    files: []
+  - id: call
+    task: "Write chat.py: one system message, one user message, print the answer and the usage"
+    explain: Use the openai package with base_url set to https://openrouter.ai/api/v1. The same script talks to Ollama if you point base_url at http://localhost:11434/v1.
+    cmd: uv run --with openai chat.py "Explain a context window to a ten year old"
+    expect: An answer prints, then one line with prompt tokens and completion tokens.
+    files:
+      - chat.py
+  - id: memory
+    task: Add a --chat mode that resends the whole conversation each turn
+    explain: The model remembers nothing. The conversation is a list you keep and send again, which is why long chats cost more per turn.
+    cmd: uv run --with openai chat.py --chat
+    expect: "Tell it your name in turn one and ask for it in turn two: it answers correctly, and the prompt token count grows every turn."
+    files:
+      - chat.py
+  - id: cost
+    task: Print the cost of each call from the model's listed prices
+    cmd: uv run --with openai chat.py "Give me three names for a parcel company"
+    expect: A cost line prints in dollars. On a free model it is 0, so also print what the same call would cost on one paid model you name.
+    files:
+      - chat.py

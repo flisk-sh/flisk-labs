@@ -61,3 +61,34 @@ test('captureProblem accepts docker captures and unverified labs', () => {
   assert.equal(captureProblem({ capture_verified: true, capture_source: 'docker' }), null);
   assert.equal(captureProblem({ capture_verified: false, capture_source: 'local-source' }), null);
 });
+
+const guide = () => ({
+  id: '10-x', title: 'X', track: 'models', level: 'beginner', duration_min: 10, mode: 'guide', goal: 'g', build: 'b',
+  needs: ['a laptop'], docs: [{ label: 'Docs', url: 'https://example.com' }],
+  steps: [{ id: 'one', task: 'Do it', cmd: 'true', expect: 'It exits 0.', files: [] }]
+});
+
+test('guideProblems accepts a complete guide lab', async () => {
+  const { guideProblems } = await import('../scripts/lib.mjs');
+  assert.deepEqual(guideProblems(guide()), []);
+});
+
+test('guideProblems rejects a transcript, a capture flag and a step without a check', async () => {
+  const { guideProblems } = await import('../scripts/lib.mjs');
+  const lab = guide();
+  lab.capture_verified = true;
+  lab.steps[0].out = 'made-up output';
+  lab.steps.push({ id: 'two', task: 'No check', files: [] });
+  const problems = guideProblems(lab).join('\n');
+  assert.match(problems, /remove capture_verified/);
+  assert.match(problems, /shows no transcript/);
+  assert.match(problems, /step 2 missing cmd/);
+  assert.match(problems, /step 2 missing expect/);
+});
+
+test('guideProblems rejects a docs link that is not https', async () => {
+  const { guideProblems } = await import('../scripts/lib.mjs');
+  const lab = guide();
+  lab.docs = [{ label: 'Docs', url: 'http://example.com' }];
+  assert.match(guideProblems(lab).join('\n'), /https url/);
+});

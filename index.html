@@ -1,31 +1,38 @@
 ---
 layout: default
-title: Flisk Labs — learn Flisk one command at a time
-description: An ordered path through Flisk, with replayable command transcripts and file changes you can inspect.
+title: Learn AI — hands-on labs, from a first model call to a shipped assistant
+description: Free hands-on labs for building with AI. Run a model, give it tools, measure it, make it survive a restart, and ship it to a customer. Each lab ends with a check you run yourself.
 ---
 <section class="hero">
-  <div class="eyebrow">A command line you can follow</div>
-  <h1>See what Flisk does.<br><em>Then do it yourself.</em></h1>
-  <p class="hero-copy">A practical path from your first <code>flisk --version</code> to a service you understand. Step through real commands, read their output, and inspect the files they create.</p>
-  <div class="actions"><a class="button" href="{{ '/labs/01-installed/' | relative_url }}">Start with Lab 01 <span>→</span></a><a class="button secondary" href="{{ '/catalog/' | relative_url }}">Browse the catalog</a></div>
-  <div class="hero-note">STATIC REPLAY · CAPTURED CLI OUTPUT · RUN LOCALLY WHEN READY</div>
+  <div class="eyebrow">Free · hands-on · runs on your machine</div>
+  <h1>Learn AI<br><em>by building it.</em></h1>
+  <p class="hero-copy">{{ site.data.labs | where: "mode", "guide" | size }} short labs that take you from your first model call to an assistant a customer can rely on. No videos. Every lab has a task, a command that checks it, and a plain description of a pass.</p>
+  <div class="actions"><a class="button" href="{{ '/labs/10-local-model/' | relative_url }}">Start with Lab 10 <span>→</span></a><a class="button secondary" href="#flisk">Flisk CLI labs</a></div>
+  <div class="hero-note">NO ACCOUNT · NO TRANSCRIPTS TO TRUST · YOUR TERMINAL IS THE PROOF</div>
 </section>
-<section class="section wrap" id="tracks">
-  <div class="section-head"><div><div class="eyebrow">Choose a path</div><h2>Tracks</h2></div><p>Short lessons, in a useful order.</p></div>
+{% assign courses = "ai,flisk" | split: "," %}
+{% for course in courses %}
+{% assign course_tracks = site.data.tracks | where: "course", course %}
+<section class="wrap course-head" id="{{ course }}">
+  {% if course == "ai" %}<div class="eyebrow">Course 01</div><h2>AI engineering</h2><p>Five parts, in order: call a model, give it knowledge, build the harness around it, make it reliable, and deliver it to a customer.</p>
+  {% else %}<div class="eyebrow">Course 02</div><h2>Flisk CLI</h2><p>Step through Flisk commands as a replay, see what each one writes, then run them yourself.</p>{% endif %}
+</section>
+<section class="section wrap">
   <div class="track-grid">
-  {% for track in site.data.tracks %}
-    <a class="track-card" href="#{{ track.id }}"><span class="track-index">0{{ forloop.index }} / TRACK</span><h3>{{ track.title }}</h3><p>{{ track.description }}</p><div class="track-foot">{{ track.labs.size }} LABS · {{ track.catalog_section }}</div></a>
+  {% for track in course_tracks %}
+    <a class="track-card" href="#{{ track.id }}"><span class="track-index">0{{ forloop.index }} / PART</span><h3>{{ track.title }}</h3><p>{{ track.description }}</p><div class="track-foot">{{ track.labs.size }} LABS · {{ track.catalog_section }}</div></a>
   {% endfor %}
   </div>
 </section>
-{% for track in site.data.tracks %}
+{% for track in course_tracks %}
 <section class="section wrap" id="{{ track.id }}">
-  <div class="section-head"><div><div class="eyebrow">Track {{ forloop.index | prepend: '0' }}</div><h2>{{ track.title }}</h2></div><p>{{ track.description }}</p></div>
+  <div class="section-head"><div><div class="eyebrow">Part {{ forloop.index | prepend: '0' }}</div><h2>{{ track.title }}</h2></div><p>{{ track.description }}</p></div>
   <div class="lab-grid">
   {% for lab_id in track.labs %}{% for lab in site.data.labs %}{% if lab.lab_id == lab_id %}
-    <a class="lab-card" href="{{ lab.url | relative_url }}"><div class="card-meta"><span>{{ lab.lab_id }}</span><span>{{ lab.level }} · {{ lab.duration_min }} MIN</span></div><h3>{{ lab.title }}</h3><p>{{ lab.description }}</p><div class="card-foot">{{ lab.cli_version }} CLI {% if lab.capture_verified == false %}· CAPTURE PENDING{% endif %}</div></a>
+    <a class="lab-card" href="{{ lab.url | relative_url }}"><div class="card-meta"><span>{{ lab.lab_id }}</span><span>{{ lab.level }} · {{ lab.duration_min }} MIN</span></div><h3>{{ lab.title }}</h3><p>{{ lab.description }}</p><div class="card-foot">{% if lab.mode == "guide" %}HANDS-ON · {{ lab.steps.size }} STEPS{% else %}REPLAY · {{ lab.cli_version }} CLI {% if lab.capture_verified == false %}· CAPTURE PENDING{% endif %}{% endif %}</div></a>
   {% endif %}{% endfor %}{% endfor %}
   </div>
 </section>
 {% endfor %}
-<section class="wrap callout"><strong>Replay means replay.</strong> Browser lessons show captured terminal output. They do not run Docker, execute Flisk, or start a stack in your browser. Every lesson includes commands to run on your machine.</section>
+{% endfor %}
+<section class="wrap callout"><strong>Two kinds of lab.</strong> Hands-on labs give you a task and a check, and you run everything yourself. Replay labs show terminal output captured from a pinned Flisk release; they do not run Docker or Flisk in your browser.</section>

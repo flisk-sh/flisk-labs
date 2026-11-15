@@ -1,0 +1,41 @@
+---
+layout: default
+---
+<section class="hero lab-head wrap">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ '/' | relative_url }}">Labs</a>
+    <span aria-hidden="true">/</span>
+    <a href="{{ '/' | relative_url }}#{{ page.track }}">{{ page.track | replace: '-', ' ' }}</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">{{ page.lab_id }}</span>
+  </nav>
+  <div class="eyebrow">{{ page.track | replace: '-', ' ' }} · {{ page.level }} · {{ page.duration_min }} min</div>
+  <h1>{{ page.title }}</h1>
+  <p>{{ page.goal }}</p>
+  <div class="hero-note">HANDS-ON LAB · YOU RUN IT ON YOUR MACHINE · {{ page.steps.size }} STEPS</div>
+</section>
+<section class="wrap lab-layout">
+  <div>
+    <ol class="guide-steps">
+    {% for step in page.steps %}
+      <li class="guide-step info-panel" id="{{ step.id }}">
+        <div class="card-meta">Step {{ forloop.index }} of {{ page.steps.size }}</div>
+        <h2>{{ step.task }}</h2>
+        {% if step.explain %}<p>{{ step.explain }}</p>{% endif %}
+        <p class="guide-label">Run this to check</p>
+        <div class="copy-block guide-cmd">{{ step.cmd | escape }}<button class="copy-action" data-copy-value="{{ step.cmd | escape }}">Copy</button></div>
+        <p class="guide-label">You pass when</p>
+        <p class="guide-expect">{{ step.expect }}</p>
+        {% if step.files.size > 0 %}<p class="guide-label">Files you write</p><ul class="file-list">{% for file in step.files %}<li>{{ file }}</li>{% endfor %}</ul>{% endif %}
+      </li>
+    {% endfor %}
+    </ol>
+    <div class="callout"><strong>No transcript here on purpose.</strong> This page does not show terminal output, because model answers differ from run to run. Each step says what a pass looks like; your own terminal is the proof.</div>
+  </div>
+  <aside class="lab-info">
+    <section class="info-panel"><h3>What you build</h3><p>{{ page.build }}</p></section>
+    <section class="info-panel"><h3>What you need</h3><ul>{% for need in page.needs %}<li>{{ need }}</li>{% endfor %}</ul></section>
+    <section class="info-panel"><h3>Read more</h3>{% for doc in page.docs %}<a class="source-line" href="{{ doc.url }}">{{ doc.label }} ↗</a>{% endfor %}</section>
+    <a class="button secondary" href="{{ '/' | relative_url }}#{{ page.track }}">← Back to track</a>
+  </aside>
+</section>

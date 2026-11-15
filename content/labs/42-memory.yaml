@@ -1,0 +1,41 @@
+id: 42-memory
+title: Memory that outlives the conversation
+track: reliable
+level: intermediate
+duration_min: 40
+mode: guide
+goal: Let your assistant store facts and find them in a later session, without one customer seeing another's.
+build: Two tools, remember and recall, backed by a local vector database with one space per customer.
+needs:
+  - Docker
+  - Python 3.11 or newer and uv
+  - Ollama
+  - Lab 30 done
+docs:
+  - label: Qdrant docs
+    url: https://qdrant.tech/documentation/
+steps:
+  - id: start
+    task: Start Qdrant
+    cmd: docker run -d --name learn-qdrant -p 6333:6333 qdrant/qdrant && sleep 3 && curl -s http://localhost:6333/collections
+    expect: JSON with "status":"ok" and an empty list of collections.
+    files: []
+  - id: tools
+    task: Add remember(fact) and recall(question) to your harness
+    cmd: uv run --with openai --with qdrant-client --with requests harness.py --customer ana "Remember that I prefer deliveries after 6pm"
+    expect: It confirms the fact was stored, and the collections list now has one entry.
+    files:
+      - harness.py
+      - memory.py
+  - id: later
+    task: Start a new session and ask about it
+    cmd: uv run --with openai --with qdrant-client --with requests harness.py --customer ana "When should you deliver to me?"
+    expect: A fresh process answers after 6pm.
+    files: []
+  - id: walls
+    task: Ask the same question as another customer
+    explain: Filter by customer in the database query, not in the prompt. A prompt can be talked out of a rule; a filter cannot.
+    cmd: uv run --with openai --with qdrant-client --with requests harness.py --customer ben "When should you deliver to me?"
+    expect: It does not know. Ana's fact never appears in Ben's session.
+    files:
+      - memory.py

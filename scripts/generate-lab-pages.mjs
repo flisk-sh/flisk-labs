@@ -13,9 +13,9 @@ for (const file of labFiles) {
   fs.mkdirSync(routeDir, { recursive: true });
   const page = {
     ...lab,
-    layout: 'lab',
+    layout: lab.mode === 'guide' ? 'guide' : 'lab',
     lab_id: lab.id,
-    description: lab.steps[0]?.explain ?? `Step through ${lab.title}.`,
+    description: lab.goal ?? lab.steps[0]?.explain ?? `Step through ${lab.title}.`,
     permalink: `/labs/${lab.id}/`
   };
   const frontMatter = yaml.stringify(page).trimEnd();
