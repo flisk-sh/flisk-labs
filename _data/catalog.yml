@@ -141,7 +141,7 @@
 - title: Flisk Labs
   section: Learning and articles
   classification: Official
-  url: https://labs.flisk.si/
+  url: https://practice.flisk.si/
   description: "([source](https://github.com/flisk-sh/flisk-labs)): ordered
     lessons with captured CLI output, the files each command writes, and a
     static replay. Labs 02 and 03 are marked pending until their capture image
