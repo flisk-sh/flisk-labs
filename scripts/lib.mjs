@@ -40,3 +40,19 @@ export function captureProblem(lab) {
   }
   return null;
 }
+
+// Previous and next lab for each lab, in course order: a course runs through
+// its tracks in the order of content/tracks.yaml, so the last lab of one part
+// leads to the first lab of the next part.
+export function labNeighbours(tracks) {
+  const byCourse = new Map();
+  for (const track of tracks) {
+    const key = track.course ?? track.id;
+    byCourse.set(key, [...(byCourse.get(key) ?? []), ...(track.labs ?? [])]);
+  }
+  const neighbours = new Map();
+  for (const ids of byCourse.values()) {
+    ids.forEach((id, i) => neighbours.set(id, { prev: ids[i - 1] ?? null, next: ids[i + 1] ?? null }));
+  }
+  return neighbours;
+}

@@ -92,3 +92,16 @@ test('guideProblems rejects a docs link that is not https', async () => {
   lab.docs = [{ label: 'Docs', url: 'http://example.com' }];
   assert.match(guideProblems(lab).join('\n'), /https url/);
 });
+
+test('labNeighbours walks a course across its parts and stops at course ends', async () => {
+  const { labNeighbours } = await import('../scripts/lib.mjs');
+  const n = labNeighbours([
+    { id: 'models', course: 'ai', labs: ['10-a', '11-b'] },
+    { id: 'knowledge', course: 'ai', labs: ['20-c'] },
+    { id: 'cli', course: 'flisk', labs: ['01-x', '02-y'] }
+  ]);
+  assert.deepEqual(n.get('10-a'), { prev: null, next: '11-b' });
+  assert.deepEqual(n.get('11-b'), { prev: '10-a', next: '20-c' });
+  assert.deepEqual(n.get('20-c'), { prev: '11-b', next: null });
+  assert.deepEqual(n.get('01-x'), { prev: null, next: '02-y' });
+});
