@@ -39,54 +39,54 @@
   description: install Flisk, create a project, scaffold a resource, and run a
     stack. **Official**
   lab_ids:
+    - 03-backend
     - 01-installed
     - 02-scaffold
-    - 03-backend
 - title: npm package
   section: Core framework and releases
   classification: Official
   url: https://www.npmjs.com/package/@flisk-sh/flisk
   description: install the Flisk CLI with npm or Bun. **Official**
   lab_ids:
+    - 03-backend
     - 01-installed
     - 02-scaffold
-    - 03-backend
 - title: releases
   section: Core framework and releases
   classification: Official
   url: https://github.com/flisk-sh/releases/releases
   description: prebuilt Flisk CLI binaries for supported platforms. **Official**
   lab_ids:
+    - 03-backend
     - 01-installed
     - 02-scaffold
-    - 03-backend
 - title: flisk.sh
   section: Core framework and releases
   classification: Official
   url: https://github.com/flisk-sh/flisk-sh.github.io
   description: source for the public install site and CLI installer. **Official**
   lab_ids:
+    - 03-backend
     - 01-installed
     - 02-scaffold
-    - 03-backend
 - title: Install script
   section: Core framework and releases
   classification: Official
   url: https://flisk.sh/install.sh
   description: shell installer for the published CLI binary. **Official**
   lab_ids:
+    - 03-backend
     - 01-installed
     - 02-scaffold
-    - 03-backend
 - title: Changelog
   section: Core framework and releases
   classification: Official
   url: https://github.com/flisk-sh/flisk/releases
   description: notable CLI and framework changes. **Official**
   lab_ids:
+    - 03-backend
     - 01-installed
     - 02-scaffold
-    - 03-backend
 - title: website
   section: Documentation and reference
   classification: Official
@@ -122,8 +122,8 @@
   section: Documentation and reference
   classification: Official
   url: https://github.com/flisk-sh/flisk/blob/main/docs/byo.md
-  description: wrap an existing service with Flisk orchestration without generating
-    application code. **Official**
+  description: wrap an existing service with Flisk orchestration without
+    generating application code. **Official**
   lab_ids: []
 - title: WSL2 guide
   section: Documentation and reference
@@ -142,10 +142,10 @@
   section: Learning and articles
   classification: Official
   url: https://flisk-sh.github.io/flisk-labs/
-  description: "([source](https://github.com/flisk-sh/flisk-labs)): ordered lessons
-    with captured CLI output, the files each command writes, and a static
-    replay. Labs 02 and 03 are marked pending until their capture image is
-    published. **Official**"
+  description: "([source](https://github.com/flisk-sh/flisk-labs)): ordered
+    lessons with captured CLI output, the files each command writes, and a
+    static replay. Labs 02 and 03 are marked pending until their capture image
+    is published. **Official**"
   lab_ids: []
 - title: Flisk blog
   section: Learning and articles
@@ -157,8 +157,8 @@
   section: Learning and articles
   classification: Community
   url: https://dev.to/mynameis0d3c53a3/we-ran-100-microservices-on-a-16gb-laptop-no-kubernetes-590e
-  description: Flisk overview and reproducible scale benchmark using the 100-service
-    ERP example. **Community**
+  description: Flisk overview and reproducible scale benchmark using the
+    100-service ERP example. **Community**
   lab_ids: []
 - title: AI Assistants Need Topology
   section: Learning and articles
@@ -513,8 +513,8 @@
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/why-flisk-does-not-hide-the-stack/
-  description: Flisk exposes standard tools because hiding every detail makes teams
-    weaker when debugging starts. **Official**
+  description: Flisk exposes standard tools because hiding every detail makes
+    teams weaker when debugging starts. **Official**
   lab_ids: []
 - title: Why Flisk Is Not a Cloud IDE
   section: Learning and articles
@@ -828,8 +828,8 @@
   section: Learning and articles
   classification: Official
   url: https://flisk.sh/blog/articles/from-product-intent-to-runnable-services/
-  description: How Flisk turns service definitions into local systems developers can
-    actually inspect and run. **Official**
+  description: How Flisk turns service definitions into local systems developers
+    can actually inspect and run. **Official**
   lab_ids: []
 - title: Frontend and Backend in One Loop
   section: Learning and articles
@@ -932,17 +932,210 @@
   description: 100-service ERP fixture across seven business domains, used for
     scale testing. **Official**
   lab_ids: []
+- title: flisk-person-crud-example
+  section: Examples and demo applications
+  classification: Official
+  url: https://github.com/flisk-sh/flisk-person-crud-example
+  description: person CRUD with React, Express, MongoDB, Redis, and RabbitMQ. **Official**
+  lab_ids: []
+- title: flisk-agent-stack
+  section: Examples and demo applications
+  classification: Official
+  url: https://github.com/flisk-sh/flisk-agent-stack
+  description: "AI agent stack: a Bun agent, an MCP tool server, Postgres, and
+    NATS. The template behind `flisk project agent-stack`. **Official**"
+  lab_ids: []
+- title: vercel-store
+  section: Examples and demo applications
+  classification: Official
+  url: https://github.com/flisk-sh/vercel-store
+  description: storefront landscape with a Hono BFF and a Vue frontend. **Official**
+  lab_ids: []
+- title: flisk-thor-storefront
+  section: Examples and demo applications
+  classification: Official
+  url: https://github.com/flisk-sh/flisk-thor-storefront
+  description: storefront landscape for Thor Commerce. **Official**
+  lab_ids: []
 - title: create-flisk
   section: Starters and scaffolding
   classification: Official
   url: https://github.com/flisk-sh/create-flisk
   description: starter generator and landing page for creating a Flisk stack. **Official**
   lab_ids: []
+- title: flisk-stack
+  section: Starters and scaffolding
+  classification: Official
+  url: https://github.com/flisk-sh/flisk-stack
+  description: convention-over-configuration full-stack skeleton (Actions, Models,
+    Jobs, views, migrations) started with `flisk up`. **Official**
+  lab_ids: []
+- title: flisk-template-launch
+  section: Starters and scaffolding
+  classification: Official
+  url: https://github.com/flisk-sh/flisk-template-launch
+  description: one free Bun + Hono service with SEO, icons, and a Product Hunt
+    kit. **Official**
+  lab_ids: []
+- title: flisk-template-portal
+  section: Starters and scaffolding
+  classification: Official
+  url: https://github.com/flisk-sh/flisk-template-portal
+  description: sign in with GitHub, API keys, usage, and a metered `/v1` proxy in
+    one Bun service. **Official**
+  lab_ids: []
+- title: flisk-cli-starter
+  section: Starters and scaffolding
+  classification: Official
+  url: https://github.com/flisk-sh/flisk-cli-starter
+  description: starter for a local app stack, open in any cloud dev environment.
+    **Official**
+  lab_ids: []
+- title: Bring-your-own templates
+  section: Starters and scaffolding
+  classification: Official
+  url: https://github.com/flisk-sh/flisk-template-vue
+  description: "apps from the framework generators that run under `flisk up`:
+    [Vue](https://github.com/flisk-sh/flisk-template-vue),
+    [Next.js](https://github.com/flisk-sh/flisk-template-next-app),
+    [Bati](https://github.com/flisk-sh/flisk-template-bati) (React + Hono),
+    [Analog](https://github.com/flisk-sh/flisk-template-analog) (Angular), and
+    [AdonisJS](https://github.com/flisk-sh/flisk-template-adonisjs).
+    **Official**"
+  lab_ids: []
+- title: flisk-service-definitions
+  section: Starters and scaffolding
+  classification: Community
+  url: https://github.com/flisk-sh/flisk-service-definitions
+  description: community registry of `service.json` definitions, one directory per
+    app, validated against the schema. **Official**
+  lab_ids: []
 - title: More example repositories
   section: Starters and scaffolding
   classification: Official
   url: https://github.com/flisk-sh?tab=repositories&q=example
   description: browse public Flisk example repositories. **Official**
+  lab_ids: []
+- title: TubeHaus
+  section: Adopters
+  classification: Community
+  url: https://github.com/biolend83/tubehaus
+  description: self-hosted video stack with an optional Flisk start path next to
+    Docker Compose; the setup was proved with a real `flisk up`. **Community**
+  lab_ids: []
+- title: Lekast
+  section: Adopters
+  classification: Community
+  url: https://www.linkedin.com/company/lekast/
+  description: runs Flisk on its own repositories. **Community**
+  lab_ids: []
+- title: mfin.services
+  section: Adopters
+  classification: Community
+  url: https://medium.com/@mfin.services
+  description: public write-up of running Flisk. **Community**
+  lab_ids: []
+- title: MakeOffer
+  section: Adopters
+  classification: Community
+  url: https://www.linkedin.com/company/makeofferio
+  description: runs Flisk on its own repositories. **Community**
+  lab_ids: []
+- title: Red Moon Digital
+  section: Adopters
+  classification: Community
+  url: https://redmoon.digital/
+  description: runs Flisk on its own repositories. **Community**
+  lab_ids: []
+- title: flisk-import
+  section: Migrate an existing app
+  classification: Official
+  url: https://github.com/flisk-sh/flisk-import
+  description: scan a repo and import its Procfile, Compose, Dockerfile, and
+    `package.json` services into Flisk. Keeps ports, healthchecks, env, volume
+    names, and the Compose project name. **Official**
+  lab_ids: []
+- title: flisk-export
+  section: Migrate an existing app
+  classification: Official
+  url: https://github.com/flisk-sh/flisk-export
+  description: write `render.yaml`, `wrangler.toml`, or Compose files from
+    `service.json`. Files only; it never deploys. **Official**
+  lab_ids: []
+- title: Bring-your-own guide
+  section: Migrate an existing app
+  classification: Official
+  url: https://github.com/flisk-sh/flisk/blob/main/docs/byo.md
+  description: wrap an existing service with Flisk orchestration. **Official**
+  lab_ids: []
+- title: fliskos
+  section: Apps and tools built with Flisk
+  classification: Official
+  url: https://github.com/flisk-sh/fliskos
+  description: local desktop command center for Flisk projects. **Official**
+  lab_ids: []
+- title: pages
+  section: Apps and tools built with Flisk
+  classification: Official
+  url: https://github.com/flisk-sh/pages
+  description: publish an interactive page from your agent to pages.flisk.si. **Official**
+  lab_ids: []
+- title: citable
+  section: Apps and tools built with Flisk
+  classification: Official
+  url: https://github.com/flisk-sh/citable
+  description: check whether AI answers can cite your site. **Official**
+  lab_ids: []
+- title: readme-score
+  section: Apps and tools built with Flisk
+  classification: Official
+  url: https://github.com/flisk-sh/readme-score
+  description: score a README out of 100, with a fix for every miss. **Official**
+  lab_ids: []
+- title: helpdock
+  section: Apps and tools built with Flisk
+  classification: Official
+  url: https://github.com/flisk-sh/helpdock
+  description: your docs as a help center that answers with sources, with an MCP
+    server. **Official**
+  lab_ids: []
+- title: flisk-tools
+  section: Apps and tools built with Flisk
+  classification: Official
+  url: https://github.com/flisk-sh/flisk-tools
+  description: run small web and GitHub tools on your own GitHub. **Official**
+  lab_ids: []
+- title: live-preview
+  section: Apps and tools built with Flisk
+  classification: Official
+  url: https://github.com/flisk-sh/live-preview
+  description: public HTTPS link for a Docker stack on a GitHub Actions runner. **Official**
+  lab_ids: []
+- title: command-comparer
+  section: Apps and tools built with Flisk
+  classification: Official
+  url: https://github.com/flisk-sh/command-comparer
+  description: Flisk next to Terraform, CDK, Compose, Tilt, Skaffold, and more,
+    with a source for every cell. **Official**
+  lab_ids: []
+- title: roadmap
+  section: Apps and tools built with Flisk
+  classification: Community
+  url: https://github.com/flisk-sh/roadmap
+  description: community-edited map of local DevEx tools. **Official**
+  lab_ids: []
+- title: awesome-rea-flisk-cases
+  section: Apps and tools built with Flisk
+  classification: Official
+  url: https://github.com/flisk-sh/awesome-rea-flisk-cases
+  description: reverse-engineer apps and rebuild them with Flisk. **Official**
+  lab_ids: []
+- title: flisk-model
+  section: Apps and tools built with Flisk
+  classification: Official
+  url: https://github.com/flisk-sh/flisk-model
+  description: a 62-question test of whether a small model can write correct Flisk
+    config files. **Official**
   lab_ids: []
 - title: Node.js
   section: Tools and technologies
@@ -962,8 +1155,8 @@
   section: Tools and technologies
   classification: Official
   url: https://docs.npmjs.com/
-  description: publishes and installs the Flisk CLI package; generated services can
-    use a local registry. **Core and optional service**
+  description: publishes and installs the Flisk CLI package; generated services
+    can use a local registry. **Core and optional service**
   lab_ids: []
 - title: TypeScript
   section: Tools and technologies
@@ -1143,7 +1336,8 @@
   section: Tools and technologies
   classification: Official
   url: https://www.verdaccio.org/docs/installation/
-  description: private local npm registry. Requires a Flisk license. **Paid optional service**
+  description: private local npm registry. Requires a Flisk license. **Paid
+    optional service**
   lab_ids: []
 - title: Sablier
   section: Tools and technologies
