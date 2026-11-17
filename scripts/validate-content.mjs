@@ -1,4 +1,4 @@
-import { readLabs, readYaml, root, fail, captureProblem, guideProblems } from './lib.mjs';
+import { readLabs, readYaml, root, fail, captureProblem, guideProblems, catalogProblems } from './lib.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -36,4 +36,9 @@ const trackIds = new Set((tracks ?? []).map((track) => track.id));
 const labIds = new Set(readLabs().map(({ data }) => data?.id));
 for (const track of tracks ?? []) for (const id of track.labs ?? []) if (!labIds.has(id)) { console.error(`tracks.yaml: track ${track.id} lists unknown lab ${id}`); problems++; }
 for (const { file, data } of readLabs()) if (!trackIds.has(data.track)) { console.error(`${path.basename(file)}: unknown track ${data.track}`); problems++; }
+const catalogFile = path.join(root, '_data/catalog.yml');
+if (fs.existsSync(catalogFile)) {
+  const catalog = readYaml(catalogFile);
+  for (const problem of catalogProblems(catalog, labIds)) { console.error(problem); problems++; }
+}
 if (problems) { fail(`${problems} content issue(s)`); } else console.log(`Validated ${ids.size} labs and ${trackIds.size} tracks.`);

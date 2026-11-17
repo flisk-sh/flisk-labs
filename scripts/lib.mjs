@@ -57,3 +57,18 @@ export function labNeighbours(tracks) {
   }
   return neighbours;
 }
+
+// Every lab_id referenced by catalog entries in _data/catalog.yml must exist in content/labs/.
+export function catalogProblems(catalog, labIds) {
+  const problems = [];
+  const known = labIds instanceof Set ? labIds : new Set(labIds ?? []);
+  for (const entry of catalog ?? []) {
+    const title = entry?.title ?? 'untitled';
+    for (const id of entry?.lab_ids ?? []) {
+      if (!known.has(id)) {
+        problems.push(`catalog.yml: entry "${title}" lists unknown lab ${id}`);
+      }
+    }
+  }
+  return problems;
+}
