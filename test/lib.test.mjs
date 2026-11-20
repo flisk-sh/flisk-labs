@@ -116,3 +116,22 @@ test('labNeighbours keeps a lab shared by two parts in its first place', async (
   assert.deepEqual(n.get('02-y'), { prev: '01-x', next: '03-z' });
   assert.deepEqual(n.get('03-z'), { prev: '02-y', next: null });
 });
+
+test('catalogProblems accepts catalog entries whose lab_ids all exist', async () => {
+  const { catalogProblems } = await import('../scripts/lib.mjs');
+  const catalog = [
+    { title: 'Intro', lab_ids: ['01-installed', '02-scaffold'] },
+    { title: 'Docs', lab_ids: [] }
+  ];
+  assert.deepEqual(catalogProblems(catalog, new Set(['01-installed', '02-scaffold'])), []);
+});
+
+test('catalogProblems rejects catalog entry with a missing lab_id', async () => {
+  const { catalogProblems } = await import('../scripts/lib.mjs');
+  const catalog = [
+    { title: 'Quickstart', lab_ids: ['01-installed', 'missing-lab'] }
+  ];
+  const problems = catalogProblems(catalog, new Set(['01-installed']));
+  assert.equal(problems.length, 1);
+  assert.match(problems[0], /entry "Quickstart" lists unknown lab missing-lab/);
+});
