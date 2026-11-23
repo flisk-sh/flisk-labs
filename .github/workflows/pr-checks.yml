@@ -26,10 +26,13 @@ jobs:
           cache: npm
 
       - name: Install dependencies
+        id: install
         run: npm ci
 
       - name: Validate content
+        id: validate
         run: npm run validate
 
       - name: Check links
+        if: steps.install.outcome == 'success'
         run: npm run check:links
