@@ -1,0 +1,52 @@
+name: Lab problem report
+description: Report an issue with an interactive Flisk lab or exercise
+title: "lab: <lab-id> - <brief summary>"
+labels: ["lab-report"]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Thanks for taking the time to report this lab issue.
+        Please provide the lab ID, step number, and what went wrong so we can fix or update the lab.
+  - type: input
+    id: lab-id
+    attributes:
+      label: Lab ID
+      description: The ID of the lab (e.g. `express-basics`, `docker-compose-node`, etc.)
+      placeholder: express-basics
+    validations:
+      required: true
+  - type: input
+    id: step-number
+    attributes:
+      label: Step number
+      description: The number of the step that failed or caused confusion (e.g. `Step 2`)
+      placeholder: "2"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of failure
+      description: What did you run, what did you expect to happen, and what happened instead? Include any error output.
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system / Environment
+      description: What operating system or terminal environment are you running?
+      options:
+        - macOS (Apple Silicon)
+        - macOS (Intel)
+        - Linux
+        - Windows (WSL)
+        - Windows (PowerShell / Command Prompt)
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Any extra details, node/flisk version, or screenshots if applicable.
