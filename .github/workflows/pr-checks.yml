@@ -34,5 +34,5 @@ jobs:
         run: npm run validate
 
       - name: Check links
-        if: steps.install.outcome == 'success'
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: npm run check:links
