@@ -99,7 +99,7 @@
 - title: Contributing to flisk
   section: Documentation and reference
   classification: Official
-  url: https://github.com/flisk-sh/flisk/blob/main/CONTRIBUTING.md
+  url: https://github.com/flisk-sh/flisk/blob/main/.github/CONTRIBUTING.md
   description: development setup and contribution workflow. **Official**
   lab_ids: []
 - title: MCP guide
@@ -143,13 +143,6 @@
   classification: Official
   url: https://flisk.sh/blog/
   description: browse the complete official article library. **Official**
-  lab_ids: []
-- title: We Ran 100 Microservices on a 16GB Laptop. No Kubernetes.
-  section: Learning and articles
-  classification: Community
-  url: https://dev.to/mynameis0d3c53a3/we-ran-100-microservices-on-a-16gb-laptop-no-kubernetes-590e
-  description: Flisk overview and reproducible scale benchmark using the
-    100-service ERP example. **Community**
   lab_ids: []
 - title: AI Assistants Need Topology
   section: Learning and articles
@@ -1412,7 +1405,7 @@
 - title: Security policy
   section: Security and identity
   classification: Official
-  url: https://github.com/flisk-sh/flisk/blob/main/SECURITY.md
+  url: https://github.com/flisk-sh/flisk/blob/main/.github/SECURITY.md
   description: responsible vulnerability reporting for the core project. **Official**
   lab_ids: []
 - title: flisk-auth-queue-email-example
@@ -1431,7 +1424,7 @@
 - title: Current CLI extensions
   section: Extensions and historical projects
   classification: Official
-  url: https://github.com/flisk-sh/flisk/tree/main/ext
+  url: https://github.com/flisk-sh/flisk/tree/main/runtime/ext
   description: extension and IDE integration source maintained in the core
     monorepo. **Official**
   lab_ids: []
@@ -1448,7 +1441,7 @@
   url: https://github.com/flisk-sh/flisk
   description: "**Archived.** Earlier extensions repository; use the current
     [flisk extension
-    documentation](https://github.com/flisk-sh/flisk/tree/main/ext) for current
+    documentation](https://github.com/flisk-sh/flisk/tree/main/runtime/ext) for current
     work."
   lab_ids: []
 - title: flisk
