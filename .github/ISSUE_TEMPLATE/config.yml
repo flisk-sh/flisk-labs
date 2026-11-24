@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Flisk Discussions
+    url: https://github.com/flisk-sh/flisk/discussions
+    about: Ask questions or discuss lab ideas.
+  - name: Flisk Documentation
+    url: https://flisk.sh
+    about: Official documentation, guides, and quickstart.
