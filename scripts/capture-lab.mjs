@@ -12,34 +12,43 @@ if (!id) throw new Error('Usage: npm run capture -- <lab-id> [--write]');
 const contentDir = process.env.FLISK_CAPTURE_CONTENT_DIR ?? path.join(root, 'content');
 const file = path.join(contentDir, 'labs', `${id}.yaml`);
 const lab = yaml.parse(fs.readFileSync(file, 'utf8'));
-const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'flisk-lab-'));
 const image = process.env.FLISK_CAPTURE_IMAGE ?? 'flisk-sh/releases';
 const tag = lab.cli_version;
-const docker = spawnSync('docker', ['run', '--rm', '-v', `${temp}:/workspace`, '-w', '/workspace', image + ':' + tag, 'sh', '-lc', 'command -v flisk >/dev/null || { echo "flisk CLI missing from capture image" >&2; exit 127; }; test "$(flisk --version)" = "' + tag + '"'], { encoding: 'utf8' });
-if (docker.status !== 0) {
-  console.error(`Docker capture image unavailable or failed: ${image}:${tag}\n${docker.stderr || docker.stdout}`);
-  process.exit(docker.status || 1);
-}
-const outputs = [];
-for (const step of lab.steps) {
-  const run = spawnSync('docker', ['run', '--rm', '-v', `${temp}:/workspace`, '-w', '/workspace', image + ':' + tag, 'sh', '-lc', step.cmd], { encoding: 'utf8' });
-  if (run.status !== 0) {
-    console.error(`${id}/${step.id} failed (exit ${run.status})\n${run.stderr}`);
-    process.exit(run.status || 1);
+function capture(temp) {
+  const docker = spawnSync('docker', ['run', '--rm', '-v', `${temp}:/workspace`, '-w', '/workspace', image + ':' + tag, 'sh', '-lc', 'command -v flisk >/dev/null || { echo "flisk CLI missing from capture image" >&2; exit 127; }; test "$(flisk --version)" = "' + tag + '"'], { encoding: 'utf8' });
+  if (docker.status !== 0) {
+    console.error(`Docker capture image unavailable or failed: ${image}:${tag}\n${docker.stderr || docker.stdout}`);
+    return docker.status || 1;
   }
-  outputs.push({ ...step, out: run.stdout.replace(/\n+$/, ''), verified: true });
+  const outputs = [];
+  for (const step of lab.steps) {
+    const run = spawnSync('docker', ['run', '--rm', '-v', `${temp}:/workspace`, '-w', '/workspace', image + ':' + tag, 'sh', '-lc', step.cmd], { encoding: 'utf8' });
+    if (run.status !== 0) {
+      console.error(`${id}/${step.id} failed (exit ${run.status})\n${run.stderr}`);
+      return run.status || 1;
+    }
+    outputs.push({ ...step, out: run.stdout.replace(/\n+$/, ''), verified: true });
+  }
+  let exitCode = 0;
+  if (write) {
+    lab.steps = outputs;
+    lab.capture_source = 'docker';
+    lab.capture_verified = true;
+    fs.writeFileSync(file, yaml.stringify(lab));
+  } else {
+    const changed = outputs.filter((step, index) => step.out !== lab.steps[index]?.out).map((step) => step.id);
+    if (changed.length) {
+      console.error(`${id}: transcript drift in steps ${changed.join(', ')}; run capture --write to update intentionally.`);
+      exitCode = 1;
+    } else console.log(`${id}: capture matches ${image}:${tag}.`);
+  }
+  console.log(`Captured ${outputs.length} step(s) for ${id} from ${image}:${tag}.`);
+  return exitCode;
 }
-if (write) {
-  lab.steps = outputs;
-  lab.capture_source = 'docker';
-  lab.capture_verified = true;
-  fs.writeFileSync(file, yaml.stringify(lab));
-} else {
-  const changed = outputs.filter((step, index) => step.out !== lab.steps[index]?.out).map((step) => step.id);
-  if (changed.length) {
-    console.error(`${id}: transcript drift in steps ${changed.join(', ')}; run capture --write to update intentionally.`);
-    process.exitCode = 1;
-  } else console.log(`${id}: capture matches ${image}:${tag}.`);
+
+const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'flisk-lab-'));
+try {
+  process.exitCode = capture(temp);
+} finally {
+  fs.rmSync(temp, { recursive: true, force: true });
 }
-fs.rmSync(temp, { recursive: true, force: true });
-console.log(`Captured ${outputs.length} step(s) for ${id} from ${image}:${tag}.`);
