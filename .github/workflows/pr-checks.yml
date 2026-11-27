@@ -27,7 +27,7 @@ jobs:
 
       - name: Install dependencies
         id: install
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Validate content
         id: validate
