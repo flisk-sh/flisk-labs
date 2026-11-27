@@ -1,0 +1,38 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        id: install
+        run: npm ci --ignore-scripts
+
+      - name: Validate content
+        id: validate
+        run: npm run validate
+
+      - name: Check links
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run check:links
